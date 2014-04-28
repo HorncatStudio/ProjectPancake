@@ -33,12 +33,6 @@ public class SceneManager {
       case SCENE_SPLASH:
         loadSplashScene();
         break;
-//            case SCENE_LOADING:
-//                setScene(loadingScene);
-//                break;
-//            case SCENE_WIN:
-//            	setScene(winScene);
-//            	break;
       default:
         break;
     }
@@ -47,7 +41,7 @@ public class SceneManager {
   private void setScene(BaseScene scene) {
     currentScene = scene;
     currentSceneType = scene.getSceneType();
-    currentScene.resourcesManager.mGame.setScreen(currentScene); // \todo refactor this
+    currentScene.resourcesManager.setScreen(currentScene);
   }
 
   //---------------------------------------------

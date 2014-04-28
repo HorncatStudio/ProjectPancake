@@ -10,6 +10,10 @@ public class ResourceManager {
 
   public ProjectPancakeGame mGame;
 
+  void setScreen(BaseScene scene) {
+    mGame.setScreen(scene);
+  }
+
   /**
    * Shared Game Resources
    */
