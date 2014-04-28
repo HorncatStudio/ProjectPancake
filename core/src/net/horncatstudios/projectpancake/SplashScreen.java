@@ -18,7 +18,7 @@ public class SplashScreen extends BaseScene {
   public void createScene() {
     ursaRageLogo = new Rectangle();
     ursaRageLogo.x = 640 / 2 - 480 / 2;
-    ursaRageLogo.y = (480 / 2 - 480 / 2) + 20 ;
+    ursaRageLogo.y = (480 / 2 - 480 / 2) + 20;
   }
 
   @Override
@@ -47,8 +47,8 @@ public class SplashScreen extends BaseScene {
   @Override
   public void show() {
     Timer.schedule(new Timer.Task() {
-    @Override
-    public void run() {
+      @Override
+      public void run() {
         SceneManager.getInstance().loadMenuScene();
       }
     }, 1);

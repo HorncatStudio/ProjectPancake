@@ -2,32 +2,28 @@ package net.horncatstudios.gameengine;
 
 
 import com.badlogic.gdx.Gdx;
-
 import net.horncatstudios.projectpancake.GameScreen;
 import net.horncatstudios.projectpancake.MainMenuScreen;
 import net.horncatstudios.projectpancake.SplashScreen;
 
 public class SceneManager {
-	private BaseScene splashScene = null;
-	private BaseScene menuScene = null;
-	private BaseScene gameLevelScene = null;
+  private BaseScene splashScene = null;
+  private BaseScene menuScene = null;
+  private BaseScene gameLevelScene = null;
 
-	private static final SceneManager INSTANCE = new SceneManager();
-	
-	private SceneType currentSceneType = SceneType.SCENE_SPLASH;
-	private BaseScene currentScene;
+  private static final SceneManager INSTANCE = new SceneManager();
 
-  public enum SceneType
-	{
-		SCENE_SPLASH,
-		SCENE_MENU,
-		SCENE_GAME
-	}
-	
-public void setScene(SceneType sceneType)
-  {
-    switch (sceneType)
-    {
+  private SceneType currentSceneType = SceneType.SCENE_SPLASH;
+  private BaseScene currentScene;
+
+  public enum SceneType {
+    SCENE_SPLASH,
+    SCENE_MENU,
+    SCENE_GAME
+  }
+
+  public void setScene(SceneType sceneType) {
+    switch (sceneType) {
       case SCENE_MENU:
         loadMenuScene();
         break;
@@ -48,11 +44,10 @@ public void setScene(SceneType sceneType)
     }
   }
 
-  private void setScene(BaseScene scene)
-  {
+  private void setScene(BaseScene scene) {
     currentScene = scene;
     currentSceneType = scene.getSceneType();
-    currentScene.resourcesManager.mGame.setScreen(currentScene); // refactor this
+    currentScene.resourcesManager.mGame.setScreen(currentScene); // \todo refactor this
   }
 
   //---------------------------------------------
@@ -74,8 +69,7 @@ public void setScene(SceneType sceneType)
   public void loadSplashScene() {
     ResourceManager.getInstance().loadSplashScreen();
 
-    if( null == splashScene )
-    {
+    if (null == splashScene) {
       splashScene = new SplashScreen();
     }
     setScene(splashScene);
@@ -87,12 +81,12 @@ public void setScene(SceneType sceneType)
   }
 
   public void loadMenuScene() {
-    if ( null != splashScene ) {
+    if (null != splashScene) {
       this.disposeSplashScene();
     }
 
     ResourceManager.getInstance().loadMenuResources();
-    if( null == menuScene ) {
+    if (null == menuScene) {
       menuScene = new MainMenuScreen();
     }
     setScene(menuScene);
@@ -102,7 +96,7 @@ public void setScene(SceneType sceneType)
     Gdx.app.log("touch", "menuItemClicked Loading Game");
 
     ResourceManager.getInstance().loadGameResources();
-    if( null == gameLevelScene ){
+    if (null == gameLevelScene) {
       gameLevelScene = new GameScreen();
     }
     setScene(gameLevelScene);

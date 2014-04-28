@@ -2,7 +2,6 @@ package net.horncatstudios.gameengine;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-
 import net.horncatstudios.projectpancake.ProjectPancakeGame;
 
 public class ResourceManager {
@@ -12,24 +11,24 @@ public class ResourceManager {
   public ProjectPancakeGame mGame;
 
   /**
-  * Shared Game Resources
-  */
- // public Music conversationMusic;
- // public Sound supriseSound;
+   * Shared Game Resources
+   */
+  // public Music conversationMusic;
+  // public Sound supriseSound;
 
 
   /**
-  * Splash Resources
-  */
+   * Splash Resources
+   */
   public Texture ursaRageLogoimage;
 
   /**
-  * Main Menu Resources
-  */
+   * Main Menu Resources
+   */
 
   /**
-  * Game Level Resources
-  */
+   * Game Level Resources
+   */
   public Texture schoolBackground;
   public Texture textBackground;
   public Texture dorianBaseImage;
@@ -72,7 +71,7 @@ public class ResourceManager {
     ursaRageLogoimage.dispose();
   }
 
-  public static void prepareManager( ProjectPancakeGame game ) {
+  public static void prepareManager(ProjectPancakeGame game) {
     getInstance().mGame = game;
   }
 
@@ -80,7 +79,7 @@ public class ResourceManager {
   // GETTERS AND SETTERS
   //---------------------------------------------
   public static ResourceManager getInstance() {
-      return INSTANCE;
+    return INSTANCE;
   }
 
   public void prepareSharedResources() {

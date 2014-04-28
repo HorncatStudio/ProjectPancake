@@ -3,23 +3,15 @@ package net.horncatstudios.projectpancake;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.Array;
-
 import net.horncatstudios.gameengine.BaseScene;
-import net.horncatstudios.gameengine.Label;
 import net.horncatstudios.gameengine.SceneManager;
-
-import net.horncatstudios.toolkit.Point;
-import net.horncatstudios.toolkit.Vector2;
 
 /**
  * Created by Angelina on 7/18/13.
  */
 public class GameScreen extends BaseScene {
 
-//  private Label mScoreText;
+  //  private Label mScoreText;
   public Sprite mDorianSprite;
 
   public GameScreen() {
@@ -50,7 +42,7 @@ public class GameScreen extends BaseScene {
     mGame.batch.setProjectionMatrix(camera.combined);
 
     mGame.batch.begin();
-    mGame.batch.draw(resourcesManager.schoolBackground, 0 ,  0);
+    mGame.batch.draw(resourcesManager.schoolBackground, 0, 0);
     this.mDorianSprite.draw(mGame.batch);
     mGame.batch.draw(resourcesManager.textBackground, 0, 0);
     mGame.batch.end();
@@ -63,7 +55,7 @@ public class GameScreen extends BaseScene {
 
   @Override
   public void show() {
-   // resourcesManager.conversationMusic.play();
+    // resourcesManager.conversationMusic.play();
   }
 
   @Override

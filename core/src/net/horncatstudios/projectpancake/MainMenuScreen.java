@@ -32,8 +32,8 @@ public class MainMenuScreen extends BaseScene {
     mGame.batch.end();
 
     if (Gdx.input.isTouched()) {
-        SceneManager.getInstance().loadGameScene();
-        dispose();
+      SceneManager.getInstance().loadGameScene();
+      dispose();
     }
   }
 
