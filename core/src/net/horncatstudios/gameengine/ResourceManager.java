@@ -1,7 +1,11 @@
 package net.horncatstudios.gameengine;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import net.horncatstudios.projectpancake.ProjectPancakeGame;
 
 public class ResourceManager {
@@ -19,7 +23,9 @@ public class ResourceManager {
    */
   // public Music conversationMusic;
   // public Sound supriseSound;
-
+  public Label.LabelStyle mFontMenuStyle;
+  public Label.LabelStyle mFontTitleStyle;
+  public BitmapFont mSharedFont;
 
   /**
    * Splash Resources
@@ -39,6 +45,9 @@ public class ResourceManager {
 
 
   public void loadSharedResouces() {
+    mFontMenuStyle = new Label.LabelStyle(mSharedFont, Color.PINK);
+    mFontTitleStyle = new Label.LabelStyle(mSharedFont, Color.YELLOW);
+
     // load the drop sound effect and the rain background "music"
     //conversationMusic = Gdx.audio.newMusic(Gdx.files.internal("conversationMusic.mp3"));
     //supriseSound = Gdx.audio.newSound(Gdx.files.internal("supriseSound.wav"));

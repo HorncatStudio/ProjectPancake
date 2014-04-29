@@ -17,9 +17,10 @@ public class ProjectPancakeGame extends Game implements InputProcessor {
   @Override
   public void create() {
     batch = new SpriteBatch();
-    font = new BitmapFont(Gdx.files.internal("font/dosgreen.txt"), false);
+    font = new BitmapFont(Gdx.files.internal("font/PW403.fnt"), false);
 
     resourceManager = resourceManager.getInstance();
+    resourceManager.mSharedFont = font;
     resourceManager.prepareManager(this);
     resourceManager.prepareSharedResources();
 
