@@ -2,6 +2,7 @@ package net.horncatstudios.gameengine;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -25,6 +26,7 @@ public class ResourceManager {
   // public Sound supriseSound;
   public Label.LabelStyle mFontMenuStyle;
   public Label.LabelStyle mFontTitleStyle;
+  public Skin mMenuButtonSkin;
   public BitmapFont mSharedFont;
 
   /**
@@ -46,7 +48,24 @@ public class ResourceManager {
 
   public void loadSharedResouces() {
     mFontMenuStyle = new Label.LabelStyle(mSharedFont, Color.PINK);
-    mFontTitleStyle = new Label.LabelStyle(mSharedFont, Color.YELLOW);
+    mFontTitleStyle = new Label.LabelStyle(mSharedFont, Color.CYAN);
+
+    mMenuButtonSkin = new Skin();
+    mMenuButtonSkin.add("default", mSharedFont);
+    mMenuButtonSkin.add("default", mFontMenuStyle);
+
+    Pixmap pixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+    pixmap.setColor(Color.WHITE);
+    pixmap.fill();
+    mMenuButtonSkin.add("white", new Texture(pixmap));
+
+    TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
+   // style.up = mMenuButtonSkin.newDrawable("white", Color.DARK_GRAY);
+   // style.down = mMenuButtonSkin.newDrawable("white", Color.DARK_GRAY);
+   // style.checked = mMenuButtonSkin.newDrawable("white", Color.BLUE);
+    style.over = mMenuButtonSkin.newDrawable("white", Color.LIGHT_GRAY);
+    style.font = mSharedFont;
+    mMenuButtonSkin.add("default", style);
 
     // load the drop sound effect and the rain background "music"
     //conversationMusic = Gdx.audio.newMusic(Gdx.files.internal("conversationMusic.mp3"));
