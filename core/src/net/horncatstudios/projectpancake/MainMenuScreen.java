@@ -39,24 +39,35 @@ public class MainMenuScreen extends BaseScene {
 
     mTitleLabel = new Label("Project", resourcesManager.mFontTitleStyle);
     mTitleLabel.setFontScale(1f);
-    mTitleLabel.setAlignment(Align.left | Align.bottom);
+    mTitleLabel.setAlignment(Align.center | Align.bottom);
 
     mSubTitleLabel = new Label("PANCAKE", resourcesManager.mFontTitleStyle);
     mSubTitleLabel.setFontScale(2f);
-    mSubTitleLabel.setAlignment(Align.left | Align.bottom);
+    //! Note: Angelina -
+    //! Aligning to the bottom actually makes it align to the top of the cell for the label
+    mSubTitleLabel.setAlignment(Align.bottom);
 
     mMenuStartLabel = new Label("Start Game", resourcesManager.mFontMenuStyle);
     mMenuQuitLabel = new Label("Start Game", resourcesManager.mFontMenuStyle);
 
     Table table = new Table();
+    //table.debug(); uncomment for table debugging
     table.setFillParent(true);
     table.setSkin(resourcesManager.mMenuButtonSkin);
     mStage.addActor(table);
 
-    table.add(mTitleLabel).expandX().left().padLeft(20f);
+    // Adding empty cells to improve spacing for the main menu
+    table.add().expand();
     table.row();
 
-    table.add(mSubTitleLabel).expandX().left().padLeft(20f);
+    table.add(mTitleLabel).expandX().size(0, 60);
+    table.row();
+
+    table.add(mSubTitleLabel).expandX()/*.size(0,60)*/;
+    table.row();
+
+    // Adding empty cells to improve spacing for the main menu
+    table.add().expand();
     table.row();
 
     // register the button "start game"
@@ -68,17 +79,21 @@ public class MainMenuScreen extends BaseScene {
         dispose();
       }
     });
-    table.add(startGameButton).size(350, 60).uniform();
+    table.add(startGameButton)/*.size(100, 60)*/.uniform();
     table.row();
 
-    // register the button "start game"
+    // register the button "quit game"
     TextButton quitGame = new TextButton("Quit game", resourcesManager.mMenuButtonSkin);
     quitGame.addListener(new ClickListener() {
       @Override
       public void clicked(InputEvent event, float x, float y) {
       }
     });
-    table.add(quitGame).size(375, 60).uniform();
+    table.add(quitGame)/*.size(375, 60)*/.uniform();
+    table.row();
+
+    // Adding empty cells to improve spacing for the main menu
+    table.add().expand();
     table.row();
 
     Gdx.input.setInputProcessor(mStage);
@@ -106,6 +121,7 @@ public class MainMenuScreen extends BaseScene {
 //    mGame.font.draw(mGame.batch, "Quit", 100, 50);
     mGame.batch.end();
 
+    // Table.drawDebug(mStage); uncomment for table debuging placement
     mStage.draw();
   }
 

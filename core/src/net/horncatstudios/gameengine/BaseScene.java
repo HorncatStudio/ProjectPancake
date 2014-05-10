@@ -20,7 +20,6 @@ public abstract class BaseScene implements Screen, InputProcessor {
     camera.setToOrtho(false, 640, 480);
 
     createScene();
-
   }
 
   public abstract void createScene();

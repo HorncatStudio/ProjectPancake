@@ -28,6 +28,7 @@ public class ResourceManager {
   public Label.LabelStyle mFontTitleStyle;
   public Skin mMenuButtonSkin;
   public BitmapFont mSharedFont;
+  public BitmapFont mConversationFont;
 
   /**
    * Splash Resources
@@ -60,9 +61,9 @@ public class ResourceManager {
     mMenuButtonSkin.add("white", new Texture(pixmap));
 
     TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
-   // style.up = mMenuButtonSkin.newDrawable("white", Color.DARK_GRAY);
-   // style.down = mMenuButtonSkin.newDrawable("white", Color.DARK_GRAY);
-   // style.checked = mMenuButtonSkin.newDrawable("white", Color.BLUE);
+    // style.up = mMenuButtonSkin.newDrawable("white", Color.DARK_GRAY);
+    // style.down = mMenuButtonSkin.newDrawable("white", Color.DARK_GRAY);
+    // style.checked = mMenuButtonSkin.newDrawable("white", Color.BLUE);
     style.over = mMenuButtonSkin.newDrawable("white", Color.LIGHT_GRAY);
     style.font = mSharedFont;
     mMenuButtonSkin.add("default", style);
@@ -86,6 +87,7 @@ public class ResourceManager {
     schoolBackground = new Texture(Gdx.files.internal("back.png"));
     textBackground = new Texture(Gdx.files.internal("blank.png"));
     dorianBaseImage = new Texture(Gdx.files.internal("d2.png"));
+    mConversationFont = new BitmapFont(Gdx.files.internal("font/Agency24.fnt"), false);
   }
 
   public void unloadGameResources() {
