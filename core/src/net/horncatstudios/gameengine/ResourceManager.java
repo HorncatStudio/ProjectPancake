@@ -19,33 +19,30 @@ public class ResourceManager {
     mGame.setScreen(scene);
   }
 
-  /**
-   * Shared Game Resources
-   */
+
+  //region SharedGameResources
+
+  public Label.LabelStyle mFontTitleStyle;
   // public Music conversationMusic;
   // public Sound supriseSound;
-  public Label.LabelStyle mFontTitleStyle;
-
   public Skin mMenuButtonSkin;
 
   public BitmapFont mSharedFont;
   public BitmapFont mConversationFont;
+  //endregion
 
-  /**
-   * Splash Resources
-   */
+  //regionSplash Resources
   public Texture ursaRageLogoimage;
+  //endregion
 
-  /**
-   * Main Menu Resources
-   */
+  //region Main Menu Resources
+  //endregion
 
-  /**
-   * Game Level Resources
-   */
+  //region Game Level Resources
   public Texture schoolBackground;
   public Texture textBackground;
   public Texture dorianBaseImage;
+  //endregion
 
   public void loadSharedResouces() {
     mFontTitleStyle = new Label.LabelStyle(mSharedFont, Color.CYAN);
