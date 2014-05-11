@@ -24,9 +24,10 @@ public class ResourceManager {
    */
   // public Music conversationMusic;
   // public Sound supriseSound;
-  public Label.LabelStyle mFontMenuStyle;
   public Label.LabelStyle mFontTitleStyle;
+
   public Skin mMenuButtonSkin;
+
   public BitmapFont mSharedFont;
   public BitmapFont mConversationFont;
 
@@ -46,27 +47,23 @@ public class ResourceManager {
   public Texture textBackground;
   public Texture dorianBaseImage;
 
-
   public void loadSharedResouces() {
-    mFontMenuStyle = new Label.LabelStyle(mSharedFont, Color.PINK);
     mFontTitleStyle = new Label.LabelStyle(mSharedFont, Color.CYAN);
 
-    mMenuButtonSkin = new Skin();
-    mMenuButtonSkin.add("default", mSharedFont);
-    mMenuButtonSkin.add("default", mFontMenuStyle);
+    // Sets the background of the Text Button - must be set
+    Pixmap backgroundTexture = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+    backgroundTexture.setColor(Color.RED);
+    backgroundTexture.fill();
 
-    Pixmap pixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-    pixmap.setColor(Color.WHITE);
-    pixmap.fill();
-    mMenuButtonSkin.add("white", new Texture(pixmap));
+    mMenuButtonSkin = new Skin();
+    mMenuButtonSkin.add("white", new Texture(backgroundTexture));
 
     TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
-    // style.up = mMenuButtonSkin.newDrawable("white", Color.DARK_GRAY);
-    // style.down = mMenuButtonSkin.newDrawable("white", Color.DARK_GRAY);
-    // style.checked = mMenuButtonSkin.newDrawable("white", Color.BLUE);
-    style.over = mMenuButtonSkin.newDrawable("white", Color.LIGHT_GRAY);
+    style.checkedFontColor = Color.PINK;
+    style.fontColor = Color.WHITE;
     style.font = mSharedFont;
     mMenuButtonSkin.add("default", style);
+
 
     // load the drop sound effect and the rain background "music"
     //conversationMusic = Gdx.audio.newMusic(Gdx.files.internal("conversationMusic.mp3"));

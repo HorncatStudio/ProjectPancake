@@ -22,6 +22,8 @@ public class GameScreen extends BaseScene {
   public Sprite mDorianSprite;
   Conversation mCurrentConversation;
 
+//  private Label.LabelStyle mConversationStyle;
+
   public Label mStateLabel;
   public Label mResponseALabel;
   public Label mResponseBLabel;
@@ -76,7 +78,6 @@ public class GameScreen extends BaseScene {
     mCurrentConversation.ConversationStates.add(state2);
     mCurrentConversation.ConversationStates.add(state3);
     mCurrentConversation.ConversationStates.add(state4);
-
   }
 
   public void levelComplete() {
