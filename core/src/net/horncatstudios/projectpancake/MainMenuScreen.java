@@ -24,12 +24,6 @@ public class MainMenuScreen extends BaseScene implements ProjectPancakeMenuActio
   @Override
   public void createScene() {
     mMenu = new MainMenu(resourcesManager, this);
-
-    InputMultiplexer multiplexer = new InputMultiplexer();
-    //multiplexer.addProcessor(mMenu);
-    // multiplexer.addProcessor(mMenu.getStage());
-    Gdx.input.setInputProcessor(multiplexer);
-    // Gdx.input.setInputProcessor(mMenu.getStage());
     Gdx.input.setInputProcessor(mMenu);
   }
 

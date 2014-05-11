@@ -7,6 +7,7 @@ import net.horncatstudios.conversationengine.Conversation;
 import net.horncatstudios.conversationengine.Response;
 import net.horncatstudios.conversationengine.State;
 import net.horncatstudios.gameengine.BaseScene;
+import net.horncatstudios.gameengine.ConversationWidget;
 import net.horncatstudios.gameengine.Label;
 import net.horncatstudios.gameengine.SceneManager;
 import net.horncatstudios.toolkit.Point;
@@ -19,39 +20,19 @@ import java.util.List;
  */
 public class GameScreen extends BaseScene {
 
-  public Sprite mDorianSprite;
-  Conversation mCurrentConversation;
-
-//  private Label.LabelStyle mConversationStyle;
-
-  public Label mStateLabel;
-  public Label mResponseALabel;
-  public Label mResponseBLabel;
-  public Label mResponseCLabel;
-
-  private State mCurrentState;
-  private List<Label> mResponceWidgets;
+  private Sprite mDorianSprite;
+  private Conversation mCurrentConversation;
+  private ConversationWidget mConversationWidget;
 
   public GameScreen() {
     Gdx.app.log("touch", "Creating game mLevel scene Game");
     mDorianSprite = new Sprite(resourcesManager.dorianBaseImage, 640, 520);
-
-    mCurrentConversation = new Conversation();
-
-    mStateLabel = new Label("STATE LABEL.", new Point(10, 112));
-
-    mResponseALabel = new Label("RESPONCE A LABEL.", new Point(10, 70));
-    mResponseBLabel = new Label("RESPONCE B LABEL.", new Point(285, 70));
-    mResponseCLabel = new Label("RESPONCE C LABEL.", new Point(10, 30));
-
-    mResponceWidgets = new ArrayList<Label>();
-    mResponceWidgets.add(mResponseALabel);
-    mResponceWidgets.add(mResponseBLabel);
-    mResponceWidgets.add(mResponseCLabel);
+    this.mConversationWidget = new ConversationWidget();
+    this.mCurrentConversation = new Conversation();
 
     GenerateDemoConversation();
 
-    setState(mCurrentConversation.ConversationStates.get(0));
+    this.mConversationWidget.setState(mCurrentConversation.ConversationStates.get(0));
   }
 
   public void GenerateDemoConversation() {
@@ -80,24 +61,9 @@ public class GameScreen extends BaseScene {
     mCurrentConversation.ConversationStates.add(state4);
   }
 
-  public void levelComplete() {
-  }
-
   @Override
   public void createScene() {
-  }
-
-  private void setState(State state) {
-    mCurrentState = state;
-    mStateLabel.Text = state.Text;
-
-    for (Label labels : mResponceWidgets) {
-      labels.Text = "";
-    }
-
-    for (int index = 0; index < state.Responses.size(); index++) {
-      mResponceWidgets.get(index).Text = state.Responses.get(index).Text;
-    }
+    Gdx.input.setInputProcessor(this);
   }
 
   @Override
@@ -117,10 +83,7 @@ public class GameScreen extends BaseScene {
     mGame.batch.draw(resourcesManager.schoolBackground, 0, 0);
     this.mDorianSprite.draw(mGame.batch);
     mGame.batch.draw(resourcesManager.textBackground, 0, 0);
-    this.mStateLabel.draw(mGame.batch, resourcesManager.mConversationFont);
-    this.mResponseALabel.draw(mGame.batch, resourcesManager.mConversationFont);
-    this.mResponseBLabel.draw(mGame.batch, resourcesManager.mConversationFont);
-    this.mResponseCLabel.draw(mGame.batch, resourcesManager.mConversationFont);
+    mConversationWidget.draw(mGame.batch, resourcesManager.mConversationFont);
     mGame.batch.end();
   }
 
@@ -156,7 +119,7 @@ public class GameScreen extends BaseScene {
 
   @Override
   public boolean keyDown(int i) {
-    return false;
+    return this.mConversationWidget.keyDown(i);
   }
 
   @Override

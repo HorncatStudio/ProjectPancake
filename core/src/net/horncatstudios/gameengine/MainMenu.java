@@ -150,16 +150,11 @@ public class MainMenu implements InputProcessor {
   }
 
   private void triggerMenuSelection() {
-//    InputEvent inputEvent = new InputEvent();
-//    inputEvent.setType(InputEvent.Type.touchDown);
-////    currentButtonSelected().getClickListener().c.fire( inputEvent );
     TextButton button = currentButtonSelected();
     if (button.getText().toString().contains("Start game"))
       mMenuActions.StartGame();
     else
       mMenuActions.QuitGame();
-//    ClickListener listener = button.getClickListener();
-//    listener.clicked( inputEvent, 0,0);
   }
 
 
@@ -173,6 +168,7 @@ public class MainMenu implements InputProcessor {
         moveSelectionDown();
         break;
       case Input.Keys.ENTER:
+      case Input.Keys.BUTTON_A:
         triggerMenuSelection();
         break;
     }
