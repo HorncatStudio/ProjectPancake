@@ -58,6 +58,8 @@ public class ConversationWidget {
     for (int index = 0; index < state.Responses.size(); index++) {
       mResponceWidgets.get(index).Text = state.Responses.get(index).Text;
     }
+
+    setSelectedIndex(0);
   }
 
   public void draw(SpriteBatch batch, BitmapFont font) {
@@ -98,7 +100,12 @@ public class ConversationWidget {
   }
 
   private void setSelectedIndex(final int selectedIndex) {
+    if ( selectedIndex < 0 || selectedIndex >= this.numberOfVisibleWidgets() )
+      return;
+
     for (int buttonIndex = 0; buttonIndex < this.mResponceWidgets.size(); buttonIndex++) {
+
+
       if (selectedIndex == buttonIndex)
         this.mResponceWidgets.get(buttonIndex).setChecked(true);
       else
@@ -120,5 +127,16 @@ public class ConversationWidget {
         setState(response.NextState);
       }
     }
+  }
+
+  final int numberOfVisibleWidgets() {
+    int total = 0;
+
+    for(Label button : this.mResponceWidgets ) {
+      if( !button.Text.isEmpty() )
+        total++;
+    }
+
+    return total;
   }
 }
