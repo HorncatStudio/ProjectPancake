@@ -24,11 +24,5 @@ public abstract class BaseScene implements Screen, InputProcessor {
 
   public abstract void createScene();
 
-//    public abstract void onBackKeyPressed();
-//
-//    public abstract void onDPadPressed(int keyCode, KeyEvent event);
-//
-//    public abstract void onButtonPadPressed(int keyCode, KeyEvent event);
-
   public abstract SceneManager.SceneType getSceneType();
 }

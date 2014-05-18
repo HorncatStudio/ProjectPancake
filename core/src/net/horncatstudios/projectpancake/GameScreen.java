@@ -30,7 +30,7 @@ public class GameScreen extends BaseScene {
     this.mConversationWidget = new ConversationWidget();
     this.mCurrentConversation = new Conversation();
 
-    GenerateDemoConversation();
+    GenerateJapaneseConversation();
 
     this.mConversationWidget.setState(mCurrentConversation.ConversationStates.get(0));
   }
@@ -54,6 +54,32 @@ public class GameScreen extends BaseScene {
 
     state4.Responses.add(new Response("Well that was awkward.", null));
     state4.Responses.add(new Response("Conversation ending now", null));
+
+    mCurrentConversation.ConversationStates.add(state1);
+    mCurrentConversation.ConversationStates.add(state2);
+    mCurrentConversation.ConversationStates.add(state3);
+    mCurrentConversation.ConversationStates.add(state4);
+  }
+
+  public void GenerateJapaneseConversation() {
+    State state1 = new State("はい");
+    State state2 = new State("ふ～");
+    State state3 = new State("どこ");
+    State state4 = new State("どもありがと");
+
+    Response response = new Response("いえ", state2);
+    state1.Responses.add(response);
+    state1.Responses.add(new Response("うぇええええ", state2));
+    state1.Responses.add(new Response("いえ。", state3));
+
+    state2.Responses.add(new Response("ふううう", state3));
+    state2.Responses.add(new Response("ぽ", state4));
+
+    state3.Responses.add(new Response("。。。", null));
+    state3.Responses.add(new Response("たべる", state4));
+
+    state4.Responses.add(new Response("です", null));
+    state4.Responses.add(new Response("私", null));
 
     mCurrentConversation.ConversationStates.add(state1);
     mCurrentConversation.ConversationStates.add(state2);

@@ -1,13 +1,16 @@
 package net.horncatstudios.gameengine;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import net.horncatstudios.projectpancake.ProjectPancakeGame;
+import org.jrenner.smartfont.SmartFontGenerator;
 
 public class ResourceManager {
 
@@ -81,7 +84,12 @@ public class ResourceManager {
     schoolBackground = new Texture(Gdx.files.internal("back.png"));
     textBackground = new Texture(Gdx.files.internal("blank.png"));
     dorianBaseImage = new Texture(Gdx.files.internal("d2.png"));
-    mConversationFont = new BitmapFont(Gdx.files.internal("font/Agency24.fnt"), false);
+
+    SmartFontGenerator fontGenerator = new SmartFontGenerator();
+    //FileHandle fontConversation = Gdx.files.local("font/AGENCYR.TTF");
+    FileHandle fontConversation = Gdx.files.local("font/KaoriGel.ttf");
+
+    mConversationFont = fontGenerator.createFont(fontConversation, "conversation", 24);
   }
 
   public void unloadGameResources() {
