@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -45,6 +46,7 @@ public class ResourceManager {
   public Texture schoolBackground;
   public Texture textBackground;
   public Texture dorianBaseImage;
+  public TextureAtlas dorianImages;
   //endregion
 
   public void loadSharedResouces() {
@@ -89,6 +91,8 @@ public class ResourceManager {
     //FileHandle fontConversation = Gdx.files.local("font/AGENCYR.TTF");
     FileHandle fontConversation = Gdx.files.local("font/KaoriGel.ttf");
 
+    dorianImages = new TextureAtlas(Gdx.files.internal("dorian/dorian.atlas"));
+
     mConversationFont = fontGenerator.createFont(fontConversation, "conversation", 24);
   }
 
@@ -96,6 +100,7 @@ public class ResourceManager {
     schoolBackground.dispose();
     dorianBaseImage.dispose();
     textBackground.dispose();
+    dorianImages.dispose();
   }
 
 

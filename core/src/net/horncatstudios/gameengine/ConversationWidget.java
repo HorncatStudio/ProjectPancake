@@ -28,8 +28,10 @@ public class ConversationWidget {
 
   private int mCurrentSelectedIndex;
 
-  public ConversationWidget() {
+  private StateChangeListener mStateListener;
 
+  public ConversationWidget(StateChangeListener listener) {
+    mStateListener = listener;
     mStateLabel = new Label("STATE LABEL.", new Point(10, 112));
 
     mResponseALabel = new Label("RESPONCE A LABEL.", new Point(10, 70));
@@ -100,7 +102,7 @@ public class ConversationWidget {
   }
 
   private void setSelectedIndex(final int selectedIndex) {
-    if ( selectedIndex < 0 || selectedIndex >= this.numberOfVisibleWidgets() )
+    if (selectedIndex < 0 || selectedIndex >= this.numberOfVisibleWidgets())
       return;
 
     for (int buttonIndex = 0; buttonIndex < this.mResponceWidgets.size(); buttonIndex++) {
@@ -123,8 +125,7 @@ public class ConversationWidget {
 
     for (Response response : mCurrentState.Responses) {
       if (response.Text.equals(selectedButton.Text)) {
-        // \todo update relationship stats - refactor this and pull out of the widget
-        setState(response.NextState);
+        mStateListener.onStateChange(response.NextState);
       }
     }
   }
@@ -132,8 +133,8 @@ public class ConversationWidget {
   final int numberOfVisibleWidgets() {
     int total = 0;
 
-    for(Label button : this.mResponceWidgets ) {
-      if( !button.Text.isEmpty() )
+    for (Label button : this.mResponceWidgets) {
+      if (!button.Text.isEmpty())
         total++;
     }
 

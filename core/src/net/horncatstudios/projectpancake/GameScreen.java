@@ -2,44 +2,40 @@ package net.horncatstudios.projectpancake;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import net.horncatstudios.conversationengine.Conversation;
+import net.horncatstudios.conversationengine.Emotion;
 import net.horncatstudios.conversationengine.Response;
 import net.horncatstudios.conversationengine.State;
 import net.horncatstudios.gameengine.BaseScene;
 import net.horncatstudios.gameengine.ConversationWidget;
-import net.horncatstudios.gameengine.Label;
 import net.horncatstudios.gameengine.SceneManager;
-import net.horncatstudios.toolkit.Point;
-
-import java.util.ArrayList;
-import java.util.List;
+import net.horncatstudios.gameengine.StateChangeListener;
 
 /**
  * Created by Angelina on 7/18/13.
  */
-public class GameScreen extends BaseScene {
+public class GameScreen extends BaseScene implements StateChangeListener {
 
-  private Sprite mDorianSprite;
+  private Dorian mDorianSprite;
   private Conversation mCurrentConversation;
   private ConversationWidget mConversationWidget;
 
   public GameScreen() {
     Gdx.app.log("touch", "Creating game mLevel scene Game");
-    mDorianSprite = new Sprite(resourcesManager.dorianBaseImage, 640, 520);
-    this.mConversationWidget = new ConversationWidget();
+    mDorianSprite = new Dorian(resourcesManager.dorianImages);
+    this.mConversationWidget = new ConversationWidget(this);
     this.mCurrentConversation = new Conversation();
 
-    GenerateJapaneseConversation();
+    GenerateDemoConversation();
 
     this.mConversationWidget.setState(mCurrentConversation.ConversationStates.get(0));
   }
 
   public void GenerateDemoConversation() {
-    State state1 = new State("Must be new here...");
-    State state2 = new State("... O-o ...");
-    State state3 = new State("Too ... Happy ...");
-    State state4 = new State("Well welcome here.");
+    State state1 = new State("Must be new here...", Emotion.CASUAL);
+    State state2 = new State("... O-o ...", Emotion.EMBARRASSED);
+    State state3 = new State("Too ... Happy ...", Emotion.SAD);
+    State state4 = new State("Well welcome here.", Emotion.EMBARRASSED);
 
     Response response = new Response("Oh yes!  First day here!", state2);
     state1.Responses.add(response);
@@ -95,6 +91,21 @@ public class GameScreen extends BaseScene {
   @Override
   public SceneManager.SceneType getSceneType() {
     return SceneManager.SceneType.SCENE_GAME;
+  }
+
+
+  @Override
+  public void onStateChange(final State state) {
+
+    if (null == state) {
+      SceneManager.getInstance().loadEndScreen();
+      dispose();
+      return;
+    }
+
+    // \todo update relationship stats
+    mDorianSprite.setEmotion(state.Emotion);
+    mConversationWidget.setState(state);
   }
 
   @Override
@@ -182,4 +193,5 @@ public class GameScreen extends BaseScene {
   public boolean scrolled(int i) {
     return false;
   }
+
 }

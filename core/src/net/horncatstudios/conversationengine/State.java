@@ -8,12 +8,18 @@ import java.util.List;
  */
 public class State {
   public String Text;
-  public String Emotion;
+  public Emotion Emotion;
   public List<Response> Responses;
 
   public State(String text) {
     Text = text;
     Responses = new ArrayList<Response>();
+  }
+
+  public State(String text, Emotion emotion) {
+    Text = text;
+    Responses = new ArrayList<Response>();
+    Emotion = emotion;
   }
 
 }

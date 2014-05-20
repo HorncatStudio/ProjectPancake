@@ -2,6 +2,7 @@ package net.horncatstudios.gameengine;
 
 
 import com.badlogic.gdx.Gdx;
+import net.horncatstudios.projectpancake.EndGameScreen;
 import net.horncatstudios.projectpancake.GameScreen;
 import net.horncatstudios.projectpancake.MainMenuScreen;
 import net.horncatstudios.projectpancake.SplashScreen;
@@ -10,6 +11,7 @@ public class SceneManager {
   private BaseScene splashScene = null;
   private BaseScene menuScene = null;
   private BaseScene gameLevelScene = null;
+  private BaseScene endGameScreen = null;
 
   private static final SceneManager INSTANCE = new SceneManager();
 
@@ -19,7 +21,8 @@ public class SceneManager {
   public enum SceneType {
     SCENE_SPLASH,
     SCENE_MENU,
-    SCENE_GAME
+    SCENE_GAME,
+    SCENE_END
   }
 
   public void setScene(SceneType sceneType) {
@@ -32,6 +35,9 @@ public class SceneManager {
         break;
       case SCENE_SPLASH:
         loadSplashScene();
+        break;
+      case SCENE_END:
+        loadEndScreen();
         break;
       default:
         break;
@@ -94,5 +100,14 @@ public class SceneManager {
       gameLevelScene = new GameScreen();
     }
     setScene(gameLevelScene);
+  }
+
+  public void loadEndScreen() {
+    Gdx.app.log("touch", "menuItemClicked Loading Game");
+
+    if (null == endGameScreen) {
+      endGameScreen = new EndGameScreen();
+    }
+    setScene(endGameScreen);
   }
 }
