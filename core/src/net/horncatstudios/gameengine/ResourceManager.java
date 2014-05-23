@@ -88,8 +88,8 @@ public class ResourceManager {
     dorianBaseImage = new Texture(Gdx.files.internal("d2.png"));
 
     SmartFontGenerator fontGenerator = new SmartFontGenerator();
-    //FileHandle fontConversation = Gdx.files.local("font/AGENCYR.TTF");
-    FileHandle fontConversation = Gdx.files.local("font/KaoriGel.ttf");
+    FileHandle fontConversation = Gdx.files.local("font/AGENCYR.TTF");
+    //FileHandle fontConversation = Gdx.files.local("font/KaoriGel.ttf");
 
     dorianImages = new TextureAtlas(Gdx.files.internal("dorian/dorian.atlas"));
 
