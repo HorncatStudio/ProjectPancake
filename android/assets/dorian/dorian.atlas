@@ -1,0 +1,33 @@
+
+dorian.png
+size: 642,964
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+blush
+  rotate: false
+  xy: 2, 484
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+normal
+  rotate: false
+  xy: 2, 2
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+
+dorian2.png
+size: 642,482
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+sad
+  rotate: false
+  xy: 2, 2
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
