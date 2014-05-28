@@ -44,6 +44,12 @@ public class ACharacter {
   }
 
   public void setEmotion(final Emotion emotion) {
+      if( null == emotion )
+      {
+          setNormalTexture();
+          return;
+      }
+
     switch (emotion) {
       case CASUAL:
         setNormalTexture();
@@ -53,6 +59,9 @@ public class ACharacter {
         break;
       case SAD:
         setSadTexture();
+        break;
+      default:
+        setNormalTexture();
         break;
     }
   }

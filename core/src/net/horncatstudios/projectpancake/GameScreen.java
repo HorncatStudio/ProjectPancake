@@ -11,6 +11,9 @@ import net.horncatstudios.gameengine.ConversationWidget;
 import net.horncatstudios.gameengine.SceneManager;
 import net.horncatstudios.gameengine.StateChangeListener;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+
 /**
  * Created by Angelina on 7/18/13.
  */
@@ -26,7 +29,8 @@ public class GameScreen extends BaseScene implements StateChangeListener {
     this.mConversationWidget = new ConversationWidget(this);
     this.mCurrentConversation = new Conversation();
 
-    GenerateDemoConversation();
+   // GenerateDemoConversation();
+      GenerateJapaneseConversation();
 
     this.mConversationWidget.setState(mCurrentConversation.ConversationStates.get(0));
   }
@@ -58,24 +62,25 @@ public class GameScreen extends BaseScene implements StateChangeListener {
   }
 
   public void GenerateJapaneseConversation() {
-    State state1 = new State("はい");
-    State state2 = new State("ふ～");
-    State state3 = new State("どこ");
-    State state4 = new State("どもありがと");
+      Charset.forName("UTF-8");
+    State state1 = new State( "はい" );
+    State state2 = new State("よ");
+    State state3 = new State("おもしろい");
+    State state4 = new State("ふうううう");
 
-    Response response = new Response("いえ", state2);
+    Response response = new Response("ふも", state2);
     state1.Responses.add(response);
-    state1.Responses.add(new Response("うぇええええ", state2));
-    state1.Responses.add(new Response("いえ。", state3));
+    state1.Responses.add(new Response("ふもふも", state2));
+    state1.Responses.add(new Response("ふもふ", state3));
 
-    state2.Responses.add(new Response("ふううう", state3));
-    state2.Responses.add(new Response("ぽ", state4));
+    state2.Responses.add(new Response("ぱんつ", state3));
+    state2.Responses.add(new Response("みえてるよ", state4));
 
-    state3.Responses.add(new Response("。。。", null));
-    state3.Responses.add(new Response("たべる", state4));
+    state3.Responses.add(new Response("みて", null));
+    state3.Responses.add(new Response("おろ", state4));
 
-    state4.Responses.add(new Response("です", null));
-    state4.Responses.add(new Response("私", null));
+    state4.Responses.add(new Response("ぷ", null));
+    state4.Responses.add(new Response("ふ～", null));
 
     mCurrentConversation.ConversationStates.add(state1);
     mCurrentConversation.ConversationStates.add(state2);

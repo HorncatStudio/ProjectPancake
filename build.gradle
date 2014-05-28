@@ -32,6 +32,10 @@ allprojects {
   }
 }
 
+tasks.withType(Compile) {
+    options.encoding = 'UTF-8'
+}
+
 project(":core") {
   apply plugin: "java"
 

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import net.horncatstudios.projectpancake.ProjectPancakeGame;
@@ -87,13 +88,23 @@ public class ResourceManager {
     textBackground = new Texture(Gdx.files.internal("blank.png"));
     dorianBaseImage = new Texture(Gdx.files.internal("d2.png"));
 
-    SmartFontGenerator fontGenerator = new SmartFontGenerator();
-    FileHandle fontConversation = Gdx.files.local("font/AGENCYR.TTF");
+//      FileHandle fontFile  = Gdx.files.local("font/msmincho.ttc");
+//      FreeTypeFontGenerator generator = new FreeTypeFontGenerator(fontFile);
+//      FreeTypeFontGenerator.FreeTypeFontParameter paremteres = new FreeTypeFontGenerator.FreeTypeFontParameter();
+//      paremteres.size = 24;
+//      paremteres.characters = "はい";
+//      mConversationFont = generator.generateFont(paremteres);
+//      generator.dispose();
+    mConversationFont = new BitmapFont( Gdx.files.internal("font/newjap.fnt"));
+
+//    SmartFontGenerator fontGenerator = new SmartFontGenerator();
+//    FileHandle fontConversation = Gdx.files.local("font/AGENCYR.TTF");
     //FileHandle fontConversation = Gdx.files.local("font/KaoriGel.ttf");
+ //   mConversationFont = fontGenerator.createFont(fontConversation, "conversation", 24);
+
 
     dorianImages = new TextureAtlas(Gdx.files.internal("dorian/dorian.atlas"));
 
-    mConversationFont = fontGenerator.createFont(fontConversation, "conversation", 24);
   }
 
   public void unloadGameResources() {
@@ -101,6 +112,7 @@ public class ResourceManager {
     dorianBaseImage.dispose();
     textBackground.dispose();
     dorianImages.dispose();
+      mConversationFont.dispose();
   }
 
 
