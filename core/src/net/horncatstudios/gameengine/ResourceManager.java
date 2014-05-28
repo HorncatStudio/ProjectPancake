@@ -88,18 +88,10 @@ public class ResourceManager {
     textBackground = new Texture(Gdx.files.internal("blank.png"));
     dorianBaseImage = new Texture(Gdx.files.internal("d2.png"));
 
-//      FileHandle fontFile  = Gdx.files.local("font/msmincho.ttc");
-//      FreeTypeFontGenerator generator = new FreeTypeFontGenerator(fontFile);
-//      FreeTypeFontGenerator.FreeTypeFontParameter paremteres = new FreeTypeFontGenerator.FreeTypeFontParameter();
-//      paremteres.size = 24;
-//      paremteres.characters = "はい";
-//      mConversationFont = generator.generateFont(paremteres);
-//      generator.dispose();
-    mConversationFont = new BitmapFont( Gdx.files.internal("font/newjap.fnt"));
+    mConversationFont = new BitmapFont( Gdx.files.internal("font/japanese.fnt"), Gdx.files.internal("font/japanese.png"), false);
 
 //    SmartFontGenerator fontGenerator = new SmartFontGenerator();
 //    FileHandle fontConversation = Gdx.files.local("font/AGENCYR.TTF");
-    //FileHandle fontConversation = Gdx.files.local("font/KaoriGel.ttf");
  //   mConversationFont = fontGenerator.createFont(fontConversation, "conversation", 24);
 
 

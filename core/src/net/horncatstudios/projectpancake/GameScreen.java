@@ -62,25 +62,25 @@ public class GameScreen extends BaseScene implements StateChangeListener {
   }
 
   public void GenerateJapaneseConversation() {
-      Charset.forName("UTF-8");
-    State state1 = new State( "ã¯ã„" );
-    State state2 = new State("ã‚ˆ");
-    State state3 = new State("ãŠã‚‚ã—ã‚ã„");
-    State state4 = new State("ãµã†ã†ã†ã†");
+     // Charset.forName("SJIS");
+    State state1 = new State( "‚ ‚¢‚¤‚¦‚¨‚©‚«‚­‚¯‚±");
+    State state2 = new State("‚¢");
+    State state3 = new State("‚¤");
+    State state4 = new State("‚¦");
 
-    Response response = new Response("ãµã‚‚", state2);
+    Response response = new Response("‚¨", state2);
     state1.Responses.add(response);
-    state1.Responses.add(new Response("ãµã‚‚ãµã‚‚", state2));
-    state1.Responses.add(new Response("ãµã‚‚ãµ", state3));
+    state1.Responses.add(new Response("‚©", state2));
+    state1.Responses.add(new Response("‚«", state3));
 
-    state2.Responses.add(new Response("ã±ã‚“ã¤", state3));
-    state2.Responses.add(new Response("ã¿ãˆã¦ã‚‹ã‚ˆ", state4));
+    state2.Responses.add(new Response("‚­", state3));
+    state2.Responses.add(new Response("‚¯", state4));
 
-    state3.Responses.add(new Response("ã¿ã¦", null));
-    state3.Responses.add(new Response("ãŠã‚", state4));
+    state3.Responses.add(new Response("‚±", null));
+    state3.Responses.add(new Response("‚³", state4));
 
-    state4.Responses.add(new Response("ã·", null));
-    state4.Responses.add(new Response("ãµï½", null));
+    state4.Responses.add(new Response("‚µ", null));
+    state4.Responses.add(new Response("‚·", null));
 
     mCurrentConversation.ConversationStates.add(state1);
     mCurrentConversation.ConversationStates.add(state2);
