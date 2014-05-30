@@ -88,7 +88,7 @@ public class ResourceManager {
     textBackground = new Texture(Gdx.files.internal("blank.png"));
     dorianBaseImage = new Texture(Gdx.files.internal("d2.png"));
 
-    mConversationFont = new BitmapFont( Gdx.files.internal("font/japanese.fnt"), Gdx.files.internal("font/japanese.png"), false);
+    mConversationFont = new BitmapFont( Gdx.files.internal("font/moreJapanese.fnt"));
 
 //    SmartFontGenerator fontGenerator = new SmartFontGenerator();
 //    FileHandle fontConversation = Gdx.files.local("font/AGENCYR.TTF");

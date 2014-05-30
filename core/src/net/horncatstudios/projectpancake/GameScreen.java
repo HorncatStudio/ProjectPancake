@@ -63,24 +63,24 @@ public class GameScreen extends BaseScene implements StateChangeListener {
 
   public void GenerateJapaneseConversation() {
      // Charset.forName("SJIS");
-    State state1 = new State( "あいうえおかきくけこ");
-    State state2 = new State("い");
-    State state3 = new State("う");
-    State state4 = new State("え");
+    State state1 = new State( "ここ初めてでしょう...");
+    State state2 = new State("...そう...");
+    State state3 = new State("喜びすぎ...");
+    State state4 = new State("まぁようこそこの学園へ。");
 
-    Response response = new Response("お", state2);
+    Response response = new Response("そう！今日が初登校日！", state2);
     state1.Responses.add(response);
-    state1.Responses.add(new Response("か", state2));
-    state1.Responses.add(new Response("き", state3));
+    state1.Responses.add(new Response("ああ、見て分かんない？", state2));
+    state1.Responses.add(new Response("ああ", state3));
 
-    state2.Responses.add(new Response("く", state3));
-    state2.Responses.add(new Response("け", state4));
+    state2.Responses.add(new Response("大丈夫？", state3));
+    state2.Responses.add(new Response("いや", state4));
 
-    state3.Responses.add(new Response("こ", null));
-    state3.Responses.add(new Response("さ", state4));
+    state3.Responses.add(new Response("やったーー", null));
+    state3.Responses.add(new Response("4へ！", state4));
 
-    state4.Responses.add(new Response("し", null));
-    state4.Responses.add(new Response("す", null));
+    state4.Responses.add(new Response("何か不思議な娘だったな", null));
+    state4.Responses.add(new Response("会話終了", null));
 
     mCurrentConversation.ConversationStates.add(state1);
     mCurrentConversation.ConversationStates.add(state2);
