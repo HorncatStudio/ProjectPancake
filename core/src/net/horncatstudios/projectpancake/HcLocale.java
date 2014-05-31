@@ -4,17 +4,19 @@ package net.horncatstudios.projectpancake;
  * Created by Shinichi on 5/30/2014.
  */
 public class HcLocale {
-  public enum Locale {EN, JP}
 
-  private Locale currentLocale;
+  public enum Locale {
+    EN,
+    JP
+  }
 
-  public void setLocale(Locale locale)
-  {
+  static private Locale currentLocale = Locale.EN;
+
+  static public void setLocale(Locale locale)   {
     currentLocale = locale;
   }
 
-  public Locale getCurrentLocale()
-  {
+  static public Locale getCurrentLocale()   {
     return currentLocale;
   }
 }

@@ -9,29 +9,25 @@ public class HcText {
 
   HashMap<HcLocale.Locale, String> mText;
 
-  public HcText(final String text)
-  {
+  public HcText(final String text)   {
+    mText = new HashMap<HcLocale.Locale, String>();
     mText.put(HcLocale.Locale.EN, text);
   }
 
-  public HcText(final HcLocale hcLocale, final String text)
-  {
-    hcLocale.setLocale(HcLocale.Locale.JP);
-    mText.put(hcLocale.getCurrentLocale(), text);
+  public HcText(final HcLocale.Locale hcLocale, final String text)   {
+    mText = new HashMap<HcLocale.Locale, String>();
+    mText.put(hcLocale, text);
   }
 
-  public String getText()
-  {
-    return mText.get(HcLocale.Locale.EN);
+  public String getText()  {
+    return mText.get(HcLocale.getCurrentLocale());
   }
 
-  public String getText(final HcLocale hcLocale)
-  {
-    return mText.get(hcLocale.getCurrentLocale());
+  public String getText(final HcLocale.Locale hcLocale) {
+    return mText.get(hcLocale);
   }
 
-  public void add(final HcLocale hcLocale, final String text)
-  {
-    mText.put(hcLocale.getCurrentLocale(), text);
+  public void add(final HcLocale.Locale hcLocale, final String text) {
+    mText.put(hcLocale, text);
   }
 }
