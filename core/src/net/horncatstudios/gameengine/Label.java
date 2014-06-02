@@ -3,6 +3,7 @@ package net.horncatstudios.gameengine;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import net.horncatstudios.toolkit.HcString;
 import net.horncatstudios.toolkit.Point;
 
 /**
@@ -16,6 +17,10 @@ public class Label {
     Text = text;
     mPosition = position;
     mChecked = false;
+  }
+
+  public Label( HcString text, Point position ) {
+    this(text.getText(), position);
   }
 
   public void setPosition(float x, float y) {

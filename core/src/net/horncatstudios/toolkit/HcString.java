@@ -1,20 +1,22 @@
-package net.horncatstudios.projectpancake;
+package net.horncatstudios.toolkit;
+
+import net.horncatstudios.projectpancake.HcLocale;
 
 import java.util.HashMap;
 
 /**
  * Created by Shinichi on 5/30/2014.
  */
-public class HcText {
+public class HcString {
 
   HashMap<HcLocale.Locale, String> mText;
 
-  public HcText(final String text)   {
+  public HcString(final String text)   {
     mText = new HashMap<HcLocale.Locale, String>();
     mText.put(HcLocale.Locale.EN, text);
   }
 
-  public HcText(final HcLocale.Locale hcLocale, final String text)   {
+  public HcString(final HcLocale.Locale hcLocale, final String text)   {
     mText = new HashMap<HcLocale.Locale, String>();
     mText.put(hcLocale, text);
   }

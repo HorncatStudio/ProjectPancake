@@ -29,8 +29,11 @@ public class GameScreen extends BaseScene implements StateChangeListener {
     this.mConversationWidget = new ConversationWidget(this);
     this.mCurrentConversation = new Conversation();
 
-   // GenerateDemoConversation();
+    if( HcLocale.getCurrentLocale() == HcLocale.Locale.EN ) {
+      GenerateDemoConversation();
+    } else {
       GenerateJapaneseConversation();
+    }
 
     this.mConversationWidget.setState(mCurrentConversation.ConversationStates.get(0));
   }
@@ -63,10 +66,10 @@ public class GameScreen extends BaseScene implements StateChangeListener {
 
   public void GenerateJapaneseConversation() {
      // Charset.forName("SJIS");
-    State state1 = new State( "ここ初めてでしょう...");
-    State state2 = new State("...そう...");
-    State state3 = new State("喜びすぎ...");
-    State state4 = new State("まぁようこそこの学園へ。");
+    State state1 = new State( "ここ初めてでしょう...", Emotion.CASUAL);
+    State state2 = new State("...そう...", Emotion.EMBARRASSED);
+    State state3 = new State("喜びすぎ...", Emotion.SAD);
+    State state4 = new State("まぁようこそこの学園へ。", Emotion.EMBARRASSED);
 
     Response response = new Response("そう！今日が初登校日！", state2);
     state1.Responses.add(response);
@@ -125,7 +128,7 @@ public class GameScreen extends BaseScene implements StateChangeListener {
     mGame.batch.draw(resourcesManager.schoolBackground, 0, 0);
     this.mDorianSprite.draw(mGame.batch);
     mGame.batch.draw(resourcesManager.textBackground, 0, 0);
-    mConversationWidget.draw(mGame.batch, resourcesManager.mConversationFont);
+    mConversationWidget.draw(mGame.batch, resourcesManager.fontManager.conversationFont);
     mGame.batch.end();
   }
 

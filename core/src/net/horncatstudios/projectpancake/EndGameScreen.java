@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.GL20;
 import net.horncatstudios.gameengine.BaseScene;
 import net.horncatstudios.gameengine.Label;
 import net.horncatstudios.gameengine.SceneManager;
+import net.horncatstudios.toolkit.HcString;
 import net.horncatstudios.toolkit.Point;
 
 /**
@@ -16,7 +17,9 @@ public class EndGameScreen extends BaseScene {
 
   @Override
   public void createScene() {
-    theEnd = new Label("THE END", new Point(300, 300));
+    HcString text = new HcString("THE END");
+    text.add(HcLocale.Locale.JP, "èIÇÌÇË");
+    theEnd = new Label(text, new Point(300, 300));
   }
 
   @Override
@@ -74,7 +77,7 @@ public class EndGameScreen extends BaseScene {
     mGame.batch.setProjectionMatrix(camera.combined);
 
     mGame.batch.begin();
-    theEnd.draw(mGame.batch, resourcesManager.mFontTitleStyle.font);
+    theEnd.draw(mGame.batch, resourcesManager.fontManager.conversationFont);
     mGame.batch.end();
   }
 

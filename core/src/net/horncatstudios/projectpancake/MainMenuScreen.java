@@ -23,7 +23,7 @@ public class MainMenuScreen extends BaseScene implements ProjectPancakeMenuActio
 
   @Override
   public void createScene() {
-    mMenu = new MainMenu(resourcesManager, this);
+    mMenu = new MainMenu(resourcesManager.fontManager, this);
     Gdx.input.setInputProcessor(mMenu);
   }
 
@@ -46,12 +46,12 @@ public class MainMenuScreen extends BaseScene implements ProjectPancakeMenuActio
   @Override
   public void StartGame() {
     SceneManager.getInstance().loadGameScene();
-    dispose();
+    this.dispose();
   }
 
   @Override
   public void QuitGame() {
-
+    this.dispose();
   }
 
   @Override
@@ -81,7 +81,7 @@ public class MainMenuScreen extends BaseScene implements ProjectPancakeMenuActio
 
   @Override
   public void dispose() {
-
+    this.resourcesManager.unloadMenuResources();
   }
 
   @Override

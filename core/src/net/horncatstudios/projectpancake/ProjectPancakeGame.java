@@ -8,32 +8,28 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import net.horncatstudios.gameengine.ResourceManager;
 import net.horncatstudios.gameengine.SceneManager;
 
-public class ProjectPancakeGame extends Game implements InputProcessor {
+public class ProjectPancakeGame extends Game {
   SpriteBatch batch;
-  BitmapFont font;
 
   ResourceManager resourceManager;
 
   @Override
   public void create() {
     batch = new SpriteBatch();
-    font = new BitmapFont(Gdx.files.internal("font/PW403.fnt"), false);
+
+    HcLocale.setLocale(HcLocale.Locale.JP);
 
     resourceManager = resourceManager.getInstance();
-    resourceManager.mSharedFont = font;
     resourceManager.prepareManager(this);
     resourceManager.prepareSharedResources();
 
     SceneManager.getInstance().setScene(SceneManager.SceneType.SCENE_SPLASH);
-    Gdx.input.setInputProcessor(this);
   }
-
 
   @Override
   public void dispose() {
     batch.dispose();
-    font.dispose();
-    ResourceManager.getInstance().disposeSharedresources();
+    ResourceManager.getInstance().disposeSharedResources();
   }
 
   @Override
@@ -51,53 +47,5 @@ public class ProjectPancakeGame extends Game implements InputProcessor {
 
   @Override
   public void resume() {
-  }
-
-  @Override
-  public boolean keyDown(int keycode) {
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  @Override
-  public boolean keyUp(int keycode) {
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  @Override
-  public boolean keyTyped(char character) {
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  @Override
-  public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  @Override
-  public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  @Override
-  public boolean touchDragged(int screenX, int screenY, int pointer) {
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  @Override
-  public boolean mouseMoved(int screenX, int screenY) {
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  @Override
-  public boolean scrolled(int amount) {
-    // TODO Auto-generated method stub
-    return false;
   }
 }

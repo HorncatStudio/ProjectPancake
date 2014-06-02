@@ -3,20 +3,16 @@ package net.horncatstudios.gameengine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import net.horncatstudios.projectpancake.FontResourceManager;
 import net.horncatstudios.projectpancake.ProjectPancakeMenuActions;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +24,6 @@ public class MainMenu implements InputProcessor {
   //! The stage responsible for managing the main menu table
   private Stage mStage;
 
-  private ResourceManager mResources;
   private ProjectPancakeMenuActions mMenuActions;
 
   Label mTitleLabel;
@@ -38,18 +33,17 @@ public class MainMenu implements InputProcessor {
 
   int mCurrentSelectedIndex;
 
-  public MainMenu(final ResourceManager resourceManager, final ProjectPancakeMenuActions actions) {
-    this.mResources = resourceManager;
+  public MainMenu(final FontResourceManager fontManager, final ProjectPancakeMenuActions actions) {
     this.mMenuActions = actions;
     this.mMenuOptions = new ArrayList<TextButton>();
 
     this.mStage = new Stage();
 
-    this.mTitleLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("Project", this.mResources.mFontTitleStyle);
+    this.mTitleLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("Project", fontManager.MainMenuGameTitleStyle);
     this.mTitleLabel.setFontScale(1f);
     this.mTitleLabel.setAlignment(Align.center | Align.bottom);
 
-    this.mSubTitleLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("PANCAKE", this.mResources.mFontTitleStyle);
+    this.mSubTitleLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("PANCAKE", fontManager.MainMenuGameTitleStyle);
     this.mSubTitleLabel.setFontScale(2f);
     //! Note: Angelina -
     //! Aligning to the bottom actually makes it align to the top of the cell for the label
@@ -58,10 +52,11 @@ public class MainMenu implements InputProcessor {
     Table table = new Table();
     //table.debug(); uncomment for table debugging
     table.setFillParent(true);
-    table.setSkin(this.mResources.mMenuButtonSkin);
+    table.setSkin(fontManager.MainMenuButtonSkin);
     this.mStage.addActor(table);
 
     // Adding empty cells to improve spacing for the main menu
+    table.add().expand();
     table.add().expand();
     table.row();
 
@@ -76,25 +71,20 @@ public class MainMenu implements InputProcessor {
     table.row();
 
     // register the button "start game"
-    TextButton startGameButton = new TextButton("Start game", this.mResources.mMenuButtonSkin);
+    TextButton startGameButton = new TextButton("Start game", fontManager.MainMenuButtonSkin);
     startGameButton.addListener(new ClickListener() {
       @Override
       public void clicked(InputEvent event, float x, float y) {
         mMenuActions.StartGame();
       }
     });
-//    startGameButton.addListener( new ChangeListener() {
-//      @Override
-//      public void changed(ChangeEvent event, Actor actor) {
-//        mMenuActions.StartGame();
-//      }
-//    });
+
     table.add(startGameButton)/*.size(100, 60)*/.uniform();
     this.mMenuOptions.add(startGameButton);
     table.row();
 
     // register the button "quit game" - leaving with clicked as an example of using both
-    TextButton quitGameButton = new TextButton("Quit game", this.mResources.mMenuButtonSkin);
+    TextButton quitGameButton = new TextButton("Quit game",fontManager.MainMenuButtonSkin);
     quitGameButton.addListener(new ClickListener() {
       @Override
       public void clicked(InputEvent event, float x, float y) {

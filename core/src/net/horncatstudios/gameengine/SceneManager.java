@@ -83,6 +83,7 @@ public class SceneManager {
   public void loadMenuScene() {
     if (null != splashScene) {
       this.disposeSplashScene();
+      splashScene = null;
     }
 
     ResourceManager.getInstance().loadMenuResources();

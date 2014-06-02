@@ -1,18 +1,11 @@
 package net.horncatstudios.gameengine;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import net.horncatstudios.projectpancake.FontResourceManager;
 import net.horncatstudios.projectpancake.ProjectPancakeGame;
-import org.jrenner.smartfont.SmartFontGenerator;
 
 public class ResourceManager {
 
@@ -24,16 +17,11 @@ public class ResourceManager {
     mGame.setScreen(scene);
   }
 
+  public static FontResourceManager fontManager = new FontResourceManager();
 
   //region SharedGameResources
-
-  public Label.LabelStyle mFontTitleStyle;
   // public Music conversationMusic;
   // public Sound supriseSound;
-  public Skin mMenuButtonSkin;
-
-  public BitmapFont mSharedFont;
-  public BitmapFont mConversationFont;
   //endregion
 
   //regionSplash Resources
@@ -51,35 +39,24 @@ public class ResourceManager {
   //endregion
 
   public void loadSharedResouces() {
-    mFontTitleStyle = new Label.LabelStyle(mSharedFont, Color.CYAN);
-
-    // Sets the background of the Text Button - must be set
-    Pixmap backgroundTexture = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-    backgroundTexture.setColor(Color.RED);
-    backgroundTexture.fill();
-
-    mMenuButtonSkin = new Skin();
-    mMenuButtonSkin.add("white", new Texture(backgroundTexture));
-
-    TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
-    style.checkedFontColor = Color.PINK;
-    style.fontColor = Color.WHITE;
-    style.font = mSharedFont;
-    mMenuButtonSkin.add("default", style);
-
-
     // load the drop sound effect and the rain background "music"
     //conversationMusic = Gdx.audio.newMusic(Gdx.files.internal("conversationMusic.mp3"));
     //supriseSound = Gdx.audio.newSound(Gdx.files.internal("supriseSound.wav"));
+    fontManager.loadSharedResources();
   }
 
-  public void disposeSharedresources() {
+  public void disposeSharedResources() {
     //supriseSound.dispose();
     //conversationMusic.dispose();
+    fontManager.disposeSharedResources();
   }
 
-
   public void loadMenuResources() {
+    fontManager.loadMenuResources();
+  }
+
+  public void unloadMenuResources() {
+    fontManager.unloadMenuResources();
   }
 
   public void loadGameResources() {
@@ -87,12 +64,6 @@ public class ResourceManager {
     schoolBackground = new Texture(Gdx.files.internal("back.png"));
     textBackground = new Texture(Gdx.files.internal("blank.png"));
     dorianBaseImage = new Texture(Gdx.files.internal("d2.png"));
-
-    mConversationFont = new BitmapFont( Gdx.files.internal("font/moreJapanese.fnt"));
-
-//    SmartFontGenerator fontGenerator = new SmartFontGenerator();
-//    FileHandle fontConversation = Gdx.files.local("font/AGENCYR.TTF");
- //   mConversationFont = fontGenerator.createFont(fontConversation, "conversation", 24);
 
 
     dorianImages = new TextureAtlas(Gdx.files.internal("dorian/dorian.atlas"));
@@ -104,7 +75,6 @@ public class ResourceManager {
     dorianBaseImage.dispose();
     textBackground.dispose();
     dorianImages.dispose();
-      mConversationFont.dispose();
   }
 
 
