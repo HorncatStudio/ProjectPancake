@@ -39,11 +39,13 @@ public class MainMenu implements InputProcessor {
 
     this.mStage = new Stage();
 
-    this.mTitleLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("Project", fontManager.MainMenuGameTitleStyle);
+//    this.mTitleLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("Project", fontManager.MainMenuGameTitleStyle);
+    this.mTitleLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("ぷろじぇくと", fontManager.MainMenuGameTitleStyle);
     this.mTitleLabel.setFontScale(1f);
     this.mTitleLabel.setAlignment(Align.center | Align.bottom);
 
-    this.mSubTitleLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("PANCAKE", fontManager.MainMenuGameTitleStyle);
+//    this.mSubTitleLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("PANCAKE", fontManager.MainMenuGameTitleStyle);
+    this.mSubTitleLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("パンケーキ", fontManager.MainMenuGameTitleStyle);
     this.mSubTitleLabel.setFontScale(2f);
     //! Note: Angelina -
     //! Aligning to the bottom actually makes it align to the top of the cell for the label
@@ -72,6 +74,7 @@ public class MainMenu implements InputProcessor {
 
     // register the button "start game"
     TextButton startGameButton = new TextButton("Start game", fontManager.MainMenuButtonSkin);
+//    TextButton startGameButton = new TextButton("すたーと", fontManager.MainMenuButtonSkin);
     startGameButton.addListener(new ClickListener() {
       @Override
       public void clicked(InputEvent event, float x, float y) {
@@ -84,7 +87,8 @@ public class MainMenu implements InputProcessor {
     table.row();
 
     // register the button "quit game" - leaving with clicked as an example of using both
-    TextButton quitGameButton = new TextButton("Quit game",fontManager.MainMenuButtonSkin);
+    TextButton quitGameButton = new TextButton("Quit game", fontManager.MainMenuButtonSkin);
+//    TextButton quitGameButton = new TextButton("ヤメル", fontManager.MainMenuButtonSkin);
     quitGameButton.addListener(new ClickListener() {
       @Override
       public void clicked(InputEvent event, float x, float y) {

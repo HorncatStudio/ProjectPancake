@@ -18,7 +18,7 @@ public class EndGameScreen extends BaseScene {
   @Override
   public void createScene() {
     HcString text = new HcString("THE END");
-    text.add(HcLocale.Locale.JP, "èIÇÌÇË");
+    text.add(HcLocale.Locale.JP, "ÁµÇ„Çè„Çä");
     theEnd = new Label(text, new Point(300, 300));
   }
 

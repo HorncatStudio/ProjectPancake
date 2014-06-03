@@ -18,7 +18,7 @@ public class FontResourceManager {
   public BitmapFont conversationFont = null;
 
   private BitmapFont englishTextFont = null;
-  private BitmapFont japaneseTextFont = new BitmapFont(Gdx.files.internal("font/japanese.fnt"), Gdx.files.internal("font/japanese.png"), false);
+  private BitmapFont japaneseTextFont = new BitmapFont(Gdx.files.internal("font/moreJapanese.fnt"));
 
   //region Main Menu Resources
   private BitmapFont mSharedFont;
@@ -27,7 +27,8 @@ public class FontResourceManager {
   //endregion
 
   public void loadMenuResources() {
-    mSharedFont = new BitmapFont(Gdx.files.internal("font/PW403.fnt"), false);
+//    mSharedFont = new BitmapFont(Gdx.files.internal("font/PW403.fnt"), false);
+    mSharedFont = new BitmapFont(Gdx.files.internal("font/lovepop.fnt"));
     MainMenuGameTitleStyle = new Label.LabelStyle(mSharedFont, Color.CYAN);
 
     // Sets the background of the Text Button - must be set
