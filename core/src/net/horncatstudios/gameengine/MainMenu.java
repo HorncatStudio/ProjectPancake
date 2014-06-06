@@ -73,8 +73,8 @@ public class MainMenu implements InputProcessor {
     table.row();
 
     // register the button "start game"
-    TextButton startGameButton = new TextButton("Start game", fontManager.MainMenuButtonSkin);
-//    TextButton startGameButton = new TextButton("Ç∑ÇΩÅ[Ç∆", fontManager.MainMenuButtonSkin);
+//    TextButton startGameButton = new TextButton("Start game", fontManager.MainMenuButtonSkin);
+    TextButton startGameButton = new TextButton("Ç∑ÇΩÅ[Ç∆", fontManager.MainMenuButtonSkin);
     startGameButton.addListener(new ClickListener() {
       @Override
       public void clicked(InputEvent event, float x, float y) {
@@ -87,8 +87,8 @@ public class MainMenu implements InputProcessor {
     table.row();
 
     // register the button "quit game" - leaving with clicked as an example of using both
-    TextButton quitGameButton = new TextButton("Quit game", fontManager.MainMenuButtonSkin);
-//    TextButton quitGameButton = new TextButton("ÉÑÉÅÉã", fontManager.MainMenuButtonSkin);
+//    TextButton quitGameButton = new TextButton("Quit game", fontManager.MainMenuButtonSkin);
+    TextButton quitGameButton = new TextButton("ÉÑÉÅÉã", fontManager.MainMenuButtonSkin);
     quitGameButton.addListener(new ClickListener() {
       @Override
       public void clicked(InputEvent event, float x, float y) {
@@ -145,7 +145,7 @@ public class MainMenu implements InputProcessor {
 
   private void triggerMenuSelection() {
     TextButton button = currentButtonSelected();
-    if (button.getText().toString().contains("Start game"))
+    if (button.getText().toString().contains("Start game") || button.getText().toString().contains("Ç∑ÇΩÅ[Ç∆"))
       mMenuActions.StartGame();
     else
       mMenuActions.QuitGame();
