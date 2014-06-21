@@ -9,7 +9,7 @@ import java.util.HashMap;
  */
 public class HcString {
 
-  HashMap<HcLocale.Locale, String> mText;
+  private HashMap<HcLocale.Locale, String> mText;
 
   public HcString(final String text)   {
     mText = new HashMap<HcLocale.Locale, String>();
