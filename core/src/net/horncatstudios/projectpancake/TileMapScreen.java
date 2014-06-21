@@ -24,7 +24,7 @@ public class TileMapScreen extends BaseScene {
     mRenderer = new OrthogonalTiledMapRenderer(resourcesManager.mSchoolMap);
     this.player = new PlayerSprite(new Sprite(new Texture("tileset/marajade_mod.png")),
         (TiledMapTileLayer) resourcesManager.mSchoolMap.getLayers().get(1));
-    this.player.setPosition(100, 300);
+    this.player.setPosition(132, 300);
     Gdx.input.setInputProcessor(this);
   }
 
@@ -76,7 +76,19 @@ public class TileMapScreen extends BaseScene {
 
   @Override
   public boolean keyUp(int keycode) {
-    this.player.stop();
+    switch (keycode) {
+      case Input.Keys.UP:
+      case Input.Keys.DOWN:
+        this.player.stopUpDown();
+        break;
+      case Input.Keys.RIGHT:
+      case Input.Keys.LEFT:
+        this.player.stopLeftRight();
+        break;
+      case Input.Keys.ENTER:
+      case Input.Keys.BUTTON_A:
+        break;
+    }
     return true;
   }
 
