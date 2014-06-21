@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="40" height="40" tilewidth="16" tileheight="16">
  <tileset firstgid="1" name="ST-Schl-I01" tilewidth="16" tileheight="16">
-  <image source="school/ST-Schl-I01.png" width="256" height="1600"/>
+  <image source="../tilset/ST-Schl-I01.png" width="256" height="1600"/>
  </tileset>
  <tileset firstgid="1601" name="ST-Schl-I02" tilewidth="16" tileheight="16">
-  <image source="school/ST-Schl-I02.png" width="256" height="1600"/>
+  <image source="../tilset/ST-Schl-I02.png" width="256" height="1600"/>
  </tileset>
  <tileset firstgid="3201" name="ST-Schl-E01" tilewidth="16" tileheight="16">
-  <image source="school/ST-Schl-E01.png" width="256" height="1600"/>
+  <image source="../tilset/ST-Schl-E01.png" width="256" height="1600"/>
  </tileset>
  <layer name="Tile Layer 2" width="40" height="40">
   <data encoding="base64" compression="zlib">
