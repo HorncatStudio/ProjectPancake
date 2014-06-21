@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="40" height="40" tilewidth="16" tileheight="16">
  <tileset firstgid="1" name="ST-Schl-I01" tilewidth="16" tileheight="16">
-  <image source="../tileset/ST-Schl-I01.png" width="256" height="1600"/>
+  <image source="school/ST-Schl-I01.png" width="256" height="1600"/>
   <terraintypes>
    <terrain name="New Terrain" tile="-1"/>
   </terraintypes>
@@ -277,7 +277,7 @@
   </tile>
  </tileset>
  <tileset firstgid="1601" name="ST-Schl-I02" tilewidth="16" tileheight="16">
-  <image source="../tileset/ST-Schl-I02.png" width="256" height="1600"/>
+  <image source="school/ST-Schl-I02.png" width="256" height="1600"/>
   <tile id="160">
    <properties>
     <property name="blocked" value=""/>
@@ -710,19 +710,19 @@
   </tile>
  </tileset>
  <tileset firstgid="3201" name="ST-Schl-E01" tilewidth="16" tileheight="16">
-  <image source="../tileset/ST-Schl-E01.png" width="256" height="1600"/>
+  <image source="school/ST-Schl-E01.png" width="256" height="1600"/>
  </tileset>
- <layer name="BottomLayer" width="40" height="40">
+ <layer name="BottomLayer" width="40" height="40" visible="0">
   <data encoding="base64" compression="zlib">
    eJztlkuOg0AMRJFAXACOM5/zJDcgp58ssFSpPDcmmXwWWVgGGuhy2S5333XdsFoPnix79xF+Otu8Wlz3cu/YJnv30T5wOl/vxJ9iDgwZf4oxi9Of65qv7+HP69DjiVgC/wD7Z/+MtRn+W+VRMczyfJY13V859v313uv7Fv4IG/E32zuUc8Uw2TrtW+lfx6YYMz4oh2SK89b+1W+zHE3dNcaKaW7u4c8xtNb3eNeIW/nz3v0vHfN6bc0qvybcitF1rKqH1PcVnl0zK/FojZNleF3/s30PY9cdzeIZ8dbbvfPg+XesNCeop2M9sJzEltVnOfcZojyQxtAMG5JvvO4PIxvxR9w5Nq8pr0+q69b8XQBXeMqpm2Pz567BpF/OufO3iJ0S/lyvKuZ9uaWr5IO3ReqP+HuVD94OBf5Ip6s6T7pZ8YrJ8W3pt2tJNl9aWkja6Pydxksej8Af6QtpiZ5xtuqX4nR+A19g0vsKZ9SH2Tr1L8VK/B3H6z4h/dN/0Xxs1eUAuDR+ike1T7WQ9I9qyOeo5pj4pXNLlheaH4qxVT/ZnM/OO74+Gddz8r1qs9tW/dH5gHo9q93A0OLv64zj+2w/4+X1b1J/W/mlswN94zH6jPQ6pNlE87d1hqH+IE2hPsvio/qmOemx6x50vsq0J6tbr+vqXNI68j50/lo9Sfnc08fkM92nfqPnmZFuqjbRe1v8PcrT7Kl+v+ec8Qr/DP7u8a/m58Pfh7934Cnzf/7xcGY=
   </data>
  </layer>
  <layer name="CollidableLayer" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzN2EdvE0EYgOEvXpM4pgUIvYVe0pxACqQZJIpEC0iUGwGJeiEgUS+UG1woN7gAAQQXiiiCCxxI+AMk/ABI6C2Q0OuLYollvHh3nbU9Iz1K5LHHr3blT5YbfSJNOJ8mcgHJXIUBkVAg9nOaaWvBTdpuJbmvhrawqa/BEDmDszhndD3WSlubr+v/bMPZuRczRS5ldr9vCW21pr6rvP81XMeNSEsHbZ0+d+fepu2OB32raasz9d2lqRFNuBfpK6Kt2NRX4hcpRRnK/f+e5/XeFtrqTX33aWpGCx5E+mbRNtvUN4fXz8U8zFfex+u9vbTts/l8LKVtmalvOa9fgZVYpbxPIvbsltq3jtevxwZsVM5KxJ7dUu/vdl6/AzuxSzkrEXt2S71+uq01tK3VuE+9v7ot9f4mc/45Wamcf3ar3af5/DOiPx86zb8sI/r66TT/ciyuX3dXvN+9NtGyWfl+FzK8ny/xfvfaTcsepS9scX9TtQ7Sckjpq7W4fqmaf8dpOaH01VlcP53mX73F50Or+SfR91en+WfVp9P8+7OS+fmNZzYm8/tVPLNxK23bNJgv/1v7aTug4XzJ5Trn4ShtxzScLxW0VeI0bQ0azpcFtC3E4aDIkeDfx3WZL/m0FeAkbaeC9s83L69+v4q1qji/Gpdpu+Kyz6vfr2KtRZy/GK/TRd7gLdrxEI/QijY8xhM8xTM8xwu8xCsH+27PU3t+4Cd+QTJE3vH3PTrQiQ/4iE/4jC/4im/47mDf7XlqT2/0QV9kIQ0+GPCjB9KRgQAyEURP9HKw7/Y8tWckRmE0ctAP/TEA2RiIQRiMIRiKYRiOEQ723Z6n9uSjAIUIYQzGYhzGYwImYhImYwqmIhd5Dvbdnqf2VKEaNQijCMWYhukoQSnKUI4ZmIkKVDrYd3ue2vMbWqobnw==
+   eJzN2MdPFGEYx/GXHaSsDRR7w17oKEWpmlgSG5pYbqKJ9SKaWC+WmyZiuWmCBTV6scQSvehB8B8Q/AMU7A0Fe/0aNvH1YXanbGGe5JNl95l558fMzpPJNviUasSFOKUuIpaVk6RUblLobZrI1oxbZLsd43wVZKvU8tUbSp3FOZw3Oj9rIVurr/PvNMPeupeSlbqcHH6+xWSr0vJd4/jXcQM3A1naydbhc7buHbLdjUC+VWSr1vLdI1MDGnE/kC+PbPlavoJ4pQpRhOL4/9eLdG8z2Wq0fA/I1IRmPAzkm0m2WVq+2ew/B3MxD4dSlapNNe/p5aa3h2x7Le6PJWRbquVbxv7LsQIrRT7Z08ttz6pkvrXsvw7rsUHkkz293PasSl7fbey/HTuwU+STPb3c9qxKnj9Zer5Q2wRTG+Qzu7WabGu0fMGOUSuOpx+3LgjZd5NPXl+zY/xd72TgvXyt097Lkv1Q2wYreX3lrNL/32jMRqvqzvlnVW0+j88/o+v9IWeV/n2J9fxLMbqev2jMOLfzL93k/IVbbp+9NpJlk3i+yzW63h/hlttnr11k2S3yVZpc3+6qA2Q5KPJVmZy/WD7/6XWcLCdEvmqT8xeNGed2/tWY3B/RmHHhPP/J6xuNGRfN5z+9vPj8F8lyMxsjPf9ClZvZuIVsWz0wX4LVPrLt9+B8yeA8Z+Io2Y55cL6UkK0UZ8hW78H5Mp9sC3DYr9QR/7/PvTJfssiWjVNkO+233l6vSP1+FarKWL8cV8h21WG+SP1+FaoWsv4ivElQ6i3eoQ2P8BgtaMUTPMUzPMcLvMQrvLbRd7qezPMTv/AbKlGp97x+QDs68BGf8Blf8BXf8B0/bPSdrifz9EYf9EUK4uCDgXj0QAISkYRk+NETvWz0na4n84zASIxCOlLRD/2RhgEYiEEYjCEYimEYbqPvdD2ZJwvZyEEuRmMMxmIcxmMCJmISJmMKMpBpo+90PZmnDOWoQCXykI+pmIYCFKIIxZiOGShBqY2+0/Vknj9ZvE5Y
   </data>
  </layer>
- <layer name="RandomObjectLayer(NotCollidable)" width="40" height="40">
+ <layer name="RandomObjectLayer(NotCollidable)" width="40" height="40" visible="0">
   <data encoding="base64" compression="zlib">
    eJztmDlOAzEUhq0kkFVpWC4AN4AbkBtACw20LBL00LNcgKUFKYE+JNBCSAJ0kJWlgQYkkFglEP9IQxN5Gb/xTFLkk16Fl29sv2eHYJCxEKIdBCOYOyJv0we3fqJfJcZYNeas7WqSsTXEOmIjac8Nt36FXzbK2GGU5qfDJpy2ENuIHdtvCG7DCr8C3M44fjpr44Q0nDKIfcSB7TcCt1GFXwVuVR/WLwenPOIIcWz7jcEtpfATsYszuUc4l6J+RTiVEGXEue03DrcJhV85hPYhfQ9danCqIxqIZtJ5vwbcmhp+8wHGFgL6ftR+d3HG7uPO2y9jjhXCPNR+L3B71fDT4Ql59+wy997g9k70Synm/sHff1369SQY6024G8NLBuA2qOn3gDV59KFmWlSQu9WW/FXVvg+4fQr8ZHtOuZMucPYuPcoPE9zA7ZbjZ60DpV6ZZhIOUxwPar0yzSwc5jrAww9U9VBGVnDHFsJ4/4Xp43rNCXLjlJMfJu4mE1zB7ZrjJ7qbqO9CizTGy2h+cxH7XuLsPfWO+EL9/RbU4BzGy2uOWYNbneMnuyNkUN95IqbxrTOc7/X7nSdiEW5LBn+nmYb3PtChU/L8n9YcNPEGFUGp96ocdHOH6GD6/wcWbmqnCN31kNUXp7XHyz2Q1ZdOebOJ8OLMtAO/cqxLly7e8gdpbnDd
   </data>
