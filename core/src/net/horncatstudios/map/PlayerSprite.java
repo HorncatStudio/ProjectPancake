@@ -12,7 +12,7 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class PlayerSprite extends Sprite {
 
-  private float speed = 20;
+  private float speed = 30;
   private Vector2 velocity = new Vector2(0, 0);
 
   private TiledMapTileLayer mCollisionLayer;
@@ -23,10 +23,10 @@ public class PlayerSprite extends Sprite {
   }
 
   public void update(final float delta) {
-    if (velocity.y > speed)
-      velocity.y = speed;
-    else if (velocity.y < -speed)
-      velocity.y = -speed;
+//    if (velocity.y > speed)
+//      velocity.y = speed;
+//    else if (velocity.y < -speed)
+//      velocity.y = -speed;
 
     // save old position
     float oldX = getX(), oldY = getY();
