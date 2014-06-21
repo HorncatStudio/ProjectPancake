@@ -45,7 +45,7 @@ public class MainMenuScreen extends BaseScene implements ProjectPancakeMenuActio
 
   @Override
   public void StartGame() {
-    SceneManager.getInstance().loadGameScene();
+    SceneManager.getInstance().loadTileMapScene();
     this.dispose();
   }
 
@@ -56,7 +56,9 @@ public class MainMenuScreen extends BaseScene implements ProjectPancakeMenuActio
 
   @Override
   public void resize(int i, int i2) {
-
+    camera.viewportHeight = i;
+    camera.viewportWidth = i2;
+    camera.update();
   }
 
   @Override
