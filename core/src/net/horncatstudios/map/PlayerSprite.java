@@ -1,5 +1,6 @@
 package net.horncatstudios.map;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -11,11 +12,8 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class PlayerSprite extends Sprite {
 
-  //! movement velocity
-  private Vector2 veloctiy = new Vector2(0, 0);
-
-  // private float speed = 60 * 2;
-  // private float gravity = 60 * 1.8f;
+  private float speed = 20;
+  private Vector2 velocity = new Vector2(0, 0);
 
   private TiledMapTileLayer mCollisionLayer;
 
@@ -24,131 +22,101 @@ public class PlayerSprite extends Sprite {
     this.mCollisionLayer = collisionLayer;
   }
 
+  public void update(final float delta) {
+    if (velocity.y > speed)
+      velocity.y = speed;
+    else if (velocity.y < -speed)
+      velocity.y = -speed;
+
+    // save old position
+    float oldX = getX(), oldY = getY();
+    boolean collisionX = false, collisionY = false;
+
+    // move on x
+    setX(getX() + velocity.x * delta);
+
+    if (velocity.x < 0) // going left
+      collisionX = collidesLeft();
+    else if (velocity.x > 0) // going right
+      collisionX = collidesRight();
+
+    // react to x collision
+    if (collisionX) {
+      setX(oldX);
+      velocity.x = 0;
+    }
+
+    // move on y
+    setY(getY() + velocity.y * delta * 5f);
+
+    if (velocity.y < 0) // going down
+      collisionY = collidesBottom();
+    else if (velocity.y > 0) // going up
+      collisionY = collidesTop();
+
+    // react to y collision
+    if (collisionY) {
+      setY(oldY);
+      velocity.y = 0;
+    }
+  }
+
   public void draw(SpriteBatch spriteBatch) {
-    update(0);
+    update(Gdx.graphics.getDeltaTime());
     super.draw(spriteBatch);
   }
 
+  public boolean collidesRight() {
+    for (float step = 0; step < getHeight(); step += this.mCollisionLayer.getTileHeight() / 2)
+      if (isCellBlocked(getX() + getWidth(), getY() + step))
+        return true;
+    return false;
+  }
+
+  public boolean collidesLeft() {
+    for (float step = 0; step < getHeight(); step += this.mCollisionLayer.getTileHeight() / 2)
+      if (isCellBlocked(getX(), getY() + step))
+        return true;
+    return false;
+  }
+
+  public boolean collidesTop() {
+    for (float step = 0; step < getWidth(); step += this.mCollisionLayer.getTileWidth() / 2)
+      if (isCellBlocked(getX() + step, getY() + getHeight()))
+        return true;
+    return false;
+
+  }
+
+  public boolean collidesBottom() {
+    for (float step = 0; step < getWidth(); step += this.mCollisionLayer.getTileWidth() / 2)
+      if (isCellBlocked(getX() + step, getY()))
+        return true;
+    return false;
+  }
+
   public void moveRight() {
-    veloctiy.x = 1;
+    velocity.x = speed * 2;
   }
 
   public void moveLeft() {
-    veloctiy.x = -1;
+    velocity.x = -speed * 2;
   }
 
   public void moveUp() {
-    veloctiy.y = 1;
+    velocity.y = speed;
   }
 
   public void moveDown() {
-    veloctiy.y = -1;
+    velocity.y = -speed;
   }
 
-  public void stop() {
-    veloctiy.x = 0;
-    veloctiy.y = 0;
+  public void stopLeftRight() {
+    velocity.x = 0;
   }
 
-  public void update(float delta) {
-    // Apply the gravity
-//
-//    if (veloctiy.y > speed)
-//      veloctiy.y = speed;
-//    else if (veloctiy.y < speed)
-//      veloctiy.y = -speed;
-
-    // save old position
-    float oldX = getX();
-    float oldY = getY();
-
-    boolean collidedX = false;
-    boolean collidedY = false;
-
-    // move on x
-    setX(getX() + veloctiy.x);
-
-    // the left and right direction
-    if (veloctiy.x < 0) {
-      collidedX = this.isTopLeftTileBlocked(getX(), getY());
-
-      if (!collidedX)
-        collidedX = this.isLeftTileBlocked(getX(), getY());
-
-      if (!collidedX)
-        collidedX = this.isBottomLeftTileBlocked(getX(), getY());
-
-    } else if (veloctiy.x > 0) {
-      collidedX = this.isTopRightTileBlocked(getX(), getY());
-
-      if (!collidedX)
-        collidedY = this.isRightTileBlocked(getX(), getY());
-
-      if (!collidedX)
-        collidedY = this.isBottomRightTileBlocked(getX(), getY());
-    }
-
-    if (collidedX)
-      setX(oldX);
-
-
-    // move on y
-    setY(getY() + veloctiy.y);
-
-    // up/down direction
-    if (veloctiy.y < 0) {
-      collidedY = this.isTopLeftTileBlocked(getX(), getY());
-
-      if (!collidedY)
-        collidedY = this.isTopTileBlocked(getX(), getY());
-
-      if (!collidedY)
-        collidedY = this.isTopRightTileBlocked(getX(), getY());
-
-    } else if (veloctiy.y > 0) {
-      collidedY = this.isBottomLeftTileBlocked(getX(), getY());
-
-      if (!collidedY)
-        collidedY = this.isBottomTileBlocked(getX(), getY());
-
-      if (!collidedY)
-        collidedY = this.isBottomRightTileBlocked(getX(), getY());
-    }
-
-    if (collidedY)
-      setY(oldY);
-  }
-
-  private boolean isTopLeftTileBlocked(final float x, final float y) {
-    return isCellBlocked(x, y + getHeight());
-  }
-
-  private boolean isLeftTileBlocked(final float x, final float y) {
-    return isCellBlocked(x, (y + getHeight() / 2));
-  }
-
-  private boolean isBottomLeftTileBlocked(final float x, final float y) {
-    return isCellBlocked(x, y);
-  }
-
-  private boolean isTopRightTileBlocked(final float x, final float y) {
-    return isCellBlocked(x + getWidth(), y + getHeight());
-  }
-
-  private boolean isRightTileBlocked(final float x, final float y) {
-    return isCellBlocked(x + getWidth(), y + getHeight() / 2);
-  }
-
-  private boolean isBottomRightTileBlocked(final float x, final float y) {
-    return isCellBlocked(x + getWidth(), y);
-  }
-
-  private boolean isTopTileBlocked(final float x, final float y) {
-    return isCellBlocked(x + getWidth() / 2, y + getHeight());
-  }
-
-  private boolean isBottomTileBlocked(final float x, final float y) {
-    return isCellBlocked(x + getWidth() / 2, y);
+  public void stopUpDown() {
+    velocity.y = 0;
   }
 
   private boolean isCellBlocked(final float x, final float y) {
