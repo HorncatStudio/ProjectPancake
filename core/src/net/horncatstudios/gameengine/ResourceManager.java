@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapHelper;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import net.horncatstudios.projectpancake.FontResourceManager;
 import net.horncatstudios.projectpancake.ProjectPancakeGame;
 
@@ -31,10 +34,13 @@ public class ResourceManager {
   //region Main Menu Resources
   //endregion
 
+  //region Tile Map resources
+  public TiledMap mSchoolMap = null;
+  //endregion
+
   //region Game Level Resources
   public Texture schoolBackground;
   public Texture textBackground;
-  public Texture dorianBaseImage;
   public TextureAtlas dorianImages;
   //endregion
 
@@ -63,18 +69,22 @@ public class ResourceManager {
     Gdx.app.log("touch", "Loading game resources");
     schoolBackground = new Texture(Gdx.files.internal("back.png"));
     textBackground = new Texture(Gdx.files.internal("blank.png"));
-    dorianBaseImage = new Texture(Gdx.files.internal("d2.png"));
-
-
     dorianImages = new TextureAtlas(Gdx.files.internal("dorian/dorian.atlas"));
-
   }
 
   public void unloadGameResources() {
     schoolBackground.dispose();
-    dorianBaseImage.dispose();
     textBackground.dispose();
     dorianImages.dispose();
+  }
+
+  public void loadSchoolMapResources() {
+    TmxMapLoader loader = new TmxMapLoader();
+    mSchoolMap = loader.load("basic_map/classRoomBeta.tmx");
+  }
+
+  public void unloadSchoolMapResources() {
+    mSchoolMap.dispose();
   }
 
 

@@ -2,6 +2,7 @@ package net.horncatstudios.gameengine;
 
 
 import com.badlogic.gdx.Gdx;
+import net.horncatstudios.projectpancake.TileMapScreen;
 import net.horncatstudios.projectpancake.EndGameScreen;
 import net.horncatstudios.projectpancake.GameScreen;
 import net.horncatstudios.projectpancake.MainMenuScreen;
@@ -12,6 +13,7 @@ public class SceneManager {
   private BaseScene menuScene = null;
   private BaseScene gameLevelScene = null;
   private BaseScene endGameScreen = null;
+  private BaseScene tileMapScene = null;
 
   private static final SceneManager INSTANCE = new SceneManager();
 
@@ -22,7 +24,8 @@ public class SceneManager {
     SCENE_SPLASH,
     SCENE_MENU,
     SCENE_GAME,
-    SCENE_END
+    SCENE_END,
+    SCENE_TILED_MAP
   }
 
   public void setScene(SceneType sceneType) {
@@ -38,6 +41,9 @@ public class SceneManager {
         break;
       case SCENE_END:
         loadEndScreen();
+        break;
+      case SCENE_TILED_MAP:
+        loadTileMapScene();
         break;
       default:
         break;
@@ -101,6 +107,15 @@ public class SceneManager {
       gameLevelScene = new GameScreen();
     }
     setScene(gameLevelScene);
+  }
+
+  public void loadTileMapScene() {
+    ResourceManager.getInstance().loadSchoolMapResources();
+
+    if (null == tileMapScene) {
+      tileMapScene = new TileMapScreen();
+    }
+    setScene(tileMapScene);
   }
 
   public void loadEndScreen() {
