@@ -7,27 +7,29 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.math.Vector2;
 
+import java.awt.*;
+
 /**
  * \todo write class documentation
  */
 public class PlayerSprite extends Sprite {
 
-  private float speed = 20;
+  private float speed = 40;
   private Vector2 velocity = new Vector2(0, 0);
+  int originalheight;
+  int originalwidth;
 
   private TiledMapTileLayer mCollisionLayer;
 
   public PlayerSprite(Sprite sprite, TiledMapTileLayer collisionLayer) {
     super(sprite);
     this.mCollisionLayer = collisionLayer;
+    originalheight = (int) getHeight();
+    originalwidth = (int) getWidth();
+
   }
 
   public void update(final float delta) {
-    if (velocity.y > speed)
-      velocity.y = speed;
-    else if (velocity.y < -speed)
-      velocity.y = -speed;
-
     // save old position
     float oldX = getX(), oldY = getY();
     boolean collisionX = false, collisionY = false;
@@ -82,7 +84,7 @@ public class PlayerSprite extends Sprite {
 
   public boolean collidesTop() {
     for (float step = 0; step < getWidth(); step += this.mCollisionLayer.getTileWidth() / 2)
-      if (isCellBlocked(getX() + step, getY() + getHeight()))
+      if (isCellBlocked(getX() + step, getY() + getHeight() - 5))
         return true;
     return false;
 
@@ -120,8 +122,12 @@ public class PlayerSprite extends Sprite {
   }
 
   private boolean isCellBlocked(final float x, final float y) {
-    Cell cell = this.mCollisionLayer.getCell((int) (x / this.mCollisionLayer.getTileWidth()), (int) (y / this.mCollisionLayer.getTileHeight()));
-    return ((null != cell) && (cell.getTile() != null) && cell.getTile().getProperties().containsKey("blocked"));
+    int cellX = (int) (x / this.mCollisionLayer.getTileWidth());
+    int cellY = (int) (y / this.mCollisionLayer.getTileHeight());
+    Cell cell = this.mCollisionLayer.getCell(cellX, cellY);
+    return ((null != cell) &&
+        (cell.getTile() != null) &&
+        cell.getTile().getProperties().containsKey("blocked"));
   }
 }
 

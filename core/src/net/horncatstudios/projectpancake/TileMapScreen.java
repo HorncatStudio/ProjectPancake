@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import net.horncatstudios.gameengine.BaseScene;
@@ -18,14 +19,29 @@ public class TileMapScreen extends BaseScene {
 
   private OrthogonalTiledMapRenderer mRenderer;
   private PlayerSprite player;
+  private ShapeRenderer shapeRendererForDebugging;
+
+  int mTileMapWidth;
+  int mTileMapHeight;
+  int mMapWidth;
+  int mMapHeight;
+
+  boolean debugingEnabled = false;
 
   @Override
   public void createScene() {
     mRenderer = new OrthogonalTiledMapRenderer(resourcesManager.mSchoolMap);
     this.player = new PlayerSprite(new Sprite(new Texture("tileset/marajade_mod.png")),
         (TiledMapTileLayer) resourcesManager.mSchoolMap.getLayers().get(1));
+    shapeRendererForDebugging = new ShapeRenderer();
     this.player.setPosition(132, 300);
     Gdx.input.setInputProcessor(this);
+
+    mTileMapHeight = resourcesManager.mSchoolMap.getProperties().get("tileheight", Integer.class);
+    mTileMapWidth = resourcesManager.mSchoolMap.getProperties().get("tilewidth", Integer.class);
+    mMapWidth = resourcesManager.mSchoolMap.getProperties().get("width", Integer.class) * mTileMapWidth;
+    mMapHeight = resourcesManager.mSchoolMap.getProperties().get("height", Integer.class) * mTileMapHeight;
+
   }
 
   @Override
@@ -40,6 +56,17 @@ public class TileMapScreen extends BaseScene {
 
     mRenderer.setView(this.camera);
     mRenderer.render();
+
+    if (this.debugingEnabled) {
+      shapeRendererForDebugging.setProjectionMatrix(this.camera.combined);
+      shapeRendererForDebugging.begin(ShapeRenderer.ShapeType.Line);
+      for (int x = 0; x < mMapWidth; x += mTileMapWidth)
+        shapeRendererForDebugging.line(x, 0, x, mMapHeight);
+
+      for (int y = 0; y < mMapHeight; y += mTileMapHeight)
+        shapeRendererForDebugging.line(0, y, mMapWidth, y);
+      shapeRendererForDebugging.end();
+    }
 
     mGame.batch.begin();
     this.player.draw(mGame.batch);
