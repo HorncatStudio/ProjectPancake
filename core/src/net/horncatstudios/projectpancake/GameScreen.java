@@ -1,7 +1,9 @@
 package net.horncatstudios.projectpancake;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import net.horncatstudios.conversationengine.Conversation;
 import net.horncatstudios.conversationengine.Emotion;
 import net.horncatstudios.conversationengine.Response;
@@ -22,10 +24,13 @@ public class GameScreen extends BaseScene implements StateChangeListener {
   private Dorian mDorianSprite;
   private Conversation mCurrentConversation;
   private ConversationWidget mConversationWidget;
+  private ShapeRenderer mShapeRenderer;
 
   public GameScreen() {
+    mShapeRenderer = new ShapeRenderer();
     Gdx.app.log("touch", "Creating game mLevel scene Game");
     mDorianSprite = new Dorian(resourcesManager.dorianImages);
+    mDorianSprite.setPosition(0, 10);
     this.mConversationWidget = new ConversationWidget(this);
     this.mCurrentConversation = new Conversation();
 
@@ -36,26 +41,41 @@ public class GameScreen extends BaseScene implements StateChangeListener {
     }
 
     this.mConversationWidget.setState(mCurrentConversation.ConversationStates.get(0));
+
   }
 
   public void GenerateDemoConversation() {
     State state1 = new State("Hey, new girl. 'Sup? You're probably wondering why someone would event talk to you right?", Emotion.CASUAL);
     State state2 = new State("Is that like the opposite of a #humblebrag? Anyway", Emotion.EMBARRASSED);
-    State state3 = new State("Well, the instituion asked me to give you a grand tour of the grounds.  I'm honored that they realized how much I didn't want to be in class.", Emotion.CASUAL);
-    State state4 = new State("Well welcome here.", Emotion.EMBARRASSED);
+    State state3 = new State("Well, the institution asked me to give you a grand tour of the grounds.  I'm honored that they realized how much I didn't want to be in class.", Emotion.CASUAL);
+    State state4 = new State("Have you had a chance to check out our humble city? ItÅfs pretty boring around here.", Emotion.EMBARRASSED);
+    State state5 = new State("Sorry, what? I just had to hit the snooze button on my brain. Are you serious?");
+    State state6 = new State("Eh, weÅfve got at least ONE place that sells fair trade coffee. I play the uke, steal Twinkies from the guy who lives with me. IÅfm just trying to find myself, yÅfknow?");
+    State state7 = new State("Man, alright. LetÅfs just focus on the tour? This is already punishing enough without you making it worse.");
+    State state8 = new State("Did you move from the middle of nowhere? New [guy/girl], youÅfre rather mysterious.");
+    State state9 = new State("Very cool. Anyways, back to the tour.", Emotion.CASUAL);
 
     Response response = new Response("Yes", state3);
     state1.Responses.add(response);
     state1.Responses.add(new Response("Its' Obvious that I'm just too awesome to ignore", state2));
 
-    state2.Responses.add(new Response("Is everything alright?", state3));
-    state2.Responses.add(new Response("No.", state4));
+    state2.Responses.add(new Response("", state3));
 
-    state3.Responses.add(new Response("Weeeeeee", null));
-    state3.Responses.add(new Response("To 4!", state4));
+    state3.Responses.add(new Response("", state4));
 
-    state4.Responses.add(new Response("Well that was awkward.", null));
-    state4.Responses.add(new Response("Conversation ending now", null));
+    state4.Responses.add(new Response("I think it is nice.", state5));
+    state4.Responses.add(new Response("So what do you do all the time?", state6));
+
+    state5.Responses.add(new Response("Yeah, IÅfm serious!: ", state7));
+    state5.Responses.add(new Response("Uh, it's alright.", state8));
+
+    state6.Responses.add(new Response("Cool.", state9));
+
+    state7.Responses.add(new Response("", null));
+
+    state8.Responses.add(new Response("", null));
+
+    state9.Responses.add(new Response("", null));
 
     mCurrentConversation.ConversationStates.add(state1);
     mCurrentConversation.ConversationStates.add(state2);
@@ -122,13 +142,22 @@ public class GameScreen extends BaseScene implements StateChangeListener {
 
     camera.update();
     mGame.batch.setProjectionMatrix(camera.combined);
+    this.mShapeRenderer.setProjectionMatrix(camera.combined);
+
 
     mGame.batch.begin();
-    mGame.batch.draw(resourcesManager.schoolBackground, 0, 0);
+    mGame.batch.draw(resourcesManager.schoolBackground, 0, 0, this.camera.viewportWidth, this.camera.viewportHeight);
     this.mDorianSprite.draw(mGame.batch);
-    mGame.batch.draw(resourcesManager.textBackground, 0, 0);
+    //mGame.batch.draw(resourcesManager.textBackground, 0, 0);
+
+
     mConversationWidget.draw(mGame.batch, resourcesManager.fontManager.conversationFont);
     mGame.batch.end();
+
+    this.mShapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+    this.mShapeRenderer.setColor(Color.BLACK);
+    this.mShapeRenderer.rect(0, 0, this.camera.viewportWidth, this.camera.viewportHeight / 6);
+    this.mShapeRenderer.end();
   }
 
   @Override

@@ -17,7 +17,7 @@ public class ProjectPancakeGame extends Game {
   public void create() {
     batch = new SpriteBatch();
 
-    HcLocale.setLocale(HcLocale.Locale.JP);
+    HcLocale.setLocale(HcLocale.Locale.EN);
 
     resourceManager = resourceManager.getInstance();
     resourceManager.prepareManager(this);

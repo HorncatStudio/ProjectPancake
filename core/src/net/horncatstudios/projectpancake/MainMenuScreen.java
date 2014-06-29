@@ -45,7 +45,7 @@ public class MainMenuScreen extends BaseScene implements ProjectPancakeMenuActio
 
   @Override
   public void StartGame() {
-    SceneManager.getInstance().loadTileMapScene();
+    SceneManager.getInstance().loadGameScene();
     this.dispose();
   }
 

@@ -27,6 +27,10 @@ public class ACharacter {
     blush = atlas.findRegion("blush");
   }
 
+  public void setPosition(float x, float y) {
+    mCharacterSprite.setPosition(x, y);
+  }
+
   public void draw(SpriteBatch batch) {
     this.mCharacterSprite.draw(batch);
   }
