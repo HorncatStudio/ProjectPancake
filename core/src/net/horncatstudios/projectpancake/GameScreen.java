@@ -44,7 +44,7 @@ public class GameScreen extends BaseScene implements StateChangeListener {
   }
 
   public void GenerateDemoConversation() {
-    State state1 = new State("Hey, new girl. 'Sup? You're probably wondering why someone would event talk to you right?", Emotion.CASUAL);
+    State state1 = new State("Hey, new girl. 'Sup? You're probably wondering why someone would even talk to you right?", Emotion.CASUAL);
     State state2 = new State("Is that like the opposite of a #humblebrag? Anyway", Emotion.EMBARRASSED);
     State state3 = new State("Well, the institution asked me to give you a grand tour of the grounds.  I'm honored that they realized how much I didn't want to be in class.", Emotion.CASUAL);
     State state4 = new State("Have you had a chance to check out our humble city? It?½fs pretty boring around here.", Emotion.EMBARRASSED);
