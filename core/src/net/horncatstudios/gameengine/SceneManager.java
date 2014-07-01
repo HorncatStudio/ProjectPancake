@@ -2,11 +2,8 @@ package net.horncatstudios.gameengine;
 
 
 import com.badlogic.gdx.Gdx;
-import net.horncatstudios.projectpancake.TileMapScreen;
-import net.horncatstudios.projectpancake.EndGameScreen;
-import net.horncatstudios.projectpancake.GameScreen;
-import net.horncatstudios.projectpancake.MainMenuScreen;
-import net.horncatstudios.projectpancake.SplashScreen;
+import net.horncatstudios.projectpancake.*;
+import net.horncatstudios.projectpancake.ConversationScreen;
 
 public class SceneManager {
   private BaseScene splashScene = null;
@@ -104,7 +101,7 @@ public class SceneManager {
 
     ResourceManager.getInstance().loadGameResources();
     if (null == gameLevelScene) {
-      gameLevelScene = new GameScreen();
+      gameLevelScene = new ConversationScreen();
     }
     setScene(gameLevelScene);
   }

@@ -17,13 +17,13 @@ import java.nio.charset.StandardCharsets;
 /**
  * Created by Angelina on 7/18/13.
  */
-public class GameScreen extends BaseScene implements StateChangeListener {
+public class ConversationScreen extends BaseScene implements StateChangeListener {
 
   private Dorian mDorianSprite;
   private Conversation mCurrentConversation;
   private ConversationWidget mConversationWidget;
 
-  public GameScreen() {
+  public ConversationScreen() {
     Gdx.app.log("touch", "Creating game mLevel scene Game");
     mDorianSprite = new Dorian(resourcesManager.dorianImages);
     this.mConversationWidget = new ConversationWidget(this,
