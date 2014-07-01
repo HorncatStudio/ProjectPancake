@@ -67,7 +67,7 @@ public class ResourceManager {
 
   public void loadGameResources() {
     Gdx.app.log("touch", "Loading game resources");
-    schoolBackground = new Texture(Gdx.files.internal("classroom.png"));
+    schoolBackground = new Texture(Gdx.files.internal("back.png"));
     textBackground = new Texture(Gdx.files.internal("blank.png"));
     dorianImages = new TextureAtlas(Gdx.files.internal("dorian/dorian.atlas"));
   }

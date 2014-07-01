@@ -1,9 +1,11 @@
 package net.horncatstudios.gameengine;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import net.horncatstudios.conversationengine.Response;
 import net.horncatstudios.conversationengine.State;
 import net.horncatstudios.toolkit.Point;
@@ -15,6 +17,12 @@ import java.util.List;
  * Created by Angelina on 5/10/2014.
  */
 public class ConversationWidget {
+
+
+  public Texture mCharacterNameBackround;
+  public Label mCharacterName;
+
+  public Texture mBackground;
 
   public Label mStateLabel;
 
@@ -29,10 +37,26 @@ public class ConversationWidget {
   private int mCurrentSelectedIndex;
 
   private StateChangeListener mStateListener;
+  private int mTopOfCharacterName;
+  private int mWidth;
+  private int mHeight;
+  private int mFontHeight;
 
-  public ConversationWidget(StateChangeListener listener) {
+  public ConversationWidget( StateChangeListener listener ) {
+    this(listener, 800, 120, null);
+  }
+
+  public ConversationWidget( StateChangeListener listener, int width, int height ) {
+    this(listener, width, height, null);
+  }
+
+
+  public ConversationWidget(StateChangeListener listener, int width, int height, Texture background ) {
     mStateListener = listener;
-    mStateLabel = new Label("STATE LABEL.", new Point(10, 112));
+    mFontHeight = 24;
+    this.mTopOfCharacterName = height + mFontHeight;
+    mCharacterName = new Label("Dorian", new Point(10, this.mTopOfCharacterName));
+    mStateLabel = new Label("STATE LABEL.", new Point(10, height - 2));
 
     mResponseALabel = new Label("RESPONCE A LABEL.", new Point(10, 70));
     mResponseBLabel = new Label("RESPONCE B LABEL.", new Point(285, 70));
@@ -44,6 +68,18 @@ public class ConversationWidget {
     mResponceWidgets.add(mResponseCLabel);
 
     this.mCurrentSelectedIndex = 0;
+    this.mWidth = width;
+    this.mHeight = height;
+
+    if( null == background )
+    {
+      Pixmap backgroundTexture = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+      backgroundTexture.setColor(Color.RED);
+      backgroundTexture.fill();
+      mBackground = new Texture(backgroundTexture);
+
+      mCharacterNameBackround = new Texture(backgroundTexture);
+    }
   }
 
   public void setState(State state) {
@@ -51,7 +87,7 @@ public class ConversationWidget {
       return;
 
     mCurrentState = state;
-    mStateLabel.Text = "Dorian: " + state.Text;
+    mStateLabel.Text = state.Text;
 
     for (Label labels : mResponceWidgets) {
       labels.Text = "";
@@ -65,6 +101,15 @@ public class ConversationWidget {
   }
 
   public void draw(SpriteBatch batch, BitmapFont font) {
+
+    Color oldColor = batch.getColor();
+
+    batch.setColor( oldColor.r, oldColor.g, oldColor.b, .3f);
+    batch.draw(this.mBackground, 0, 0, this.mWidth, this.mHeight);
+    batch.draw(this.mCharacterNameBackround, 0, this.mHeight  , this.mWidth/10, this.mFontHeight + 3 );
+    batch.setColor(oldColor);
+
+    this.mCharacterName.draw(batch, font);
     this.mStateLabel.draw(batch, font);
     this.mResponseALabel.draw(batch, font);
     this.mResponseBLabel.draw(batch, font);
