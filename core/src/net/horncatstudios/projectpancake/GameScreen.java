@@ -135,7 +135,7 @@ public class GameScreen extends BaseScene implements StateChangeListener {
   }
 
   @Override
-  public void render(float v) {
+  public void render(float delta) {
     Gdx.gl.glClearColor(1, 0, 1, 1);
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -149,7 +149,7 @@ public class GameScreen extends BaseScene implements StateChangeListener {
     //mGame.batch.draw(resourcesManager.textBackground, 0, 0);
 
 
-    mConversationWidget.draw(mGame.batch, resourcesManager.fontManager.conversationFont);
+    mConversationWidget.draw(mGame.batch, resourcesManager.fontManager.conversationFont, delta);
     mGame.batch.end();
   }
 

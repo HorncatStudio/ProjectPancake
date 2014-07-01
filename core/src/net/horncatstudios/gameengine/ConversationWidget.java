@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import net.horncatstudios.conversationengine.Response;
 import net.horncatstudios.conversationengine.State;
+import net.horncatstudios.toolkit.HcString;
 import net.horncatstudios.toolkit.Point;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class ConversationWidget {
 
   public Texture mBackground;
 
-  public Label mStateLabel;
+  public TalkingLabel mStateLabel;
 
   public Label mResponseALabel;
   public Label mResponseBLabel;
@@ -56,7 +57,7 @@ public class ConversationWidget {
     mFontHeight = 24;
     this.mTopOfCharacterName = height + mFontHeight;
     mCharacterName = new Label("Dorian", new Point(10, this.mTopOfCharacterName));
-    mStateLabel = new Label("STATE LABEL.", new Point(10, height - 2));
+    mStateLabel = new TalkingLabel(new HcString("STATE LABEL."), new Point(10, height - 2));
 
     mResponseALabel = new Label("RESPONCE A LABEL.", new Point(10, 70));
     mResponseBLabel = new Label("RESPONCE B LABEL.", new Point(285, 70));
@@ -87,7 +88,7 @@ public class ConversationWidget {
       return;
 
     mCurrentState = state;
-    mStateLabel.Text = state.Text;
+    mStateLabel.setText( state.Text );
 
     for (Label labels : mResponceWidgets) {
       labels.Text = "";
@@ -100,7 +101,7 @@ public class ConversationWidget {
     setSelectedIndex(0);
   }
 
-  public void draw(SpriteBatch batch, BitmapFont font) {
+  public void draw(SpriteBatch batch, BitmapFont font, float timeDelta ) {
 
     Color oldColor = batch.getColor();
 
@@ -110,7 +111,7 @@ public class ConversationWidget {
     batch.setColor(oldColor);
 
     this.mCharacterName.draw(batch, font);
-    this.mStateLabel.draw(batch, font);
+    this.mStateLabel.draw(batch, font, timeDelta);
     this.mResponseALabel.draw(batch, font);
     this.mResponseBLabel.draw(batch, font);
     this.mResponseCLabel.draw(batch, font);
