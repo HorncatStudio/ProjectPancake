@@ -6,18 +6,15 @@ import net.horncatstudios.conversationengine.Conversation;
 import net.horncatstudios.conversationengine.Emotion;
 import net.horncatstudios.conversationengine.Response;
 import net.horncatstudios.conversationengine.State;
-import net.horncatstudios.gameengine.BaseScene;
+import net.horncatstudios.gameengine.BaseScreen;
 import net.horncatstudios.gameengine.ConversationWidget;
-import net.horncatstudios.gameengine.SceneManager;
+import net.horncatstudios.gameengine.ScreenManager;
 import net.horncatstudios.gameengine.StateChangeListener;
-
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 
 /**
  * Created by Angelina on 7/18/13.
  */
-public class ConversationScreen extends BaseScene implements StateChangeListener {
+public class ConversationScreen extends BaseScreen implements StateChangeListener {
 
   private Dorian mDorianSprite;
   private Conversation mCurrentConversation;
@@ -26,9 +23,7 @@ public class ConversationScreen extends BaseScene implements StateChangeListener
   public ConversationScreen() {
     Gdx.app.log("touch", "Creating game mLevel scene Game");
     mDorianSprite = new Dorian(resourcesManager.dorianImages);
-    this.mConversationWidget = new ConversationWidget(this,
-                          (int)(this.camera.viewportWidth),
-                          (int)(this.camera.viewportHeight/7) );
+
     mDorianSprite.setPosition(0, 10);
     this.mConversationWidget = new ConversationWidget(this);
     this.mCurrentConversation = new Conversation();
@@ -47,11 +42,11 @@ public class ConversationScreen extends BaseScene implements StateChangeListener
     State state1 = new State("Hey, new girl. 'Sup? You're probably wondering why someone would even talk to you right?", Emotion.CASUAL);
     State state2 = new State("Is that like the opposite of a #humblebrag? Anyway", Emotion.EMBARRASSED);
     State state3 = new State("Well, the institution asked me to give you a grand tour of the grounds.  I'm honored that they realized how much I didn't want to be in class.", Emotion.CASUAL);
-    State state4 = new State("Have you had a chance to check out our humble city? It?Ωfs pretty boring around here.", Emotion.EMBARRASSED);
+    State state4 = new State("Have you had a chance to check out our humble city? It??fs pretty boring around here.", Emotion.EMBARRASSED);
     State state5 = new State("Sorry, what? I just had to hit the snooze button on my brain. Are you serious?");
-    State state6 = new State("Eh, we?Ωfve got at least ONE place that sells fair trade coffee. I play the uke, steal Twinkies from the guy who lives with me. I?Ωfm just trying to find myself, y?Ωfknow?");
-    State state7 = new State("Man, alright. Let?Ωfs just focus on the tour? This is already punishing enough without you making it worse.");
-    State state8 = new State("Did you move from the middle of nowhere? New [guy/girl], you?Ωfre rather mysterious.");
+    State state6 = new State("Eh, we??fve got at least ONE place that sells fair trade coffee. I play the uke, steal Twinkies from the guy who lives with me. I??fm just trying to find myself, y??fknow?");
+    State state7 = new State("Man, alright. Let??fs just focus on the tour? This is already punishing enough without you making it worse.");
+    State state8 = new State("Did you move from the middle of nowhere? New [guy/girl], you??fre rather mysterious.");
     State state9 = new State("Very cool. Anyways, back to the tour.", Emotion.CASUAL);
 
     Response response = new Response("Yes", state3);
@@ -65,7 +60,7 @@ public class ConversationScreen extends BaseScene implements StateChangeListener
     state4.Responses.add(new Response("I think it is nice.", state5));
     state4.Responses.add(new Response("So what do you do all the time?", state6));
 
-    state5.Responses.add(new Response("Yeah, I?Ωfm serious!: ", state7));
+    state5.Responses.add(new Response("Yeah, I??fm serious!: ", state7));
     state5.Responses.add(new Response("Uh, it's alright.", state8));
 
     state6.Responses.add(new Response("Cool.", state9));
@@ -84,24 +79,24 @@ public class ConversationScreen extends BaseScene implements StateChangeListener
 
   public void GenerateJapaneseConversation() {
      // Charset.forName("SJIS");
-    State state1 = new State( "?Ω?Ω?Ω?Ω?Ω?Ω?ΩﬂÇƒÇ≈ÇÔøΩ?ΩÂÇ§...", Emotion.CASUAL);
-    State state2 = new State("...?Ω?Ω?Ω?Ω...", Emotion.EMBARRASSED);
-    State state3 = new State("?Ω?Ω—ÇÔøΩ?Ω?Ω...", Emotion.SAD);
-    State state4 = new State("?Ω‹ÇÔøΩ?ΩÊÇ§?Ω?Ω?Ω?Ω?Ω?Ω?ΩÃäw?Ω?Ω?Ω÷ÅB", Emotion.EMBARRASSED);
+    State state1 = new State("?????????????????????...", Emotion.CASUAL);
+    State state2 = new State("...????????...", Emotion.EMBARRASSED);
+    State state3 = new State("????—Ç?????...", Emotion.SAD);
+    State state4 = new State("??????????????????????w???????B", Emotion.EMBARRASSED);
 
-    Response response = new Response("?Ω?Ω?Ω?Ω?ΩI?Ω?Ω?Ω?Ω?Ωo?ΩZ?Ω?ΩI", state2);
+    Response response = new Response("??????????I??????????o??Z????I", state2);
     state1.Responses.add(response);
-    state1.Responses.add(new Response("?Ω?Ω?Ω?Ω?ΩA?Ω?Ω?ΩƒïÔøΩ?Ω?Ω?Ω?Ω»ÇÔøΩ?ΩH", state2));
-    state1.Responses.add(new Response("?Ω?Ω?Ω?Ω", state3));
+    state1.Responses.add(new Response("??????????A????????????????????H", state2));
+    state1.Responses.add(new Response("????????", state3));
 
-    state2.Responses.add(new Response("?Ω?Ω?Ωv?ΩH", state3));
-    state2.Responses.add(new Response("?Ω?Ω?Ω?Ω", state4));
+    state2.Responses.add(new Response("??????v??H", state3));
+    state2.Responses.add(new Response("????????", state4));
 
-    state3.Responses.add(new Response("?Ω?Ω?Ω?Ω?Ω?Ω[?Ω[", null));
-    state3.Responses.add(new Response("4?Ω÷ÅI", state4));
+    state3.Responses.add(new Response("????????????[??[", null));
+    state3.Responses.add(new Response("4???I", state4));
 
-    state4.Responses.add(new Response("?Ω?Ω?Ω?Ω?Ωs?Ωv?Ωc?Ω»ñÔøΩ?Ω?Ω?Ω?Ω?Ω?Ω?Ω?Ω", null));
-    state4.Responses.add(new Response("?Ω?Ωb?ΩI?Ω?Ω", null));
+    state4.Responses.add(new Response("??????????s??v??c????????????????????", null));
+    state4.Responses.add(new Response("????b??I????", null));
 
     mCurrentConversation.ConversationStates.add(state1);
     mCurrentConversation.ConversationStates.add(state2);
@@ -115,8 +110,8 @@ public class ConversationScreen extends BaseScene implements StateChangeListener
   }
 
   @Override
-  public SceneManager.SceneType getSceneType() {
-    return SceneManager.SceneType.SCENE_GAME;
+  public ScreenManager.ScreenType getSceneType() {
+    return ScreenManager.ScreenType.CONVERSATION;
   }
 
 
@@ -124,7 +119,7 @@ public class ConversationScreen extends BaseScene implements StateChangeListener
   public void onStateChange(final State state) {
 
     if (null == state) {
-      SceneManager.getInstance().loadEndScreen();
+      ScreenManager.getInstance().loadWorldMapTutorialScreen();
       dispose();
       return;
     }
@@ -132,6 +127,11 @@ public class ConversationScreen extends BaseScene implements StateChangeListener
     // \todo update relationship stats
     mDorianSprite.setEmotion(state.Emotion);
     mConversationWidget.setState(state);
+  }
+
+  @Override
+  public void onStateChange(final State state, final String customEvent) {
+    onStateChange(state);
   }
 
   @Override
@@ -146,8 +146,6 @@ public class ConversationScreen extends BaseScene implements StateChangeListener
     mGame.batch.begin();
     mGame.batch.draw(resourcesManager.schoolBackground, 0, 0, this.camera.viewportWidth, this.camera.viewportHeight);
     this.mDorianSprite.draw(mGame.batch);
-    //mGame.batch.draw(resourcesManager.textBackground, 0, 0);
-
 
     mConversationWidget.draw(mGame.batch, resourcesManager.fontManager.conversationFont, delta);
     mGame.batch.end();

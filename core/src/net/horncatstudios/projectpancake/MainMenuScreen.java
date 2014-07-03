@@ -1,19 +1,17 @@
 package net.horncatstudios.projectpancake;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 
-import net.horncatstudios.gameengine.BaseScene;
+import net.horncatstudios.gameengine.BaseScreen;
 import net.horncatstudios.gameengine.MainMenu;
-import net.horncatstudios.gameengine.SceneManager;
+import net.horncatstudios.gameengine.ScreenManager;
 import net.horncatstudios.gameengine.StarField;
 
 /**
  * Created by Angelina on 7/18/13.
  */
-public class MainMenuScreen extends BaseScene implements ProjectPancakeMenuActions {
+public class MainMenuScreen extends BaseScreen implements ProjectPancakeMenuActions {
 
   StarField stars = new StarField();
   MainMenu mMenu;
@@ -45,7 +43,7 @@ public class MainMenuScreen extends BaseScene implements ProjectPancakeMenuActio
 
   @Override
   public void StartGame() {
-    SceneManager.getInstance().loadGameScene();
+    ScreenManager.getInstance().loadConversationScene();
     this.dispose();
   }
 
@@ -87,8 +85,8 @@ public class MainMenuScreen extends BaseScene implements ProjectPancakeMenuActio
   }
 
   @Override
-  public SceneManager.SceneType getSceneType() {
-    return SceneManager.SceneType.SCENE_MENU;
+  public ScreenManager.ScreenType getSceneType() {
+    return ScreenManager.ScreenType.TITLE_MENU;
   }
 
   @Override

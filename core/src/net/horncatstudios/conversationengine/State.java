@@ -11,15 +11,17 @@ public class State {
   public Emotion Emotion;
   public List<Response> Responses;
 
+  //! An extra field to indicate a special action that can be customized for extra usgae
+  public String CustomEvent;
+
   public State(String text) {
     Text = text;
     Responses = new ArrayList<Response>();
+    CustomEvent = "";
   }
 
   public State(String text, Emotion emotion) {
-    Text = text;
-    Responses = new ArrayList<Response>();
+    this(text);
     Emotion = emotion;
   }
-
 }

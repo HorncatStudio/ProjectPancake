@@ -2,10 +2,8 @@ package net.horncatstudios.gameengine;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapHelper;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import net.horncatstudios.projectpancake.FontResourceManager;
 import net.horncatstudios.projectpancake.ProjectPancakeGame;
@@ -16,7 +14,7 @@ public class ResourceManager {
 
   public ProjectPancakeGame mGame;
 
-  void setScreen(BaseScene scene) {
+  void setScreen(BaseScreen scene) {
     mGame.setScreen(scene);
   }
 
@@ -38,11 +36,16 @@ public class ResourceManager {
   public TiledMap mSchoolMap = null;
   //endregion
 
-  //region Game Level Resources
+  //region Conversation Level Resources
   public Texture schoolBackground;
   public Texture textBackground;
   public TextureAtlas dorianImages;
   //endregion
+
+  //region Map Tutorial Resources
+  public Texture worldMap;
+  //endregion
+
 
   public void loadSharedResouces() {
     // load the drop sound effect and the rain background "music"
@@ -67,7 +70,7 @@ public class ResourceManager {
 
   public void loadGameResources() {
     Gdx.app.log("touch", "Loading game resources");
-    schoolBackground = new Texture(Gdx.files.internal("back.png"));
+    schoolBackground = new Texture(Gdx.files.internal("classroom.png"));
     textBackground = new Texture(Gdx.files.internal("blank.png"));
     dorianImages = new TextureAtlas(Gdx.files.internal("dorian/dorian.atlas"));
   }
@@ -85,6 +88,14 @@ public class ResourceManager {
 
   public void unloadSchoolMapResources() {
     mSchoolMap.dispose();
+  }
+
+  public void loadMapTutorialResources() {
+    worldMap = new Texture(Gdx.files.internal("world-map-pokemon.png"));
+  }
+
+  public void unloadMapTutorialResources() {
+    worldMap.dispose();
   }
 
 

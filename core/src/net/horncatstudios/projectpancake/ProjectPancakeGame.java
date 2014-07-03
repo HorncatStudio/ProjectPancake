@@ -1,12 +1,9 @@
 package net.horncatstudios.projectpancake;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import net.horncatstudios.gameengine.ResourceManager;
-import net.horncatstudios.gameengine.SceneManager;
+import net.horncatstudios.gameengine.ScreenManager;
 
 public class ProjectPancakeGame extends Game {
   SpriteBatch batch;
@@ -23,7 +20,7 @@ public class ProjectPancakeGame extends Game {
     resourceManager.prepareManager(this);
     resourceManager.prepareSharedResources();
 
-    SceneManager.getInstance().setScene(SceneManager.SceneType.SCENE_SPLASH);
+    ScreenManager.getInstance().setScene(ScreenManager.ScreenType.PHONE_TUTORIAL);
   }
 
   @Override

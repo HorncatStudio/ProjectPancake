@@ -4,13 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Timer;
-import net.horncatstudios.gameengine.BaseScene;
-import net.horncatstudios.gameengine.SceneManager;
+import net.horncatstudios.gameengine.BaseScreen;
+import net.horncatstudios.gameengine.ScreenManager;
 
 /**
  * Created by Angelina on 7/20/13.
  */
-public class SplashScreen extends BaseScene {
+public class SplashScreen extends BaseScreen {
 
   private Rectangle ursaRageLogo;
 
@@ -22,8 +22,8 @@ public class SplashScreen extends BaseScene {
   }
 
   @Override
-  public SceneManager.SceneType getSceneType() {
-    return SceneManager.SceneType.SCENE_SPLASH;
+  public ScreenManager.ScreenType getSceneType() {
+    return ScreenManager.ScreenType.SPLASH;
   }
 
   @Override
@@ -49,7 +49,7 @@ public class SplashScreen extends BaseScene {
     Timer.schedule(new Timer.Task() {
       @Override
       public void run() {
-        SceneManager.getInstance().loadMenuScene();
+        ScreenManager.getInstance().loadMenuScene();
       }
     }, 1);
   }

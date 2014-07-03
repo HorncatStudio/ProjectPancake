@@ -2,34 +2,53 @@ package net.horncatstudios.projectpancake;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import net.horncatstudios.gameengine.BaseScreen;
-import net.horncatstudios.gameengine.Label;
-import net.horncatstudios.gameengine.ScreenManager;
-import net.horncatstudios.toolkit.HcString;
-import net.horncatstudios.toolkit.Point;
+import net.horncatstudios.conversationengine.Conversation;
+import net.horncatstudios.conversationengine.State;
+import net.horncatstudios.gameengine.*;
 
 /**
- * Created by Angelina on 5/20/2014.
+ * Created by Angelina on 7/3/2014.
  */
-public class EndGameScreen extends BaseScreen {
+public class PhoneTutorialScreen extends BaseScreen implements StateChangeListener {
 
-  private Label theEnd;
+  ConversationWidget mConversationWidget;
+  Conversation mConversation;
+  RectangleSprite mRectangleSprite;
 
   @Override
   public void createScene() {
-    HcString text = new HcString("THE DEMO_END");
-    text.add(HcLocale.Locale.JP, "èIÇÌÇË");
-    theEnd = new Label(text, new Point(300, 300));
+    this.mConversationWidget = new ConversationWidget(this);
+    this.mConversation = new Conversation();
+
+    loadPhoneTutorialTalking();
+
+//    this.mConversationWidget.setState(this.mConversation.ConversationStates.get(0));
+    Gdx.input.setInputProcessor(this);
+
+    mRectangleSprite = new RectangleSprite(50.0f, 0.0f, 300.0f, camera.viewportHeight, 2.0f);
+  }
+
+  public void loadPhoneTutorialTalking() {
   }
 
   @Override
   public ScreenManager.ScreenType getSceneType() {
-    return null;
+    return ScreenManager.ScreenType.PHONE_TUTORIAL;
   }
 
   @Override
   public boolean keyDown(int keycode) {
-    return false;
+    return this.mConversationWidget.keyDown(keycode);
+  }
+
+  @Override
+  public void onStateChange(final State state) {
+
+  }
+
+  @Override
+  public void onStateChange(final State state, final String customEvent) {
+    this.mConversationWidget.setState(state);
   }
 
   @Override
@@ -69,15 +88,15 @@ public class EndGameScreen extends BaseScreen {
 
   @Override
   public void render(float delta) {
-    Gdx.gl.glClearColor(0, 0, 0, 1);
+    Gdx.gl.glClearColor(1, 0, 1, 1);
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
     camera.update();
-
     mGame.batch.setProjectionMatrix(camera.combined);
 
+
     mGame.batch.begin();
-    theEnd.draw(mGame.batch, resourcesManager.fontManager.conversationFont);
+    this.mRectangleSprite.draw(mGame.batch);
     mGame.batch.end();
   }
 
@@ -110,4 +129,6 @@ public class EndGameScreen extends BaseScreen {
   public void dispose() {
 
   }
+
+
 }

@@ -6,13 +6,13 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import net.horncatstudios.projectpancake.ProjectPancakeGame;
 
 
-public abstract class BaseScene implements Screen, InputProcessor {
+public abstract class BaseScreen implements Screen, InputProcessor {
 
   public OrthographicCamera camera;
   protected ResourceManager resourcesManager;
   protected ProjectPancakeGame mGame;
 
-  public BaseScene() {
+  public BaseScreen() {
     this.resourcesManager = ResourceManager.getInstance();
     this.mGame = this.resourcesManager.mGame;
 
@@ -24,5 +24,5 @@ public abstract class BaseScene implements Screen, InputProcessor {
 
   public abstract void createScene();
 
-  public abstract SceneManager.SceneType getSceneType();
+  public abstract ScreenManager.ScreenType getSceneType();
 }

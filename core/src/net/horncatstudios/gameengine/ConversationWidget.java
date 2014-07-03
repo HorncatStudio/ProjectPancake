@@ -19,7 +19,6 @@ import java.util.List;
  */
 public class ConversationWidget {
 
-
   public Texture mCharacterNameBackround;
   public Label mCharacterName;
 
@@ -43,6 +42,11 @@ public class ConversationWidget {
   private int mHeight;
   private int mFontHeight;
 
+  /**
+   * Constructor that registers a StateChangeListener.  Enables actions to be selected
+   *
+   * @param listener
+   */
   public ConversationWidget( StateChangeListener listener ) {
     this(listener, 800, 120, null);
   }
@@ -50,7 +54,6 @@ public class ConversationWidget {
   public ConversationWidget( StateChangeListener listener, int width, int height ) {
     this(listener, width, height, null);
   }
-
 
   public ConversationWidget(StateChangeListener listener, int width, int height, Texture background ) {
     mStateListener = listener;
@@ -75,7 +78,7 @@ public class ConversationWidget {
     if( null == background )
     {
       Pixmap backgroundTexture = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-      backgroundTexture.setColor(Color.RED);
+      backgroundTexture.setColor(Color.BLACK);
       backgroundTexture.fill();
       mBackground = new Texture(backgroundTexture);
 
@@ -105,7 +108,7 @@ public class ConversationWidget {
 
     Color oldColor = batch.getColor();
 
-    batch.setColor( oldColor.r, oldColor.g, oldColor.b, .3f);
+    batch.setColor(oldColor.r, oldColor.g, oldColor.b, .6f);
     batch.draw(this.mBackground, 0, 0, this.mWidth, this.mHeight);
     batch.draw(this.mCharacterNameBackround, 0, this.mHeight  , this.mWidth/10, this.mFontHeight + 3 );
     batch.setColor(oldColor);
@@ -166,16 +169,22 @@ public class ConversationWidget {
     return this.mResponceWidgets.get(this.mCurrentSelectedIndex);
   }
 
+  /**
+   * Programatically selects the currently selected item within the widget.  The equivalent to a button click.
+   */
   private void triggerResponseSelection() {
     Label selectedButton = currentButtonSelected();
 
     for (Response response : mCurrentState.Responses) {
       if (response.Text.equals(selectedButton.Text)) {
-        mStateListener.onStateChange(response.NextState);
+        mStateListener.onStateChange(response.NextState, mCurrentState.CustomEvent);
       }
     }
   }
 
+  /**
+   * Returns how many items are being displayed in the list.
+   */
   final int numberOfVisibleWidgets() {
     int total = 0;
 

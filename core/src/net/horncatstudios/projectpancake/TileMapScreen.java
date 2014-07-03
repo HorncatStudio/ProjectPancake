@@ -8,14 +8,14 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import net.horncatstudios.gameengine.BaseScene;
-import net.horncatstudios.gameengine.SceneManager;
+import net.horncatstudios.gameengine.BaseScreen;
+import net.horncatstudios.gameengine.ScreenManager;
 import net.horncatstudios.map.PlayerSprite;
 
 /**
  * Created by Angelina on 6/16/2014.
  */
-public class TileMapScreen extends BaseScene {
+public class TileMapScreen extends BaseScreen {
 
   private OrthogonalTiledMapRenderer mRenderer;
   private PlayerSprite player;
@@ -45,7 +45,7 @@ public class TileMapScreen extends BaseScene {
   }
 
   @Override
-  public SceneManager.SceneType getSceneType() {
+  public ScreenManager.ScreenType getSceneType() {
     return null;
   }
 
