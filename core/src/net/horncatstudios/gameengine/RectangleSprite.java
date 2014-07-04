@@ -37,6 +37,11 @@ public class RectangleSprite {
     mDrawableForeground = new Texture(foregroundPixmap);
   }
 
+  public void setCenter( float x, float y ) {
+    mBackRectangle.setCenter(x,y);
+    mForegroundRectangle.setCenter(x,y);
+  }
+
   public void draw(SpriteBatch batch) {
     batch.draw(mDrawableBorder,
         mBackRectangle.x, mBackRectangle.y,

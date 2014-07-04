@@ -3,8 +3,10 @@ package net.horncatstudios.projectpancake;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import net.horncatstudios.conversationengine.Conversation;
 import net.horncatstudios.conversationengine.State;
 import net.horncatstudios.gameengine.*;
@@ -18,7 +20,14 @@ public class PhoneTutorialScreen extends BaseScreen implements StateChangeListen
   Conversation mConversation;
   RectangleSprite mRectangleSprite;
 
+  private FitViewport mPhoneStageViewport;
   private Stage mPhoneStage;
+
+  private ImageTextButton mContactsButton;
+  private ImageTextButton mPhoneButton;
+  private ImageTextButton mSettingsButton;
+  private ImageTextButton mMapButton;
+  private ImageTextButton mFaceboxButton;
 
 
   @Override
@@ -32,20 +41,35 @@ public class PhoneTutorialScreen extends BaseScreen implements StateChangeListen
     Gdx.input.setInputProcessor(this);
 
     mRectangleSprite = new RectangleSprite(50.0f, 0.0f, 300.0f, camera.viewportHeight, 2.0f);
+    mRectangleSprite.setCenter(camera.viewportWidth/2f, camera.viewportHeight/2f);
 
-    mPhoneStage = new Stage();
+    mPhoneStageViewport = new FitViewport(camera.viewportWidth, camera.viewportHeight, camera);
+    mPhoneStage = new Stage(mPhoneStageViewport, this.mGame.batch);
+    //mPhoneStage = new Stage(camera.viewportWidth, camera.viewportHeight, false);
     Table tableLayout = new Table();
-    tableLayout.setPosition(50.0f, 0.0f);
-    tableLayout.setWidth(300.0f);
-    // tableLayout.setFillParent(true);
+    tableLayout.debug();
+   // tableLayout.setPosition(50.0f, 0.0f);
+    //tableLayout.setOrigin(50.0f, 0.0f);
+   // tableLayout.setWidth(300.0f);
+    //tableLayout.top();
+     tableLayout.setFillParent(true);
     this.mPhoneStage.addActor(tableLayout);
 
-    tableLayout.add(new ImageTextButton("Contacts", resourcesManager.contactsStyle));
-    tableLayout.add(new ImageTextButton("Phone", resourcesManager.phoneStyle));
-    tableLayout.add(new ImageTextButton("Settings", resourcesManager.settingsStyle));
+    mContactsButton = new ImageTextButton("Contacts", resourcesManager.contactsStyle);
+
+    mPhoneButton = new ImageTextButton("Phone", resourcesManager.phoneStyle);
+    mSettingsButton = new ImageTextButton("Settings", resourcesManager.settingsStyle);
+    mMapButton = new ImageTextButton("Map", resourcesManager.mapStyle);
+    mFaceboxButton = new ImageTextButton("Facebox", resourcesManager.socialNetworkStyle);
+
+    tableLayout.add(mContactsButton).width(70).height(70);
+    tableLayout.add(mPhoneButton).width(70).height(70);
+    tableLayout.add(mSettingsButton).width(70).height(70);
     tableLayout.row();
-    tableLayout.add(new ImageTextButton("Map", resourcesManager.mapStyle));
-    tableLayout.add(new ImageTextButton("Facebox", resourcesManager.socialNetworkStyle));
+    tableLayout.add(mMapButton).width(70).height(70);
+    tableLayout.add(mFaceboxButton).width(70).height(70);
+
+    tableLayout.top();
   }
 
   public void loadPhoneTutorialTalking() {
@@ -119,6 +143,7 @@ public class PhoneTutorialScreen extends BaseScreen implements StateChangeListen
     this.mRectangleSprite.draw(mGame.batch);
     mGame.batch.end();
 
+    Table.drawDebug(mPhoneStage);
     mPhoneStage.draw();
   }
 
