@@ -28,7 +28,7 @@ public class ConversationScreen extends BaseScreen implements StateChangeListene
     this.mConversationWidget = new ConversationWidget(this);
     this.mCurrentConversation = new Conversation();
 
-    if( HcLocale.getCurrentLocale() == HcLocale.Locale.EN ) {
+    if (HcLocale.getCurrentLocale() == HcLocale.Locale.EN) {
       GenerateDemoConversation();
     } else {
       GenerateJapaneseConversation();
@@ -78,7 +78,7 @@ public class ConversationScreen extends BaseScreen implements StateChangeListene
   }
 
   public void GenerateJapaneseConversation() {
-     // Charset.forName("SJIS");
+    // Charset.forName("SJIS");
     State state1 = new State("?????????????????????...", Emotion.CASUAL);
     State state2 = new State("...????????...", Emotion.EMBARRASSED);
     State state3 = new State("????т?????...", Emotion.SAD);
@@ -178,7 +178,7 @@ public class ConversationScreen extends BaseScreen implements StateChangeListene
 
   @Override
   public void dispose() {
-    resourcesManager.unloadGameResources();
+    resourcesManager.unloadConversationResources();
   }
 
   @Override

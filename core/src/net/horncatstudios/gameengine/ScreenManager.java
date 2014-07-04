@@ -114,7 +114,7 @@ public class ScreenManager {
   public void loadConversationScene() {
     Gdx.app.log("touch", "menuItemClicked Loading Game");
 
-    ResourceManager.getInstance().loadGameResources();
+    ResourceManager.getInstance().loadConversationResources();
     if (null == gameLevelScreen) {
       gameLevelScreen = new ConversationScreen();
     }
@@ -151,6 +151,8 @@ public class ScreenManager {
 
 
   public void loadPhoneTutorialWithExplanation() {
+    ResourceManager.getInstance().loadPhoneResources();
+
     if (null == phoneTutorialScreen) {
       phoneTutorialScreen = new PhoneTutorialScreen();
     }
@@ -159,6 +161,8 @@ public class ScreenManager {
   }
 
   public void loadPhoneTutorialWithoutExplanation() {
+    ResourceManager.getInstance().loadPhoneResources();
+
     if (null == phoneTutorialScreen) {
       phoneTutorialScreen = new PhoneTutorialScreen();
     }

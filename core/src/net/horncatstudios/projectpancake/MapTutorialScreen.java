@@ -97,6 +97,7 @@ public class MapTutorialScreen extends BaseScreen implements StateChangeListener
 
     mConversationWidget.draw(mGame.batch, resourcesManager.fontManager.conversationFont, delta);
     mGame.batch.end();
+
   }
 
 
