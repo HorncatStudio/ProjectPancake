@@ -32,9 +32,16 @@ public class PhoneTutorialScreen extends BaseScreen implements StateChangeListen
 
   private Image mStaminaImage;
 
+  static final String DORIAN_ADD_CONTACT_INFO = "DorianAdd";
+  static final String SHOW_CALENDAR = "ShowCalendar";
+
+  PhoneCalendarScreen mCalendarScreen;
 
   @Override
   public void createScene() {
+
+    mCalendarScreen = new PhoneCalendarScreen(this);
+
     this.mConversationWidget = new ConversationWidget(this);
     this.mConversation = new Conversation();
 
@@ -48,17 +55,13 @@ public class PhoneTutorialScreen extends BaseScreen implements StateChangeListen
 
     mPhoneStageViewport = new FitViewport(camera.viewportWidth, camera.viewportHeight, camera);
     mPhoneStage = new Stage(mPhoneStageViewport, this.mGame.batch);
-    //mPhoneStage = new Stage(camera.viewportWidth, camera.viewportHeight, false);
     Table tableLayout = new Table();
     tableLayout.debug();
-   // tableLayout.setPosition(50.0f, 0.0f);
-    //tableLayout.setOrigin(50.0f, 0.0f);
-   // tableLayout.setWidth(300.0f);
-    //tableLayout.top();
      tableLayout.setFillParent(true);
     this.mPhoneStage.addActor(tableLayout);
 
     mContactsButton = new ImageTextButton("Contacts", resourcesManager.contactsStyle);
+    mContactsButton.setChecked(true);
 
     mPhoneButton = new ImageTextButton("Phone", resourcesManager.phoneStyle);
     mSettingsButton = new ImageTextButton("Settings", resourcesManager.settingsStyle);
@@ -81,23 +84,65 @@ public class PhoneTutorialScreen extends BaseScreen implements StateChangeListen
     this.mConversationWidget.setState( mConversation.ConversationStates.get(0) );
   }
 
-  public void loadPhoneTutorialTalking( boolean explain ) {
-    State state1 = new State("First, you can do pretty much anything with your phone.");
-    State state2 = new State("You can play games on your phone, text people, or see what’s going on in the world.");
-    State state3 = new State("Everyone here uses [social media name]. As you get to know people, maybe they’ll add you?");
+  @Override
+  public void setCustom(String event) {
+    if (event.equals("explain")) {
+      loadPhoneTutorialTalking(true);
+    } else {
+      loadPhoneTutorialTalking(false);
+    }
+  }
 
-    state1.Responses.add(new Response("", state2));
-    state2.Responses.add(new Response("", state3));
+  private void loadPhoneTutorialTalking(boolean explain) {
 
     State state4 = new State("I'll give you my number, since I'm nice.  You should read my blog if you're bored. It's pretty deep.");
+    state4.CustomEvent = DORIAN_ADD_CONTACT_INFO;
+
+    if (explain) {
+      State state1 = new State("First, you can do pretty much anything with your phone.");
+      State state2 = new State("You can play games on your phone, text people, or see what’s going on in the world.");
+      State state3 = new State("Everyone here uses [social media name]. As you get to know people, maybe they’ll add you?");
+
+      state1.Responses.add(new Response("", state2));
+      state2.Responses.add(new Response("", state3));
+      state3.Responses.add(new Response("", state4));
+
+      this.mConversation.ConversationStates.add(state1);
+      this.mConversation.ConversationStates.add(state1);
+      this.mConversation.ConversationStates.add(state3);
+    }
 
 
-    state3.Responses.add(new Response("", null));
-    state4.Responses.add(new Response("", null));
+    State state5 = new State("You can see all my updates.  If you want to find me or your other friends, we usually check in wherever we are.");
+    State state6 = new State("That way you can hang out with people without showing them that you're 'trying' y'know?");
 
-    this.mConversation.ConversationStates.add(state1);
-    this.mConversation.ConversationStates.add(state1);
-    this.mConversation.ConversationStates.add(state3);
+    State stage7 = new State("If you ever want to send me a text ... ");
+    stage7.CustomEvent = SHOW_CALENDAR;
+
+
+    State state9 = new State("You can play games at most of the places you go, so if you get tired of socializing, you can alwaysw blow off some steam on the games.");
+    State state10 = new State("They'll have [symbol] over them, so you'll see them immediately.");
+    State state11 = new State("Tired yet? I guess it's a good time to talk about stamina");
+    State state12 = new State("Every in-game day, you get a certain amount of stamina. You can see how much you have left based on the clock.");
+    State state13 = new State("The later it is, the less you have.  Each time you hang out with someone, it'' take a certain amount of time.");
+    State state14 = new State("At the end of the day, you can go home and sleep to start a new in-game day.");
+    State state15 = new State("You can also be a rebel and stay up late, but you might sleep in and miss school, so try to be a little responsible Or don't.");
+    State state16 = new State("Whatever. But seriously, if you stay up, you'll feel it the next day");
+
+    state4.Responses.add(new Response("", state5));
+    state5.Responses.add(new Response("", state6));
+    state6.Responses.add(new Response("", stage7));
+
+    stage7.Responses.add(new Response("", state9));
+    state9.Responses.add(new Response("", state10));
+    state10.Responses.add(new Response("", state11));
+    state11.Responses.add(new Response("", state12));
+    state12.Responses.add(new Response("", state13));
+    state13.Responses.add(new Response("", state14));
+    state14.Responses.add(new Response("", state15));
+    state15.Responses.add(new Response("", state16));
+    state16.Responses.add(new Response("", null));
+
     this.mConversation.ConversationStates.add(state4);
   }
 
@@ -131,12 +176,12 @@ public class PhoneTutorialScreen extends BaseScreen implements StateChangeListen
   }
 
   @Override
-  public void onStateChange(final State state) {
-
-  }
-
-  @Override
   public void onStateChange(final State state, final String customEvent) {
+
+    if (customEvent.equals(SHOW_CALENDAR)) {
+      mCalendarScreen.loadChildScreen();
+    }
+
     this.mConversationWidget.setState(state);
   }
 
@@ -198,7 +243,7 @@ public class PhoneTutorialScreen extends BaseScreen implements StateChangeListen
 
   @Override
   public void resume() {
-
+    Gdx.input.setInputProcessor(this);
   }
 
   @Override

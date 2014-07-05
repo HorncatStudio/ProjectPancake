@@ -7,7 +7,5 @@ import net.horncatstudios.conversationengine.State;
  */
 public interface StateChangeListener {
 
-  public void onStateChange(final State state);
-
   public void onStateChange(final State state, final String customEvent);
 }

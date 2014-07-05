@@ -1,6 +1,8 @@
 package net.horncatstudios.gameengine;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -30,10 +32,6 @@ public class ResourceManager {
     loadSharedResouces();
   }
 
-  void setScreen(BaseScreen scene) {
-    mGame.setScreen(scene);
-  }
-
   //region SharedGameResources
   // public Music conversationMusic;
   // public Sound supriseSound;
@@ -43,6 +41,7 @@ public class ResourceManager {
     //supriseSound = Gdx.audio.newSound(Gdx.files.internal("supriseSound.wav"));
     fontManager.loadSharedResources();
   }
+
   public void disposeSharedResources() {
     //supriseSound.dispose();
     //conversationMusic.dispose();
@@ -67,6 +66,7 @@ public class ResourceManager {
   public void loadMenuResources() {
     fontManager.loadMenuResources();
   }
+
   public void unloadMenuResources() {
     fontManager.unloadMenuResources();
   }
@@ -79,6 +79,7 @@ public class ResourceManager {
     TmxMapLoader loader = new TmxMapLoader();
     mSchoolMap = loader.load("basic_map/classRoomBeta.tmx");
   }
+
   public void unloadSchoolMapResources() {
     mSchoolMap.dispose();
   }
@@ -106,6 +107,7 @@ public class ResourceManager {
   public void loadMapTutorialResources() {
     worldMap = new Texture(Gdx.files.internal("world-map-pokemon.png"));
   }
+
   public void unloadMapTutorialResources() {
     worldMap.dispose();
   }
@@ -119,6 +121,7 @@ public class ResourceManager {
   public TextureRegionDrawable mapIcon;
   public TextureRegionDrawable socialNetworkIcon;
   public TextureRegionDrawable messageIcon;
+  public TextureRegionDrawable checkedContactsIcon;
 
   public ImageTextButton.ImageTextButtonStyle contactsStyle;
   public ImageTextButton.ImageTextButtonStyle phoneStyle;
@@ -128,16 +131,22 @@ public class ResourceManager {
   public ImageTextButton.ImageTextButtonStyle messageStyle;
 
   public Texture staminaPlaceHolder;
+  public Texture sampleCalendar;
 
   public void loadPhoneResources() {
-    contactsIcon = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("phone_assets/BOOK.png"))));
+    Pixmap contactsTexture = new Pixmap(Gdx.files.internal("phone_assets/BOOK.png"));
+    contactsIcon = new TextureRegionDrawable(new TextureRegion(new Texture(contactsTexture)));
     phoneIcon = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("phone_assets/PHONE.png"))));
     settingsIcon = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("phone_assets/SETTINGS.png"))));
     mapIcon = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("phone_assets/WORLD.png"))));
     socialNetworkIcon = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("phone_assets/TWEET.png"))));
     messageIcon = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("phone_assets/MAIL.png"))));
 
-    contactsStyle = new ImageTextButton.ImageTextButtonStyle(contactsIcon, contactsIcon, contactsIcon, fontManager.conversationFont);
+    checkedContactsIcon = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("phone_assets/SETTINGS_CHECKED.png"))));
+
+    TextureRegionDrawable contactsIconChecked = new TextureRegionDrawable(new TextureRegion(new Texture(contactsTexture)));
+
+    contactsStyle = new ImageTextButton.ImageTextButtonStyle(contactsIconChecked, contactsIconChecked, checkedContactsIcon, fontManager.conversationFont);
     phoneStyle = new ImageTextButton.ImageTextButtonStyle(phoneIcon, phoneIcon, phoneIcon, fontManager.conversationFont);
     settingsStyle = new ImageTextButton.ImageTextButtonStyle(settingsIcon, settingsIcon, settingsIcon, fontManager.conversationFont);
     mapStyle = new ImageTextButton.ImageTextButtonStyle(mapIcon, mapIcon, mapIcon, fontManager.conversationFont);
@@ -145,6 +154,7 @@ public class ResourceManager {
     messageStyle = new ImageTextButton.ImageTextButtonStyle(messageIcon, messageIcon, messageIcon, fontManager.conversationFont);
 
     staminaPlaceHolder = new Texture(Gdx.files.internal("staminaplaceholder.png"));
+    sampleCalendar = new Texture(Gdx.files.internal("temp-cute-calendar.png"));
   }
 
   public void unloadPhoneResources() {

@@ -35,7 +35,6 @@ public class ConversationScreen extends BaseScreen implements StateChangeListene
     }
 
     this.mConversationWidget.setState(mCurrentConversation.ConversationStates.get(0));
-
   }
 
   public void GenerateDemoConversation() {
@@ -114,10 +113,8 @@ public class ConversationScreen extends BaseScreen implements StateChangeListene
     return ScreenManager.ScreenType.CONVERSATION;
   }
 
-
   @Override
-  public void onStateChange(final State state) {
-
+  public void onStateChange(final State state, final String customEvent) {
     if (null == state) {
       ScreenManager.getInstance().loadWorldMapTutorialScreen();
       dispose();
@@ -127,11 +124,6 @@ public class ConversationScreen extends BaseScreen implements StateChangeListene
     // \todo update relationship stats
     mDorianSprite.setEmotion(state.Emotion);
     mConversationWidget.setState(state);
-  }
-
-  @Override
-  public void onStateChange(final State state, final String customEvent) {
-    onStateChange(state);
   }
 
   @Override

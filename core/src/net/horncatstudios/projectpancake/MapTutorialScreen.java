@@ -63,11 +63,6 @@ public class MapTutorialScreen extends BaseScreen implements StateChangeListener
   }
 
   @Override
-  public void onStateChange(State state) {
-    onStateChange(state, "");
-  }
-
-  @Override
   public void onStateChange(State state, String customEvent) {
 
     if (null == state) {

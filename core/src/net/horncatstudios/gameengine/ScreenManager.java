@@ -1,6 +1,7 @@
 package net.horncatstudios.gameengine;
 
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import net.horncatstudios.projectpancake.*;
 import net.horncatstudios.projectpancake.ConversationScreen;
@@ -14,15 +15,16 @@ public class ScreenManager {
   private BaseScreen mapTutorialScreen = null;
   private BaseScreen phoneTutorialScreen = null;
 
+  //! The singleton instance of the screen manager.  So object responsible for
+  //! managing the loading of different types of scenes in the game.
   private static final ScreenManager INSTANCE = new ScreenManager();
 
-  private ScreenType currentScreenType = ScreenType.SPLASH;
+  public static ScreenManager getInstance() {
+    return INSTANCE;
+  }
 
-  private BaseScreen currentScene;
-
-  //! Shall be used once the user is able to freely open the game menu AKA
-  //! the phone menu.
-  private BaseScreen lastScreen;
+  //! The current scene being displayed on the screen
+  private IHcScreen mCurrentScene;
 
   public enum ScreenType {
     SPLASH,
@@ -35,6 +37,17 @@ public class ScreenManager {
     ENERGY_TUTORIAL
   }
 
+  //! Base libGDX game class used for displaying games
+  private Game mGame = null;
+
+  //! Initialized the scene manager to use the libGDX game to set the new screens.
+  public void prepareSceneManager(Game game) {
+    mGame = game;
+  }
+
+  /**
+   * Sets the current screen to be based on the \a screenType.
+   */
   public void setScene(ScreenType screenType) {
     switch (screenType) {
       case TITLE_MENU:
@@ -62,26 +75,21 @@ public class ScreenManager {
     }
   }
 
-  private void setScene(BaseScreen scene) {
-    currentScene = scene;
-    currentScreenType = scene.getSceneType();
-    currentScene.resourcesManager.setScreen(currentScene);
+  /**
+   * Sets \a screen to be the current child screen.  Due to ChildScreens implementation,
+   * once this scene ends the parent scene shall return to be current screen.
+   */
+  public void setScene(ChildScreen screen) {
+    mCurrentScene = screen;
+    mGame.setScreen(mCurrentScene);
   }
 
-  //---------------------------------------------
-  // GETTERS AND SETTERS
-  //---------------------------------------------
-
-  public static ScreenManager getInstance() {
-    return INSTANCE;
-  }
-
-  public ScreenType getCurrentScreenType() {
-    return currentScreenType;
-  }
-
-  public BaseScreen getCurrentScreen() {
-    return currentScene;
+  /**
+   * Sets the \a screen to be the current screen.
+   */
+  private void setScene(BaseScreen screen) {
+    mCurrentScene = screen;
+    mGame.setScreen(mCurrentScene);
   }
 
   public void loadSplashScene() {
@@ -92,7 +100,6 @@ public class ScreenManager {
     }
     setScene(splashScreen);
   }
-
   private void disposeSplashScene() {
     splashScreen.dispose();
     splashScreen = null;
@@ -149,13 +156,17 @@ public class ScreenManager {
     setScene(endGameScreen);
   }
 
-
+  //region Phone Tutorial
   public void loadPhoneTutorialWithExplanation() {
     ResourceManager.getInstance().loadPhoneResources();
 
     if (null == phoneTutorialScreen) {
       phoneTutorialScreen = new PhoneTutorialScreen();
+    } else {
+      phoneTutorialScreen.resume();
     }
+
+    phoneTutorialScreen.setCustom("explain");
 
     setScene(phoneTutorialScreen);
   }
@@ -167,6 +178,8 @@ public class ScreenManager {
       phoneTutorialScreen = new PhoneTutorialScreen();
     }
 
+    phoneTutorialScreen.setCustom("noexplain");
     setScene(phoneTutorialScreen);
   }
+
 }
