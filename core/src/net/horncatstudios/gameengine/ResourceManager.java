@@ -127,6 +127,8 @@ public class ResourceManager {
   public ImageTextButton.ImageTextButtonStyle socialNetworkStyle;
   public ImageTextButton.ImageTextButtonStyle messageStyle;
 
+  public Texture staminaPlaceHolder;
+
   public void loadPhoneResources() {
     contactsIcon = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("phone_assets/BOOK.png"))));
     phoneIcon = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("phone_assets/PHONE.png"))));
@@ -141,6 +143,8 @@ public class ResourceManager {
     mapStyle = new ImageTextButton.ImageTextButtonStyle(mapIcon, mapIcon, mapIcon, fontManager.conversationFont);
     socialNetworkStyle = new ImageTextButton.ImageTextButtonStyle(socialNetworkIcon, socialNetworkIcon, socialNetworkIcon, fontManager.conversationFont);
     messageStyle = new ImageTextButton.ImageTextButtonStyle(messageIcon, messageIcon, messageIcon, fontManager.conversationFont);
+
+    staminaPlaceHolder = new Texture(Gdx.files.internal("staminaplaceholder.png"));
   }
 
   public void unloadPhoneResources() {
