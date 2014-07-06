@@ -25,7 +25,8 @@ public class ConversationScreen extends BaseScreen implements StateChangeListene
     mDorianSprite = new Dorian(resourcesManager.dorianImages);
 
     mDorianSprite.setPosition(0, 10);
-    this.mConversationWidget = new ConversationWidget(this);
+    this.mConversationWidget = new ConversationWidget(this, resourcesManager.fontManager.conversationFont,
+        this.camera, this.mGame.batch);
     this.mCurrentConversation = new Conversation();
 
     if (HcLocale.getCurrentLocale() == HcLocale.Locale.EN) {
@@ -138,9 +139,10 @@ public class ConversationScreen extends BaseScreen implements StateChangeListene
     mGame.batch.begin();
     mGame.batch.draw(resourcesManager.schoolBackground, 0, 0, this.camera.viewportWidth, this.camera.viewportHeight);
     this.mDorianSprite.draw(mGame.batch);
-
-    mConversationWidget.draw(mGame.batch, resourcesManager.fontManager.conversationFont, delta);
+    this.mConversationWidget.draw(mGame.batch, delta);
     mGame.batch.end();
+
+    this.mConversationWidget.draw();
   }
 
   @Override

@@ -23,7 +23,8 @@ public class MapTutorialScreen extends BaseScreen implements StateChangeListener
 
   @Override
   public void createScene() {
-    this.mConversationWidget = new ConversationWidget(this);
+    this.mConversationWidget = new ConversationWidget(this, resourcesManager.fontManager.conversationFont,
+        this.camera, this.mGame.batch);
     this.mConversation = new Conversation();
 
     loadMapTutorialTalking();
@@ -89,10 +90,11 @@ public class MapTutorialScreen extends BaseScreen implements StateChangeListener
     mGame.batch.begin();
     mGame.batch.draw(resourcesManager.worldMap, 0, 0, this.camera.viewportWidth, this.camera.viewportHeight);
     //  this.mDorianSprite.draw(mGame.batch);
+    this.mConversationWidget.draw(mGame.batch, delta);
 
-    mConversationWidget.draw(mGame.batch, resourcesManager.fontManager.conversationFont, delta);
     mGame.batch.end();
 
+    this.mConversationWidget.draw();
   }
 
 

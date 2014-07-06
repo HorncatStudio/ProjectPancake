@@ -18,7 +18,8 @@ public class PhoneCalendarScreen extends ChildScreen implements StateChangeListe
   PhoneCalendarScreen(BaseScreen parent) {
     super(parent);
 
-    this.mConversationWidget = new ConversationWidget(this);
+    this.mConversationWidget = new ConversationWidget(this, resourcesManager.fontManager.conversationFont,
+        this.camera, this.mGame.batch);
     this.mConversation = new Conversation();
 
     State state = new State("People's birthdays and stuff pop up took, so you've got no excuse to miss a birthday.");
@@ -49,8 +50,9 @@ public class PhoneCalendarScreen extends ChildScreen implements StateChangeListe
 
     mGame.batch.begin();
     mGame.batch.draw(resourcesManager.sampleCalendar, 0, 0, camera.viewportWidth, camera.viewportHeight);
-    this.mConversationWidget.draw(mGame.batch, resourcesManager.fontManager.conversationFont, delta);
+    this.mConversationWidget.draw(mGame.batch, delta);
     mGame.batch.end();
+    this.mConversationWidget.draw();
   }
 
 

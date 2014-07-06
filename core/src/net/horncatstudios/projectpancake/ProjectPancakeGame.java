@@ -21,7 +21,7 @@ public class ProjectPancakeGame extends Game {
     resourceManager.prepareSharedResources();
 
     ScreenManager.getInstance().prepareSceneManager(this);
-    ScreenManager.getInstance().setScene(ScreenManager.ScreenType.PHONE_TUTORIAL);
+    ScreenManager.getInstance().setScene(ScreenManager.ScreenType.CONVERSATION);
   }
 
   @Override

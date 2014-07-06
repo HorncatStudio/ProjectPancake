@@ -100,6 +100,7 @@ public class ScreenManager {
     }
     setScene(splashScreen);
   }
+
   private void disposeSplashScene() {
     splashScreen.dispose();
     splashScreen = null;

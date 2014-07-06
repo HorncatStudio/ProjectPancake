@@ -42,7 +42,8 @@ public class PhoneTutorialScreen extends BaseScreen implements StateChangeListen
 
     mCalendarScreen = new PhoneCalendarScreen(this);
 
-    this.mConversationWidget = new ConversationWidget(this);
+    this.mConversationWidget = new ConversationWidget(this, resourcesManager.fontManager.conversationFont,
+        this.camera, this.mGame.batch);
     this.mConversation = new Conversation();
 
     loadPhoneTutorialTalking(true);
@@ -158,11 +159,13 @@ public class PhoneTutorialScreen extends BaseScreen implements StateChangeListen
 
     mGame.batch.begin();
     this.mRectangleSprite.draw(mGame.batch);
-    this.mConversationWidget.draw(mGame.batch, resourcesManager.fontManager.conversationFont, delta);
+    this.mConversationWidget.draw(mGame.batch, delta);
     mGame.batch.end();
 
     Table.drawDebug(mPhoneStage);
     mPhoneStage.draw();
+
+    this.mConversationWidget.draw();
   }
 
   @Override
