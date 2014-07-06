@@ -52,31 +52,29 @@ public class FontResourceManager {
   }
 
   public void loadSharedResources() {
-    SmartFontGenerator fontGenerator = new SmartFontGenerator();
-    FileHandle fontConversation = Gdx.files.local("font/AGENCYR.TTF");
+    // SmartFontGenerator fontGenerator = new SmartFontGenerator();
+    // FileHandle fontConversation = Gdx.files.local("font/AGENCYR.TTF");
 
-    englishTextFont = fontGenerator.createFont(fontConversation, "conversation", 24);
+//    englishTextFont = fontGenerator.createFont(fontConversation, "conversation", 24);
+    englishTextFont = new BitmapFont(Gdx.files.local("font/Agency24.fnt"));
     japaneseTextFont = new BitmapFont(Gdx.files.internal("font/moreJapanese.fnt"));
 
-    if( HcLocale.getCurrentLocale() == HcLocale.Locale.EN ) {
+    if (HcLocale.getCurrentLocale() == HcLocale.Locale.EN) {
       conversationFont = englishTextFont;
     } else {
       conversationFont = japaneseTextFont;
     }
   }
+
   public void disposeSharedResources() {
     englishTextFont.dispose();
     japaneseTextFont.dispose();
   }
 
-  public void updateLocale( final HcLocale.Locale locale )
-  {
-    if (locale == HcLocale.Locale.EN)
-    {
+  public void updateLocale(final HcLocale.Locale locale) {
+    if (locale == HcLocale.Locale.EN) {
       conversationFont = englishTextFont;
-    }
-    else if (locale == HcLocale.Locale.JP)
-    {
+    } else if (locale == HcLocale.Locale.JP) {
       conversationFont = japaneseTextFont;
     }
   }
