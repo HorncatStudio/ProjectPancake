@@ -1,6 +1,7 @@
 package net.horncatstudios.gameengine;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -39,6 +40,10 @@ public class ResourceManager {
     // load the drop sound effect and the rain background "music"
     //conversationMusic = Gdx.audio.newMusic(Gdx.files.internal("conversationMusic.mp3"));
     //supriseSound = Gdx.audio.newSound(Gdx.files.internal("supriseSound.wav"));
+    FileHandle[] files = Gdx.files.internal("font").list();
+    for (FileHandle file : files) {
+      Gdx.app.log("touch", "Files in current local directory " + file.name());
+    }
     fontManager.loadSharedResources();
   }
 

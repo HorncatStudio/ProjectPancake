@@ -52,11 +52,11 @@ public class FontResourceManager {
   }
 
   public void loadSharedResources() {
-    // SmartFontGenerator fontGenerator = new SmartFontGenerator();
-    // FileHandle fontConversation = Gdx.files.local("font/AGENCYR.TTF");
+    SmartFontGenerator fontGenerator = new SmartFontGenerator();
+    FileHandle fontConversation = Gdx.files.local("AGENCYR.TTF");
 
-//    englishTextFont = fontGenerator.createFont(fontConversation, "conversation", 24);
-    englishTextFont = new BitmapFont(Gdx.files.local("font/Agency24.fnt"));
+    englishTextFont = fontGenerator.createFont(fontConversation, "conversation", 24);
+    //englishTextFont = new BitmapFont(Gdx.files.local("font/Agency24.fnt"));
     japaneseTextFont = new BitmapFont(Gdx.files.internal("font/moreJapanese.fnt"));
 
     if (HcLocale.getCurrentLocale() == HcLocale.Locale.EN) {

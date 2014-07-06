@@ -124,7 +124,7 @@ public class SmartFontGenerator {
   }
 
   private FileHandle getFontFile(String filename) {
-    return Gdx.files.local(generatedFontDir + filename);
+    return Gdx.files.internal(generatedFontDir + filename);
   }
 
   // GETTERS, SETTERS -----------------------
