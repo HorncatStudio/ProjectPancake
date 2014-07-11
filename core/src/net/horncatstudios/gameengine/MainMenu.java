@@ -59,20 +59,19 @@ public class MainMenu implements InputProcessor {
     this.mSubTitleLabel.setAlignment(Align.bottom);
 
     Table table = new Table();
-    //table.debug(); uncomment for table debugging
+    //table.debug(); //uncomment for table debugging
     table.setFillParent(true);
     table.setSkin(fontManager.MainMenuButtonSkin);
     this.mStage.addActor(table);
 
     // Adding empty cells to improve spacing for the main menu
     table.add().expand();
-    table.add().expand();
     table.row();
 
-    table.add(mTitleLabel).expandX().size(0, 60);
+    table.add(mTitleLabel).expandX();
     table.row();
 
-    table.add(mSubTitleLabel).expandX()/*.size(0,60)*/;
+    table.add(mSubTitleLabel).expandX();
     table.row();
 
     // Adding empty cells to improve spacing for the main menu
@@ -117,6 +116,7 @@ public class MainMenu implements InputProcessor {
     // Adding empty cells to improve spacing for the main menu
     table.add().expand();
     table.row();
+    table.center();
 
     setSelectedIndex(0);
   }
@@ -126,7 +126,7 @@ public class MainMenu implements InputProcessor {
   }
 
   public void draw() {
-    // Table.drawDebug(mStage); uncomment for table debugging placement
+    //   Table.drawDebug(mStage);// uncomment for table debugging placement
     mStage.draw();
   }
 
