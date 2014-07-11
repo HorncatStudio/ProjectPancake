@@ -22,7 +22,7 @@ public class SmartFontGenerator {
   // TODO figure out optimal page size automatically
   private int pageSize;
 
-  public static final String PROJECT_PANCAKE_DEFAULT_CHARS = "ぷじぇパンケキっ思話俺何元気新人、？。あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんーヤメルABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!?'.,;:()[]{}<>|/@$-%+=";
+  public static final String PROJECT_PANCAKE_DEFAULT_CHARS = "切隠出滲戻訳無住発馬鹿以上始感盗同居弾行店売本必死止目覚中頭当退屈回見町地味光栄非常堂々授業案内前学校言葉知謙虚ぷじぇぱぁぼだでごがぞゃどパンケキコヒウクレトｩィアリオラマジっ思話俺何元気新人、？。あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんーヤメルABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!?'.,;:()[]{}<>|/@$-%+=";
 //  public static final String PROJECT_PANCAKE_DEFAULT_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!?'.,;:()[]{}<>|/@$-%+=";
 
   public SmartFontGenerator() {

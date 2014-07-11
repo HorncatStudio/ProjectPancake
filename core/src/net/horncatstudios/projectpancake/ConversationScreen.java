@@ -42,7 +42,7 @@ public class ConversationScreen extends BaseScreen implements StateChangeListene
     State state1 = new State("Hey, new girl. 'Sup? You're probably wondering why someone would even talk to you right?", Emotion.CASUAL);
     State state2 = new State("Is that like the opposite of a #humblebrag? Anyway", Emotion.EMBARRASSED);
     State state3 = new State("Well, the institution asked me to give you a grand tour of the grounds.  I'm honored that they realized how much I didn't want to be in class.", Emotion.CASUAL);
-    State state4 = new State("Have you had a chance to check out our humble city? It??fs pretty boring around here.", Emotion.EMBARRASSED);
+    State state4 = new State("Have you had a chance to check out our humble city? It's pretty boring around here.", Emotion.EMBARRASSED);
     State state5 = new State("Sorry, what? I just had to hit the snooze button on my brain. Are you serious?");
     State state6 = new State("Eh, we??fve got at least ONE place that sells fair trade coffee. I play the uke, steal Twinkies from the guy who lives with me. I??fm just trying to find myself, y??fknow?");
     State state7 = new State("Man, alright. Let??fs just focus on the tour? This is already punishing enough without you making it worse.");
@@ -79,23 +79,36 @@ public class ConversationScreen extends BaseScreen implements StateChangeListene
 
   public void GenerateJapaneseConversation() {
     State state1 = new State("よっ、そこの新人。元気？何でこいつは俺に話しかけてるんだろうとか思ってるだろ？", Emotion.CASUAL);
-    State state2 = new State("...????????...", Emotion.EMBARRASSED);
-    State state3 = new State("????т?????...", Emotion.SAD);
-    State state4 = new State("??????????????????????w???????B", Emotion.EMBARRASSED);
+    State state2 = new State("謙虚って言葉知ってるか？とにかく、", Emotion.EMBARRASSED);
+    State state3 = new State("まぁ学校からお前を案内するよう言われてんだよ。授業を堂々とさぼれて非常に光栄なんだけどな。", Emotion.CASUAL);
+    State state4 = new State("この地味な町はもう見て回ったか？ここは本当退屈だ。", Emotion.EMBARRASSED);
+    State state5 = new State("ごめん、何て？頭の中の目覚まし止めるので必死だったわ。本気で言ってる？");
+    State state6 = new State("そうだな、いいコーヒーを売る店があるからそこによく行くな。あとウクレレ弾いたり同居人のトゥウィンキー盗んだり。まぁそんな感じだ。");
+    State state7 = new State("はいはい。もう案内始めるぞ？これ以上の馬鹿な発言には付き合いきれん。");
+    State state8 = new State("お前の住んでたとこ何も無かったのか？何か訳アリっぽいな、新人。");
+    State state9 = new State("だろ？まぁとにかく案内に戻るとするか。", Emotion.CASUAL);
 
-    Response response = new Response("??????????I??????????o??Z????I", state2);
+    Response response = new Response("うん。", state3);
     state1.Responses.add(response);
-    state1.Responses.add(new Response("??????????A????????????????????H", state2));
-    state1.Responses.add(new Response("????????", state3));
+    state1.Responses.add(new Response("滲み出るオーラはやっぱ隠し切れないか。", state2));
 
-    state2.Responses.add(new Response("??????v??H", state3));
-    state2.Responses.add(new Response("????????", state4));
+    state2.Responses.add(new Response("", state3));
 
-    state3.Responses.add(new Response("????????????[??[", null));
-    state3.Responses.add(new Response("4???I", state4));
+    state3.Responses.add(new Response("", state4));
 
-    state4.Responses.add(new Response("??????????s??v??c????????????????????", null));
-    state4.Responses.add(new Response("????b??I????", null));
+    state4.Responses.add(new Response("いい町だと思うけど。", state5));
+    state4.Responses.add(new Response("それじゃいつも何してるの？", state6));
+
+    state5.Responses.add(new Response("本気と書いてマジ！ ", state7));
+    state5.Responses.add(new Response("あー、いや何でもないよ。", state8));
+
+    state6.Responses.add(new Response("へー、いいね。", state9));
+
+    state7.Responses.add(new Response("", null));
+
+    state8.Responses.add(new Response("", null));
+
+    state9.Responses.add(new Response("", null));
 
     mCurrentConversation.ConversationStates.add(state1);
     mCurrentConversation.ConversationStates.add(state2);
