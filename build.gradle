@@ -8,7 +8,7 @@ buildscript {
   }
 
   dependencies {
-   // classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.3'
+    // classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.3'
     classpath 'com.android.tools.build:gradle:0.9.1'
     //classpath 'com.github.jtakakura:gradle-robovm-plugin:0.0.6'
   }
@@ -29,16 +29,17 @@ allprojects {
     mavenLocal();
     mavenCentral()
     maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-      maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+    maven { url "https://oss.sonatype.org/content/repositories/releases/" }
   }
 }
+apply plugin: 'java'
 
-tasks.withType(Compile) {
-    options.encoding = 'UTF-8'
-}
 
 project(":core") {
   apply plugin: "java"
+  tasks.withType(Compile) {
+    options.encoding = 'UTF-8'
+  }
 
   dependencies {
     compile "com.badlogicgames.gdx:gdx:$gdxVersion"
@@ -48,6 +49,10 @@ project(":core") {
 
 project(":desktop") {
   apply plugin: "java"
+
+  tasks.withType(Compile) {
+    options.encoding = 'UTF-8'
+  }
 
   dependencies {
     compile project(":core")
@@ -59,6 +64,10 @@ project(":desktop") {
 
 project(":android") {
   apply plugin: "android"
+
+  tasks.withType(Compile) {
+    options.encoding = 'UTF-8'
+  }
 
   configurations { natives }
 

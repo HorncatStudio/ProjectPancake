@@ -22,6 +22,9 @@ public class SmartFontGenerator {
   // TODO figure out optimal page size automatically
   private int pageSize;
 
+  public static final String PROJECT_PANCAKE_DEFAULT_CHARS = "ぷじぇパンケキっ思話俺何元気新人、？。あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんーヤメルABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!?'.,;:()[]{}<>|/@$-%+=";
+//  public static final String PROJECT_PANCAKE_DEFAULT_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!?'.,;:()[]{}<>|/@$-%+=";
+
   public SmartFontGenerator() {
     forceGeneration = false;
     generatedFontDir = "generated-fonts/";
@@ -87,7 +90,8 @@ public class SmartFontGenerator {
     FreeTypeFontGenerator generator = new FreeTypeFontGenerator(fontFile);
 
     PixmapPacker packer = new PixmapPacker(pageWidth, pageHeight, Pixmap.Format.RGBA8888, 2, false);
-    FreeTypeFontGenerator.FreeTypeBitmapFontData fontData = generator.generateData(fontSize, FreeTypeFontGenerator.DEFAULT_CHARS, false, packer);
+    FreeTypeFontGenerator.FreeTypeBitmapFontData fontData = generator.generateData(fontSize, PROJECT_PANCAKE_DEFAULT_CHARS, false, packer);
+    // FreeTypeFontGenerator.FreeTypeBitmapFontData fontData = generator.generateData(fontSize, FreeTypeFontGenerator.DEFAULT_CHARS, false, packer);
     Array<PixmapPacker.Page> pages = packer.getPages();
     TextureRegion[] texRegions = new TextureRegion[pages.size];
     for (int i = 0; i < pages.size; i++) {
@@ -124,7 +128,7 @@ public class SmartFontGenerator {
   }
 
   private FileHandle getFontFile(String filename) {
-    return Gdx.files.internal(generatedFontDir + filename);
+    return Gdx.files.local(generatedFontDir + filename);
   }
 
   // GETTERS, SETTERS -----------------------

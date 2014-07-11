@@ -18,18 +18,25 @@ public class FontResourceManager {
   public BitmapFont conversationFont = null;
 
   private BitmapFont englishTextFont = null;
-  private BitmapFont japaneseTextFont = new BitmapFont(Gdx.files.internal("font/moreJapanese.fnt"));
+  private BitmapFont japaneseTextFont = null;
 
-  //region Main Menu Resources
+  //region Main Menu Resources32
   private BitmapFont mSharedFont;
+  private BitmapFont mLargeSharedFont;
   public Label.LabelStyle MainMenuGameTitleStyle;
+  public Label.LabelStyle MainMenuGameTitleStyleBig;
   public Skin MainMenuButtonSkin;
   //endregion
 
   public void loadMenuResources() {
-//    mSharedFont = new BitmapFont(Gdx.files.internal("font/PW403.fnt"), false);
-    mSharedFont = new BitmapFont(Gdx.files.internal("font/lovepop.fnt"));
+    SmartFontGenerator fontGenerator = new SmartFontGenerator();
+
+    FileHandle titleMenuFontFile = Gdx.files.internal("font/lovepop.ttf");
+    mSharedFont = fontGenerator.createFont(titleMenuFontFile, "titlemenu", 36);
+    mLargeSharedFont = fontGenerator.createFont(titleMenuFontFile, "titlemenularge", 64);
+
     MainMenuGameTitleStyle = new Label.LabelStyle(mSharedFont, Color.CYAN);
+    MainMenuGameTitleStyleBig = new Label.LabelStyle(mLargeSharedFont, Color.CYAN);
 
     // Sets the background of the Text Button - must be set
     Pixmap backgroundTexture = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
@@ -48,16 +55,17 @@ public class FontResourceManager {
 
   public void unloadMenuResources() {
     mSharedFont.dispose();
+    mLargeSharedFont.dispose();
     MainMenuButtonSkin.dispose();
   }
 
   public void loadSharedResources() {
     SmartFontGenerator fontGenerator = new SmartFontGenerator();
-    FileHandle fontConversation = Gdx.files.local("AGENCYR.TTF");
+    FileHandle fontConversation = Gdx.files.local("font/AGENCYR.TTF");
+    FileHandle japaneseFontConversation = Gdx.files.local("font/07YasashisaAntique.ttf");
 
     englishTextFont = fontGenerator.createFont(fontConversation, "conversation", 24);
-    //englishTextFont = new BitmapFont(Gdx.files.local("font/Agency24.fnt"));
-    japaneseTextFont = new BitmapFont(Gdx.files.internal("font/moreJapanese.fnt"));
+    japaneseTextFont = fontGenerator.createFont(japaneseFontConversation, "japanese_conversation", 24);
 
     if (HcLocale.getCurrentLocale() == HcLocale.Locale.EN) {
       conversationFont = englishTextFont;

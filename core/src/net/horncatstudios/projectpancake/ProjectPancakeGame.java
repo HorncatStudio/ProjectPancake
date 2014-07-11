@@ -1,6 +1,7 @@
 package net.horncatstudios.projectpancake;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import net.horncatstudios.gameengine.ResourceManager;
 import net.horncatstudios.gameengine.ScreenManager;
@@ -14,14 +15,15 @@ public class ProjectPancakeGame extends Game {
   public void create() {
     batch = new SpriteBatch();
 
-    HcLocale.setLocale(HcLocale.Locale.EN);
+    Gdx.app.setLogLevel(Gdx.app.LOG_DEBUG);
+    HcLocale.setLocale(HcLocale.Locale.JP);
 
     resourceManager = resourceManager.getInstance();
     resourceManager.prepareManager(this);
     resourceManager.prepareSharedResources();
 
     ScreenManager.getInstance().prepareSceneManager(this);
-    ScreenManager.getInstance().setScene(ScreenManager.ScreenType.CONVERSATION);
+    ScreenManager.getInstance().setScene(ScreenManager.ScreenType.SPLASH);
   }
 
   @Override

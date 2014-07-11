@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import net.horncatstudios.projectpancake.FontResourceManager;
+import net.horncatstudios.projectpancake.HcLocale;
 import net.horncatstudios.projectpancake.ProjectPancakeMenuActions;
 
 import java.util.ArrayList;
@@ -39,14 +40,20 @@ public class MainMenu implements InputProcessor {
 
     this.mStage = new Stage();
 
-    this.mTitleLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("Project", fontManager.MainMenuGameTitleStyle);
-//   this.mTitleLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("ぷろじぇくと", fontManager.MainMenuGameTitleStyle);
+    if (HcLocale.getCurrentLocale() == HcLocale.Locale.EN) {
+      this.mTitleLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("Project", fontManager.MainMenuGameTitleStyle);
+    } else {
+      this.mTitleLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("縺ｷ繧阪§縺�縺上→", fontManager.MainMenuGameTitleStyle);
+    }
     this.mTitleLabel.setFontScale(1f);
     this.mTitleLabel.setAlignment(Align.center | Align.bottom);
 
-    this.mSubTitleLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("PANCAKE", fontManager.MainMenuGameTitleStyle);
-//    this.mSubTitleLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("パンケーキ", fontManager.MainMenuGameTitleStyle);
-    this.mSubTitleLabel.setFontScale(2f);
+    if (HcLocale.getCurrentLocale() == HcLocale.Locale.EN) {
+      this.mSubTitleLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("PANCAKE", fontManager.MainMenuGameTitleStyleBig);
+    } else {
+      this.mSubTitleLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("繝代Φ繧ｱ繝ｼ繧ｭ", fontManager.MainMenuGameTitleStyleBig);
+    }
+
     //! Note: Angelina -
     //! Aligning to the bottom actually makes it align to the top of the cell for the label
     this.mSubTitleLabel.setAlignment(Align.bottom);
@@ -73,8 +80,12 @@ public class MainMenu implements InputProcessor {
     table.row();
 
     // register the button "start game"
-    TextButton startGameButton = new TextButton("Start game", fontManager.MainMenuButtonSkin);
-//    TextButton startGameButton = new TextButton("すたーと", fontManager.MainMenuButtonSkin);
+    TextButton startGameButton = null;
+    if (HcLocale.getCurrentLocale() == HcLocale.Locale.EN) {
+      startGameButton = new TextButton("Start game", fontManager.MainMenuButtonSkin);
+    } else {
+      startGameButton = new TextButton("縺吶◆繝ｼ縺ｨ", fontManager.MainMenuButtonSkin);
+    }
     startGameButton.addListener(new ClickListener() {
       @Override
       public void clicked(InputEvent event, float x, float y) {
@@ -82,20 +93,24 @@ public class MainMenu implements InputProcessor {
       }
     });
 
-    table.add(startGameButton)/*.size(100, 60)*/.uniform();
+    table.add(startGameButton).uniform();
     this.mMenuOptions.add(startGameButton);
     table.row();
 
     // register the button "quit game" - leaving with clicked as an example of using both
-    TextButton quitGameButton = new TextButton("Quit game", fontManager.MainMenuButtonSkin);
-//    TextButton quitGameButton = new TextButton("ヤメル", fontManager.MainMenuButtonSkin);
+    TextButton quitGameButton = null;
+    if (HcLocale.getCurrentLocale() == HcLocale.Locale.EN) {
+      quitGameButton = new TextButton("Quit game", fontManager.MainMenuButtonSkin);
+    } else {
+      quitGameButton = new TextButton("繝､繝｡繝ｫ", fontManager.MainMenuButtonSkin);
+    }
     quitGameButton.addListener(new ClickListener() {
       @Override
       public void clicked(InputEvent event, float x, float y) {
         mMenuActions.QuitGame();
       }
     });
-    table.add(quitGameButton)/*.size(375, 60)*/.uniform();
+    table.add(quitGameButton).uniform();
     this.mMenuOptions.add(quitGameButton);
     table.row();
 
@@ -145,7 +160,7 @@ public class MainMenu implements InputProcessor {
 
   private void triggerMenuSelection() {
     TextButton button = currentButtonSelected();
-    if (button.getText().toString().contains("Start game") || button.getText().toString().contains("すたーと"))
+    if (button.getText().toString().contains("Start game") || button.getText().toString().contains("縺吶◆繝ｼ縺ｨ"))
       mMenuActions.StartGame();
     else
       mMenuActions.QuitGame();

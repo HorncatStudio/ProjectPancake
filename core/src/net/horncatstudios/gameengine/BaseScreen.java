@@ -17,7 +17,7 @@ public abstract class BaseScreen implements IHcScreen {
     this.mGame = this.resourcesManager.mGame;
 
     camera = new OrthographicCamera();
-    camera.setToOrtho(false, 640, 480);
+    camera.setToOrtho(false, 800, 600);
 
     createScene();
   }

@@ -8,18 +8,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import net.horncatstudios.conversationengine.Response;
 import net.horncatstudios.conversationengine.State;
-import net.horncatstudios.toolkit.HcString;
-import net.horncatstudios.toolkit.Point;
 
-import javax.xml.soap.Text;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,29 +23,16 @@ import java.util.List;
  */
 public class ConversationWidget {
 
-  //region oldimplementation
-  public Label mCharacterName;
-
-  public TalkingLabel mStateLabel;
-
-  public Label mResponseALabel;
-  public Label mResponseBLabel;
-  public Label mResponseCLabel;
-
-  private List<Label> mResponceWidgets;
-
   private State mCurrentState;
 
   private int mCurrentSelectedIndex;
 
   private StateChangeListener mStateListener;
-  private int mTopOfCharacterName;
-  private int mWidth;
-  private int mHeight;
-  private int mFontHeight;
-  //endregion
 
-  //region new implementation
+  private int mWidth;
+  private int mBackgroundHeight;
+  private int mFontHeight;
+
   public Texture mCharacterNameBackround;
   public Texture mBackground;
 
@@ -63,7 +45,6 @@ public class ConversationWidget {
 
   private Stage mStage;
   private BitmapFont mFont;
-  //endregion
 
   /**
    * Constructor that registers a StateChangeListener.  Enables actions to be selected
@@ -72,12 +53,32 @@ public class ConversationWidget {
    */
 
   public ConversationWidget(StateChangeListener listener, BitmapFont font, OrthographicCamera camera, SpriteBatch batch) {
-    this(listener);
+    this(listener, font, camera, batch, null);
+  }
+
+  public ConversationWidget(StateChangeListener listener, BitmapFont font, OrthographicCamera camera, SpriteBatch batch, Texture background) {
+
+    mStateListener = listener;
+    this.mCurrentSelectedIndex = 0;
+    mFontHeight = 24;
+
+    this.mWidth = (int) camera.viewportWidth;
+    this.mBackgroundHeight = (int) camera.viewportHeight / 8;
+
+    if (null == background) {
+      Pixmap backgroundTexture = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+      backgroundTexture.setColor(Color.BLACK);
+      backgroundTexture.fill();
+      mBackground = new Texture(backgroundTexture);
+
+      mCharacterNameBackround = new Texture(backgroundTexture);
+    }
+
     this.mFont = font;
     this.mFontHeight = (int) this.mFont.getLineHeight();
 
     this.mStage = new Stage(new ScreenViewport(camera), batch);
-    this.mStage.getViewport().update((int) (camera.viewportWidth), (int) (camera.viewportHeight), false);
+    //this.mStage.getViewport().update((int) (camera.viewportWidth), (int) (camera.viewportHeight), false);
 
     Table tableLayout = new Table();
     tableLayout.debug();
@@ -132,30 +133,6 @@ public class ConversationWidget {
     this.mStage.addActor(tableLayout);
   }
 
-  private ConversationWidget(StateChangeListener listener) {
-    this(listener, 800, 150, null);
-  }
-
-  private ConversationWidget(StateChangeListener listener, int width, int height, Texture background) {
-
-    mStateListener = listener;
-    this.mCurrentSelectedIndex = 0;
-    mFontHeight = 24;
-
-    this.mWidth = width;
-    this.mHeight = height;
-
-    if( null == background )
-    {
-      Pixmap backgroundTexture = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-      backgroundTexture.setColor(Color.BLACK);
-      backgroundTexture.fill();
-      mBackground = new Texture(backgroundTexture);
-
-      mCharacterNameBackround = new Texture(backgroundTexture);
-    }
-  }
-
   public void setState(State state) {
     if (null == state)
       return;
@@ -174,12 +151,12 @@ public class ConversationWidget {
     setSelectedIndex(0);
   }
 
-  public void draw(SpriteBatch batch, float timeDelta ) {
+  public void draw(SpriteBatch batch, float timeDelta) {
     Color oldColor = batch.getColor();
 
     batch.setColor(oldColor.r, oldColor.g, oldColor.b, .6f);
-    batch.draw(this.mBackground, 0, 0, this.mWidth, this.mHeight);
-    batch.draw(this.mCharacterNameBackround, 0, this.mHeight  , this.mWidth/10, this.mFontHeight + 3 );
+    batch.draw(this.mBackground, 0, 0, this.mWidth, this.mBackgroundHeight);
+    batch.draw(this.mCharacterNameBackround, 0, this.mBackgroundHeight, this.mWidth / 10, this.mFontHeight + 3);
     batch.setColor(oldColor);
 
     this.mTalkingLabelDecorator.draw(timeDelta);
