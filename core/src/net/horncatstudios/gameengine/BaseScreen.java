@@ -1,5 +1,6 @@
 package net.horncatstudios.gameengine;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -17,7 +18,12 @@ public abstract class BaseScreen implements IHcScreen {
     this.mGame = this.resourcesManager.mGame;
 
     camera = new OrthographicCamera();
-    camera.setToOrtho(false, 800, 600);
+
+    if (Gdx.graphics.getWidth() > 800) {
+      camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    } else {
+      camera.setToOrtho(false, 800, 600);
+    }
 
     createScene();
   }

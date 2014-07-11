@@ -20,6 +20,11 @@ public class ProjectPancakeGame extends Game {
 
     resourceManager = resourceManager.getInstance();
     resourceManager.prepareManager(this);
+
+    if (Gdx.graphics.getWidth() > 800) {
+      resourceManager.fontManager.setOuyaSizeForFonts();
+    }
+
     resourceManager.prepareSharedResources();
 
     ScreenManager.getInstance().prepareSceneManager(this);

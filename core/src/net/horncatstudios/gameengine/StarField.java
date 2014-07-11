@@ -1,8 +1,10 @@
 package net.horncatstudios.gameengine;
 
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import net.horncatstudios.toolkit.Point;
 
@@ -19,7 +21,7 @@ public class StarField {
     public int Y = 0;
     public int Size = 0;
 
-    private int mMaxSize = 3;
+    private int mMaxSize = 5;
 
     private Random mRandom;
 
@@ -54,10 +56,11 @@ public class StarField {
   private ShapeRenderer shapeRenderer = new ShapeRenderer();
   private Random random = new Random();
 
-  private final int numberOfStars = 500;
+  private int numberOfStars;
   private final int maxStarSize = 2;
   private final int minStarSize = 0;
-  private final int starFieldLength = 610;
+  private int starFieldLength = 610;
+  private int starFieldHeight = 610;
 
   private final int frequency = 10;
   private int frequencyCounter = 1;
@@ -65,9 +68,29 @@ public class StarField {
   Star[] stars = null;
 
 
+  public StarField(OrthographicCamera camera) {
+    shapeRenderer.setColor(Color.WHITE);
+    starFieldLength = (int) camera.viewportWidth;
+    starFieldHeight = (int) camera.viewportHeight;
+
+    if (starFieldLength > 800) {
+      numberOfStars = 1500;
+    } else {
+      numberOfStars = 500;
+    }
+
+    stars = new Star[numberOfStars];
+
+    createStars();
+  }
+
   public StarField() {
     shapeRenderer.setColor(Color.WHITE);
     stars = new Star[numberOfStars];
+    createStars();
+  }
+
+  private void createStars() {
     int starSizeRange = maxStarSize - minStarSize;
 
     for (int index = 0; index < numberOfStars; index++) {
@@ -78,6 +101,7 @@ public class StarField {
       stars[index].Size = random.nextInt(starSizeRange) + (minStarSize);
     }
   }
+
 
   public void draw(Camera camera) {
 

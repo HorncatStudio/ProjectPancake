@@ -28,12 +28,22 @@ public class FontResourceManager {
   public Skin MainMenuButtonSkin;
   //endregion
 
+  private int superLargeFontSize = 64;
+  private int largeFontSize = 36;
+  private int mediumFontSize = 24;
+
+  public void setOuyaSizeForFonts() {
+    superLargeFontSize = superLargeFontSize * 2;
+    largeFontSize = largeFontSize * 2;
+    mediumFontSize = mediumFontSize * 2;
+  }
+
   public void loadMenuResources() {
     SmartFontGenerator fontGenerator = new SmartFontGenerator();
 
     FileHandle titleMenuFontFile = Gdx.files.internal("font/lovepop.ttf");
-    mSharedFont = fontGenerator.createFont(titleMenuFontFile, "titlemenu", 36);
-    mLargeSharedFont = fontGenerator.createFont(titleMenuFontFile, "titlemenularge", 64);
+    mSharedFont = fontGenerator.createFont(titleMenuFontFile, "titlemenu", largeFontSize);
+    mLargeSharedFont = fontGenerator.createFont(titleMenuFontFile, "titlemenularge", superLargeFontSize);
 
     MainMenuGameTitleStyle = new Label.LabelStyle(mSharedFont, Color.CYAN);
     MainMenuGameTitleStyleBig = new Label.LabelStyle(mLargeSharedFont, Color.CYAN);
@@ -61,11 +71,11 @@ public class FontResourceManager {
 
   public void loadSharedResources() {
     SmartFontGenerator fontGenerator = new SmartFontGenerator();
-    FileHandle fontConversation = Gdx.files.local("font/AGENCYR.TTF");
-    FileHandle japaneseFontConversation = Gdx.files.local("font/07YasashisaAntique.ttf");
+    FileHandle fontConversation = Gdx.files.internal("font/AGENCYR.TTF");
+    FileHandle japaneseFontConversation = Gdx.files.internal("font/07YasashisaAntique.ttf");
 
-    englishTextFont = fontGenerator.createFont(fontConversation, "conversation", 24);
-    japaneseTextFont = fontGenerator.createFont(japaneseFontConversation, "japanese_conversation", 24);
+    englishTextFont = fontGenerator.createFont(fontConversation, "conversation", mediumFontSize);
+    japaneseTextFont = fontGenerator.createFont(japaneseFontConversation, "japanese_conversation", mediumFontSize);
 
     if (HcLocale.getCurrentLocale() == HcLocale.Locale.EN) {
       conversationFont = englishTextFont;

@@ -13,14 +13,13 @@ import net.horncatstudios.gameengine.StarField;
  */
 public class MainMenuScreen extends BaseScreen implements ProjectPancakeMenuActions {
 
-  StarField stars = new StarField();
+  StarField stars;
   MainMenu mMenu;
 
-  public MainMenuScreen() {
-  }
 
   @Override
   public void createScene() {
+    stars = new StarField(this.camera);
     mMenu = new MainMenu(resourcesManager.fontManager, this);
     Gdx.input.setInputProcessor(mMenu);
   }
