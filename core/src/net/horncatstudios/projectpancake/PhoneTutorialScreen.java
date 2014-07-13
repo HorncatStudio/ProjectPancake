@@ -46,7 +46,11 @@ public class PhoneTutorialScreen extends BaseScreen implements StateChangeListen
         this.camera, this.mGame.batch);
     this.mConversation = new Conversation();
 
-    loadPhoneTutorialTalking(true);
+    if (HcLocale.getCurrentLocale() == HcLocale.Locale.EN) {
+      loadPhoneTutorialTalking(true);
+    } else {
+      loadJapanesePhoneTutorialTalking(true);
+    }
 
 //    this.mConversationWidget.setState(this.mConversation.ConversationStates.get(0));
     Gdx.input.setInputProcessor(this);
@@ -147,6 +151,57 @@ public class PhoneTutorialScreen extends BaseScreen implements StateChangeListen
     this.mConversation.ConversationStates.add(state4);
   }
 
+  private void loadJapanesePhoneTutorialTalking(boolean explain) {
+    State state4 = new State("俺の番号やるよ。俺は優しいからな。退屈になったら俺のブログでも読めよ。深いこと書いてるぜ。");
+    state4.CustomEvent = DORIAN_ADD_CONTACT_INFO;
+
+    if (explain) {
+      State state1 = new State("まず最初に、携帯があれば何でもできる。");
+      State state2 = new State("ゲームしたり、友達にメッセージしたり、世界情勢を知ることだってできる。");
+      State state3 = new State("ここでは皆[ソーシャルメディア名]を使ってる。だから知り合いが増えるたびに友達申請が来るかもな？");
+
+      state1.Responses.add(new Response("", state2));
+      state2.Responses.add(new Response("", state3));
+      state3.Responses.add(new Response("", state4));
+
+      this.mConversation.ConversationStates.add(state1);
+      this.mConversation.ConversationStates.add(state1);
+      this.mConversation.ConversationStates.add(state3);
+    }
+
+
+    State state5 = new State("基本的に全ての更新内容を閲覧可能だ。もし俺や他の友達の場所を知りたいなら、小まめにチェックすることだな。");
+    State state6 = new State("「探し回る」なんてことしたくないだろ？");
+
+    State stage7 = new State("メッセージをする時は・・・");
+    stage7.CustomEvent = SHOW_CALENDAR;
+
+
+    State state9 = new State("ゲームはほとんどどこでもできる。だから人付き合いに疲れたなって時には思う存分ゲームで晴らしてやればいい。");
+    State state10 = new State("[シンボルorマーカー]がゲームの目印だ。");
+    State state11 = new State("疲れてきたんじゃないか？いいタイミングだから[エナジー/体力]について話しておこう。");
+    State state12 = new State("ゲーム内では毎日ある一定量の体力が与えられる。いくら体力が残ってるかはゲーム内の時計を見れば分かる。");
+    State state13 = new State("時間が過ぎれば体力も減っていく。また誰かと会ったりすると一定量の体力が削られる。");
+    State state14 = new State("家に帰り寝ると次の日が始まる。");
+    State state15 = new State("遅くまで起きている事もできるが、寝過ごしたり学校を休んだりしてしまうこともあるので、するなら自己責任でな。");
+    State state16 = new State("まぁやりたければやってみればいいさ。");
+
+    state4.Responses.add(new Response("", state5));
+    state5.Responses.add(new Response("", state6));
+    state6.Responses.add(new Response("", stage7));
+
+    stage7.Responses.add(new Response("", state9));
+    state9.Responses.add(new Response("", state10));
+    state10.Responses.add(new Response("", state11));
+    state11.Responses.add(new Response("", state12));
+    state12.Responses.add(new Response("", state13));
+    state13.Responses.add(new Response("", state14));
+    state14.Responses.add(new Response("", state15));
+    state15.Responses.add(new Response("", state16));
+    state16.Responses.add(new Response("", null));
+
+    this.mConversation.ConversationStates.add(state4);
+  }
 
   @Override
   public void render(float delta) {

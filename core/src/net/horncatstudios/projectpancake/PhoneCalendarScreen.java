@@ -22,7 +22,31 @@ public class PhoneCalendarScreen extends ChildScreen implements StateChangeListe
         this.camera, this.mGame.batch);
     this.mConversation = new Conversation();
 
-    State state = new State("People's birthdays and stuff pop up took, so you've got no excuse to miss a birthday.");
+    if (HcLocale.getCurrentLocale() == HcLocale.Locale.EN) {
+      State state = new State("People's birthdays and stuff pop up took, so you've got no excuse to miss a birthday.");
+      State state2 = new State("Hint, hint");
+
+      state.Responses.add(new Response("", state2));
+      state2.Responses.add(new Response("", null));
+
+      this.mConversation.ConversationStates.add(state);
+      this.mConversation.ConversationStates.add(state2);
+
+      this.mConversationWidget.setState(state);
+    } else {
+      State state = new State("友達の誕生日といったものもポップアップされる。だからそいつの誕生日を知らなかったなんてことは起こらないはずだな？");
+      State state2 = new State("忘れてたなんてのは理由にならないから気を付けとけよ。");
+
+      state.Responses.add(new Response("", state2));
+      state2.Responses.add(new Response("", null));
+
+      this.mConversation.ConversationStates.add(state);
+      this.mConversation.ConversationStates.add(state2);
+
+      this.mConversationWidget.setState(state);
+    }
+
+    /*State state = new State("People's birthdays and stuff pop up took, so you've got no excuse to miss a birthday.");
     State state2 = new State("Hint, hint");
 
     state.Responses.add(new Response("", state2));
@@ -31,7 +55,7 @@ public class PhoneCalendarScreen extends ChildScreen implements StateChangeListe
     this.mConversation.ConversationStates.add(state);
     this.mConversation.ConversationStates.add(state2);
 
-    this.mConversationWidget.setState(state);
+    this.mConversationWidget.setState(state);*/
   }
 
   @Override

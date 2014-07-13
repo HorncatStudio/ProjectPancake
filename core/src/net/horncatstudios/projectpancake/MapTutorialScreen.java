@@ -27,6 +27,12 @@ public class MapTutorialScreen extends BaseScreen implements StateChangeListener
         this.camera, this.mGame.batch);
     this.mConversation = new Conversation();
 
+    if (HcLocale.getCurrentLocale() == HcLocale.Locale.EN) {
+      loadMapTutorialTalking();
+    } else {
+      loadJapaneseMapTutorialTalking();
+    }
+
     loadMapTutorialTalking();
 
     this.mConversationWidget.setState(this.mConversation.ConversationStates.get(0));
@@ -53,6 +59,30 @@ public class MapTutorialScreen extends BaseScreen implements StateChangeListener
 
     state2.Responses.add(new Response("Yes", state3));
     state2.Responses.add(new Response("No", state4));
+
+    state3.Responses.add(new Response("", null));
+    state4.Responses.add(new Response("", null));
+
+    this.mConversation.ConversationStates.add(state1);
+    this.mConversation.ConversationStates.add(state1);
+    this.mConversation.ConversationStates.add(state3);
+    this.mConversation.ConversationStates.add(state4);
+  }
+
+  private void loadJapaneseMapTutorialTalking() {
+    State state1 = new State("これが町の全体図だ。いつでも携帯メニューからアクセスできる。行きたい場所をセレクトすればそこに行ける。");
+    State state2 = new State("携帯の使い方は知ってるよな？");
+
+    state1.Responses.add(new Response("", state2));
+
+    State state3 = new State("よし、手間が省けたな。");
+    state3.CustomEvent = this.EXPLAIN_PHONE_TUTORIAL;
+
+    State state4 = new State("おいおい、マニュアル読めよ。まぁいい、説明してやるからよく聞けよ？");
+    state4.CustomEvent = this.NO_EXPLAIN_PHONE_TUTORIAL;
+
+    state2.Responses.add(new Response("はい", state3));
+    state2.Responses.add(new Response("いいえ", state4));
 
     state3.Responses.add(new Response("", null));
     state4.Responses.add(new Response("", null));
