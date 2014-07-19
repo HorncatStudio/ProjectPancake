@@ -22,7 +22,7 @@ public class SmartFontGenerator {
   // TODO figure out optimal page size automatically
   private int pageSize;
 
-  public static final String PROJECT_PANCAKE_DEFAULT_CHARS = "理由忘自己責任休事遅次寝帰家削会誰減過計残与一定量毎力印晴存分疲付時探小他閲覧可能更容的基来申請増合皆世界情勢最初深読優番号起誕生日友達聞省手間方使場所携帯全体図切隠出滲戻訳無住発馬鹿以上始感盗同居弾行店売本必死止目覚中頭当退屈回見町地味光栄非常堂々授業案内前学校言葉知謙虚ぜずばぷじぇぱぁぼだでごがぞゃどびエナタイミボカゲムチェソシャデブログパンケキコヒウクレトｩィアリオラマジニュセスポップっ思話俺何元気新人、？。・あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんーヤメル「」ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!?'.,;:()[]{}<>|/@$-%+=";
+  public static final String PROJECT_PANCAKE_DEFAULT_CHARS = "ド理由忘自己責任休事遅次寝帰家削会誰減過計残与一定量毎力印晴存分疲付時探小他閲覧可能更容的基来申請増合皆世界情勢最初深読優番号起誕生日友達聞省手間方使場所携帯全体図切隠出滲戻訳無住発馬鹿以上始感盗同居弾行店売本必死止目覚中頭当退屈回見町地味光栄非常堂々授業案内前学校言葉知謙虚ぜずばぷじぇぱぁぼだでごがぞゃどびエナタイミボカゲムチェソシャデブログパンケキコヒウクレトｩィアリオラマジニュセスポップっ思話俺何元気新人、？。・あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんーヤメル「」ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!?'.,;:()[]{}<>|/@$-%+=";
 //  public static final String PROJECT_PANCAKE_DEFAULT_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!?'.,;:()[]{}<>|/@$-%+=";
 
   public SmartFontGenerator() {

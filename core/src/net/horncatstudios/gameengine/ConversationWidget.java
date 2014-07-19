@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import net.horncatstudios.conversationengine.Response;
 import net.horncatstudios.conversationengine.State;
+import net.horncatstudios.projectpancake.HcLocale;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,9 +64,6 @@ public class ConversationWidget {
     this.mCurrentSelectedIndex = 0;
     mFontHeight = 24;
 
-    this.mWidth = (int) camera.viewportWidth;
-    this.mBackgroundHeight = (int) camera.viewportHeight / 8;
-
     if (null == background) {
       Pixmap backgroundTexture = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
       backgroundTexture.setColor(Color.BLACK);
@@ -94,7 +93,12 @@ public class ConversationWidget {
     difStyle.font = this.mFont;
 
     com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle labelStyle = new com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle(mFont, Color.WHITE);
-    this.mCharacterNameLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("Dorian", labelStyle);
+    if (HcLocale.getCurrentLocale() == HcLocale.Locale.JP) {
+      this.mCharacterNameLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("ドリアン", labelStyle);
+    } else {
+      this.mCharacterNameLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("Dorian", labelStyle);
+    }
+
     this.mCharacterNameLabel.setWidth(this.mWidth);
     this.mCharacterNameLabel.setWrap(true);
     this.mCharacterNameLabel.setWidth(this.mWidth);
@@ -131,6 +135,11 @@ public class ConversationWidget {
     tableLayout.pad(5);
 
     this.mStage.addActor(tableLayout);
+
+    this.mWidth = (int) camera.viewportWidth;
+
+    //! todo - refactor this to not rely on the magic numbers in the future
+    this.mBackgroundHeight = (int) (camera.viewportHeight / 4.7);
   }
 
   public void setState(State state) {
@@ -156,7 +165,7 @@ public class ConversationWidget {
 
     batch.setColor(oldColor.r, oldColor.g, oldColor.b, .6f);
     batch.draw(this.mBackground, 0, 0, this.mWidth, this.mBackgroundHeight);
-    batch.draw(this.mCharacterNameBackround, 0, this.mBackgroundHeight, this.mWidth / 10, this.mFontHeight + 3);
+    batch.draw(this.mCharacterNameBackround, 0, this.mBackgroundHeight, (float) (this.mWidth / 7.8), this.mFontHeight + 3);
     batch.setColor(oldColor);
 
     this.mTalkingLabelDecorator.draw(timeDelta);
