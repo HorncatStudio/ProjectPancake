@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
@@ -122,7 +123,7 @@ public class ConversationWidget {
       response.getLabel().setWrap(true);
     }
 
-    tableLayout.add(this.mCharacterNameLabel).width(this.mWidth).height(this.mFontHeight).left();
+    Cell nameCell = tableLayout.add(this.mCharacterNameLabel).width(this.mWidth).height(this.mFontHeight).left();
     tableLayout.row().expand();
     tableLayout.row();
     tableLayout.add(this.mStateTextLabel).width(this.mWidth).height(this.mFontHeight * 2).left();
@@ -138,8 +139,11 @@ public class ConversationWidget {
 
     this.mWidth = (int) camera.viewportWidth;
 
-    //! todo - refactor this to not rely on the magic numbers in the future
-    this.mBackgroundHeight = (int) (camera.viewportHeight / 4.7);
+    //! note - must force the table to "validate" in order to determine sizing and positions for each of the labels
+    //!        Once validated, can pull the physical position of the character label to determine the height of the
+    //!        background for the widget.
+    tableLayout.validate();
+    this.mBackgroundHeight = (int) (mCharacterNameLabel.getY());
   }
 
   public void setState(State state) {

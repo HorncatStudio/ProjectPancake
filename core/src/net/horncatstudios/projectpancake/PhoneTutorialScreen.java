@@ -55,14 +55,14 @@ public class PhoneTutorialScreen extends BaseScreen implements StateChangeListen
 //    this.mConversationWidget.setState(this.mConversation.ConversationStates.get(0));
     Gdx.input.setInputProcessor(this);
 
-    mRectangleSprite = new RectangleSprite(50.0f, 0.0f, 300.0f, camera.viewportHeight, 2.0f);
-    mRectangleSprite.setCenter(camera.viewportWidth/2f, camera.viewportHeight/2f);
+    mRectangleSprite = new RectangleSprite(50.0f, 0.0f, camera.viewportWidth / 2, camera.viewportHeight, 2.0f);
+    mRectangleSprite.setCenter(camera.viewportWidth / 2f, camera.viewportHeight / 2f);
 
     mPhoneStageViewport = new FitViewport(camera.viewportWidth, camera.viewportHeight, camera);
     mPhoneStage = new Stage(mPhoneStageViewport, this.mGame.batch);
     Table tableLayout = new Table();
     tableLayout.debug();
-     tableLayout.setFillParent(true);
+    tableLayout.setFillParent(true);
     this.mPhoneStage.addActor(tableLayout);
 
     mContactsButton = new ImageTextButton("Contacts", resourcesManager.contactsStyle);
@@ -86,7 +86,7 @@ public class PhoneTutorialScreen extends BaseScreen implements StateChangeListen
 
     tableLayout.top();
 
-    this.mConversationWidget.setState( mConversation.ConversationStates.get(0) );
+    this.mConversationWidget.setState(mConversation.ConversationStates.get(0));
   }
 
   @Override
@@ -286,17 +286,14 @@ public class PhoneTutorialScreen extends BaseScreen implements StateChangeListen
 
   @Override
   public void show() {
-
   }
 
   @Override
   public void hide() {
-
   }
 
   @Override
   public void pause() {
-
   }
 
   @Override
@@ -306,7 +303,6 @@ public class PhoneTutorialScreen extends BaseScreen implements StateChangeListen
 
   @Override
   public void dispose() {
-
   }
 
 
