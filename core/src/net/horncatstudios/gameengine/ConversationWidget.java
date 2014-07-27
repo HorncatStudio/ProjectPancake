@@ -100,6 +100,9 @@ public class ConversationWidget {
       this.mCharacterNameLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("Dorian", labelStyle);
     }
 
+    //! Adding a smidge of padding so that the word wrapping wont overlap with the side of the screen
+    this.mWidth = (int) camera.viewportWidth - 1;
+
     this.mCharacterNameLabel.setWidth(this.mWidth);
     this.mCharacterNameLabel.setWrap(true);
     this.mCharacterNameLabel.setWidth(this.mWidth);
@@ -123,7 +126,7 @@ public class ConversationWidget {
       response.getLabel().setWrap(true);
     }
 
-    Cell nameCell = tableLayout.add(this.mCharacterNameLabel).width(this.mWidth).height(this.mFontHeight).left();
+    tableLayout.add(this.mCharacterNameLabel).width(this.mWidth).height(this.mFontHeight).left();
     tableLayout.row().expand();
     tableLayout.row();
     tableLayout.add(this.mStateTextLabel).width(this.mWidth).height(this.mFontHeight * 2).left();
@@ -136,8 +139,6 @@ public class ConversationWidget {
     tableLayout.pad(5);
 
     this.mStage.addActor(tableLayout);
-
-    this.mWidth = (int) camera.viewportWidth;
 
     //! note - must force the table to "validate" in order to determine sizing and positions for each of the labels
     //!        Once validated, can pull the physical position of the character label to determine the height of the

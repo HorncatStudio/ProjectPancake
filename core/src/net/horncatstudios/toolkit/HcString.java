@@ -11,17 +11,21 @@ public class HcString {
 
   private HashMap<HcLocale.Locale, String> mText;
 
-  public HcString(final String text)   {
-    mText = new HashMap<HcLocale.Locale, String>();
-    mText.put(HcLocale.Locale.EN, text);
+  public HcString(final String text) {
+    this(HcLocale.Locale.EN, text);
   }
 
-  public HcString(final HcLocale.Locale hcLocale, final String text)   {
+  public HcString(final String englishText, final String japaneseText) {
+    this(HcLocale.Locale.EN, englishText);
+    this.add(HcLocale.Locale.JP, japaneseText);
+  }
+
+  public HcString(final HcLocale.Locale hcLocale, final String text) {
     mText = new HashMap<HcLocale.Locale, String>();
     mText.put(hcLocale, text);
   }
 
-  public String getText()  {
+  public String getText() {
     return mText.get(HcLocale.getCurrentLocale());
   }
 

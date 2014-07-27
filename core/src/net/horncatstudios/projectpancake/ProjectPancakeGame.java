@@ -28,7 +28,7 @@ public class ProjectPancakeGame extends Game {
     resourceManager.prepareSharedResources();
 
     ScreenManager.getInstance().prepareSceneManager(this);
-    ScreenManager.getInstance().setScene(ScreenManager.ScreenType.SPLASH);
+    ScreenManager.getInstance().setScene(ScreenManager.ScreenType.MAP_TUTORIAL);
   }
 
   @Override

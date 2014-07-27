@@ -28,6 +28,10 @@ public class FontResourceManager {
   public Skin MainMenuButtonSkin;
   //endregion
 
+  //region Location Map Resources
+  public TextButton.TextButtonStyle LocationMenuStyle;
+  //endregion
+
   private int superLargeFontSize = 64;
   private int largeFontSize = 36;
   private int mediumFontSize = 24;
@@ -67,6 +71,14 @@ public class FontResourceManager {
     mSharedFont.dispose();
     mLargeSharedFont.dispose();
     MainMenuButtonSkin.dispose();
+  }
+
+  public void loadLocationMenuResources() {
+    LocationMenuStyle = new TextButton.TextButtonStyle();
+    LocationMenuStyle.checkedFontColor = Color.BLACK;
+    LocationMenuStyle.disabledFontColor = Color.LIGHT_GRAY;
+    LocationMenuStyle.fontColor = Color.DARK_GRAY;
+    LocationMenuStyle.font = conversationFont;
   }
 
   public void loadSharedResources() {

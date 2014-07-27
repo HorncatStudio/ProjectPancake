@@ -108,9 +108,22 @@ public class ResourceManager {
 
   //region Map Tutorial Resources
   public Texture worldMap;
+  public TextureRegionDrawable menuBackground;
+  public Texture menuBackgroundTexture;
 
   public void loadMapTutorialResources() {
     worldMap = new Texture(Gdx.files.internal("world-map-pokemon.png"));
+    fontManager.loadLocationMenuResources();
+
+
+    Pixmap backgroundTexture = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+    backgroundTexture.setColor(Color.WHITE);
+    backgroundTexture.fill();
+
+    menuBackgroundTexture = new Texture(backgroundTexture);
+
+    TextureRegion backgroundRegion = new TextureRegion(menuBackgroundTexture);
+    menuBackground = new TextureRegionDrawable(backgroundRegion);
   }
 
   public void unloadMapTutorialResources() {

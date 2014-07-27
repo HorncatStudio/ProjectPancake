@@ -2,13 +2,17 @@ package net.horncatstudios.projectpancake;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import net.horncatstudios.conversationengine.Conversation;
 import net.horncatstudios.conversationengine.Response;
 import net.horncatstudios.conversationengine.State;
-import net.horncatstudios.gameengine.BaseScreen;
-import net.horncatstudios.gameengine.ConversationWidget;
-import net.horncatstudios.gameengine.ScreenManager;
-import net.horncatstudios.gameengine.StateChangeListener;
+import net.horncatstudios.gameengine.*;
+import net.horncatstudios.toolkit.HcString;
 
 /**
  * Created by Angelina on 7/3/2014.
@@ -18,14 +22,76 @@ public class MapTutorialScreen extends BaseScreen implements StateChangeListener
   ConversationWidget mConversationWidget;
   Conversation mConversation;
 
+  private Stage mStage;
+
   private static final String EXPLAIN_PHONE_TUTORIAL = "Explain";
   private static final String NO_EXPLAIN_PHONE_TUTORIAL = "NoExplain";
+
+  TextButton mHomeTextButton;
+  TextButton mSchoolTextButton;
+  TextButton mMallTextButton;
+  TextButton mParkMenuButton;
+  TextButton mCoffeeShopButton;
+
+  Cell mBottomCell;
 
   @Override
   public void createScene() {
     this.mConversationWidget = new ConversationWidget(this, resourcesManager.fontManager.conversationFont,
         this.camera, this.mGame.batch);
     this.mConversation = new Conversation();
+
+    HcString homeMenuItem = new HcString("Home");
+    HcString schoolMenuItem = new HcString("School");
+    HcString mallMenuItem = new HcString("Mall");
+    HcString parkMenuItem = new HcString("Park");
+    HcString coffeeShopItem = new HcString("Coffee Shop ");
+
+    mHomeTextButton = new TextButton(homeMenuItem.getText(), ResourceManager.fontManager.LocationMenuStyle);
+    mHomeTextButton.getLabel().setAlignment(Align.left | Align.top);
+
+    mSchoolTextButton = new TextButton(schoolMenuItem.getText(), ResourceManager.fontManager.LocationMenuStyle);
+    ;
+    mSchoolTextButton.setChecked(true);
+    mSchoolTextButton.getLabel().setAlignment(Align.left | Align.top);
+
+    mMallTextButton = new TextButton(mallMenuItem.getText(), ResourceManager.fontManager.LocationMenuStyle);
+    mMallTextButton.setDisabled(true);
+    mMallTextButton.getLabel().setAlignment(Align.left | Align.top);
+
+    mParkMenuButton = new TextButton(parkMenuItem.getText(), ResourceManager.fontManager.LocationMenuStyle);
+    mParkMenuButton.setDisabled(true);
+    mParkMenuButton.getLabel().setAlignment(Align.left | Align.top);
+
+    mCoffeeShopButton = new TextButton(coffeeShopItem.getText(), ResourceManager.fontManager.LocationMenuStyle);
+    mCoffeeShopButton.setDisabled(true);
+    mCoffeeShopButton.getLabel().setAlignment(Align.left | Align.top);
+
+    int cellMenuWidth = (int) (this.camera.viewportWidth / 5);
+
+    this.mStage = new Stage(new ScreenViewport(camera), this.mGame.batch);
+    Table mapMenu = new Table();
+    mapMenu.debug();
+
+
+    mapMenu.add().height(50);
+    mapMenu.row();
+    mapMenu.add(mHomeTextButton).width(cellMenuWidth).left();
+    mapMenu.add().width(50);
+    mapMenu.row();
+    mapMenu.add(mSchoolTextButton).width(cellMenuWidth).left();
+    mapMenu.row();
+    mapMenu.add(mMallTextButton).width(cellMenuWidth).left();
+    mapMenu.row();
+    mapMenu.add(mParkMenuButton).width(cellMenuWidth).left();
+    mapMenu.row();
+    mBottomCell = mapMenu.add(mCoffeeShopButton).width(cellMenuWidth).left();
+    mapMenu.top().right();
+
+    this.mStage.addActor(mapMenu);
+    mapMenu.validate();
+
+    // mapMenu.setBackground(resourcesManager.menuBackground);
 
     if (HcLocale.getCurrentLocale() == HcLocale.Locale.EN) {
       loadMapTutorialTalking();
@@ -37,6 +103,8 @@ public class MapTutorialScreen extends BaseScreen implements StateChangeListener
 
     this.mConversationWidget.setState(this.mConversation.ConversationStates.get(0));
     Gdx.input.setInputProcessor(this);
+
+    mapMenu.setFillParent(true);
   }
 
   @Override
@@ -119,12 +187,17 @@ public class MapTutorialScreen extends BaseScreen implements StateChangeListener
 
     mGame.batch.begin();
     mGame.batch.draw(resourcesManager.worldMap, 0, 0, this.camera.viewportWidth, this.camera.viewportHeight);
+    mGame.batch.draw(resourcesManager.menuBackgroundTexture, mBottomCell.getActorX() - 10, mBottomCell.getActorY() - 10, mBottomCell.getActorWidth() + 20, mBottomCell.getActorHeight() * 5 + 20);
     //  this.mDorianSprite.draw(mGame.batch);
     this.mConversationWidget.draw(mGame.batch, delta);
 
     mGame.batch.end();
 
     this.mConversationWidget.draw();
+
+    Table.drawDebug(this.mStage);
+    this.mStage.draw();
+
   }
 
 
