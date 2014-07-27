@@ -1,6 +1,7 @@
 package net.horncatstudios.projectpancake;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
@@ -13,6 +14,9 @@ import net.horncatstudios.conversationengine.Response;
 import net.horncatstudios.conversationengine.State;
 import net.horncatstudios.gameengine.*;
 import net.horncatstudios.toolkit.HcString;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Angelina on 7/3/2014.
@@ -32,11 +36,16 @@ public class MapTutorialScreen extends BaseScreen implements StateChangeListener
   TextButton mMallTextButton;
   TextButton mParkMenuButton;
   TextButton mCoffeeShopButton;
+  List<TextButton> mapMenuButtons;
 
   Cell mBottomCell;
 
+  int mCurrentMapIndex;
+
   @Override
   public void createScene() {
+
+    mCurrentMapIndex = 1;
     this.mConversationWidget = new ConversationWidget(this, resourcesManager.fontManager.conversationFont,
         this.camera, this.mGame.batch);
     this.mConversation = new Conversation();
@@ -47,25 +56,32 @@ public class MapTutorialScreen extends BaseScreen implements StateChangeListener
     HcString parkMenuItem = new HcString("Park");
     HcString coffeeShopItem = new HcString("Coffee Shop ");
 
+    mapMenuButtons = new ArrayList<TextButton>();
+
     mHomeTextButton = new TextButton(homeMenuItem.getText(), ResourceManager.fontManager.LocationMenuStyle);
     mHomeTextButton.getLabel().setAlignment(Align.left | Align.top);
+    mapMenuButtons.add(mHomeTextButton);
 
     mSchoolTextButton = new TextButton(schoolMenuItem.getText(), ResourceManager.fontManager.LocationMenuStyle);
-    ;
     mSchoolTextButton.setChecked(true);
     mSchoolTextButton.getLabel().setAlignment(Align.left | Align.top);
+    mapMenuButtons.add(mSchoolTextButton);
 
     mMallTextButton = new TextButton(mallMenuItem.getText(), ResourceManager.fontManager.LocationMenuStyle);
     mMallTextButton.setDisabled(true);
     mMallTextButton.getLabel().setAlignment(Align.left | Align.top);
+    mapMenuButtons.add(mMallTextButton);
+
 
     mParkMenuButton = new TextButton(parkMenuItem.getText(), ResourceManager.fontManager.LocationMenuStyle);
-    mParkMenuButton.setDisabled(true);
+    //  mParkMenuButton.setDisabled(true);
     mParkMenuButton.getLabel().setAlignment(Align.left | Align.top);
+    mapMenuButtons.add(mParkMenuButton);
 
     mCoffeeShopButton = new TextButton(coffeeShopItem.getText(), ResourceManager.fontManager.LocationMenuStyle);
     mCoffeeShopButton.setDisabled(true);
     mCoffeeShopButton.getLabel().setAlignment(Align.left | Align.top);
+    mapMenuButtons.add(mCoffeeShopButton);
 
     int cellMenuWidth = (int) (this.camera.viewportWidth / 5);
 
@@ -203,8 +219,69 @@ public class MapTutorialScreen extends BaseScreen implements StateChangeListener
 
   @Override
   public boolean keyDown(int keycode) {
+    switch (keycode) {
+      case Input.Keys.UP:
+        moveSelectionUp();
+        break;
+      case Input.Keys.DOWN:
+        moveSelectionDown();
+        break;
+      case Input.Keys.ENTER:
+      case Input.Keys.BUTTON_A:
+        //triggerMapSelection();
+        break;
+    }
+
     return this.mConversationWidget.keyDown(keycode);
   }
+
+
+  private void moveSelectionUp() {
+    if (this.mCurrentMapIndex == 0)
+      return;
+
+    int newIndex = nextNotDisabledButton(this.mCurrentMapIndex, false);
+    setSelectedIndex(newIndex);
+  }
+
+  private void moveSelectionDown() {
+    if (this.mCurrentMapIndex == this.mapMenuButtons.size())
+      return;
+
+    int newIndex = nextNotDisabledButton(this.mCurrentMapIndex, true);
+    setSelectedIndex(newIndex);
+  }
+
+  private void setSelectedIndex(final int selectedIndex) {
+    if (selectedIndex < 0 || selectedIndex >= this.mapMenuButtons.size())
+      return;
+
+    for (int buttonIndex = 0; buttonIndex < this.mapMenuButtons.size(); buttonIndex++) {
+      if (selectedIndex == buttonIndex)
+        this.mapMenuButtons.get(buttonIndex).setChecked(true);
+      else
+        this.mapMenuButtons.get(buttonIndex).setChecked(false);
+    }
+    this.mCurrentMapIndex = selectedIndex;
+  }
+
+  int nextNotDisabledButton(final int index, boolean goingDown) {
+
+    if (goingDown) {
+      for (int buttonIndex = index + 1; buttonIndex < this.mapMenuButtons.size(); buttonIndex++) {
+        if (!this.mapMenuButtons.get(buttonIndex).isDisabled())
+          return buttonIndex;
+      }
+    } else {
+      for (int buttonIndex = index - 1; buttonIndex >= 0; buttonIndex--) {
+        if (!this.mapMenuButtons.get(buttonIndex).isDisabled())
+          return buttonIndex;
+      }
+    }
+
+    return index;
+  }
+
 
   @Override
   public boolean keyUp(int keycode) {

@@ -75,7 +75,7 @@ public class FontResourceManager {
 
   public void loadLocationMenuResources() {
     LocationMenuStyle = new TextButton.TextButtonStyle();
-    LocationMenuStyle.checkedFontColor = Color.BLACK;
+    LocationMenuStyle.checkedFontColor = Color.BLUE;
     LocationMenuStyle.disabledFontColor = Color.LIGHT_GRAY;
     LocationMenuStyle.fontColor = Color.DARK_GRAY;
     LocationMenuStyle.font = conversationFont;
