@@ -12,7 +12,7 @@ public class TalkingLabelDecorator {
   private float timeDeltaCounter = 0.0f;
   private String mDisplayText;
 
-  static final float MEDIUM_SPEED = 0.02f;
+  static final float MEDIUM_SPEED = HcDefines.mediumTalkSpeed();
   private float mTalkSpeed = MEDIUM_SPEED;
 
   TalkingLabelDecorator(Label label) {

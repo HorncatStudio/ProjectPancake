@@ -16,7 +16,7 @@ public class ProjectPancakeGame extends Game {
     batch = new SpriteBatch();
 
     Gdx.app.setLogLevel(Gdx.app.LOG_DEBUG);
-    HcLocale.setLocale(HcLocale.Locale.JP);
+    HcLocale.setLocale(HcLocale.Locale.EN);
 
     resourceManager = resourceManager.getInstance();
     resourceManager.prepareManager(this);
