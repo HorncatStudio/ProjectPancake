@@ -3,6 +3,7 @@ package net.horncatstudios.projectpancake;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -14,6 +15,7 @@ import net.horncatstudios.conversationengine.Response;
 import net.horncatstudios.conversationengine.State;
 import net.horncatstudios.gameengine.*;
 import net.horncatstudios.toolkit.HcString;
+import net.horncatstudios.toolkit.Point;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +44,12 @@ public class MapTutorialScreen extends BaseScreen implements StateChangeListener
 
   int mCurrentMapIndex;
 
+  Sprite mapPointerSprite;
+
+  Point mHomePosition;
+  Point mSchoolPosition;
+  Point mParkPosition;
+
   @Override
   public void createScene() {
 
@@ -55,6 +63,14 @@ public class MapTutorialScreen extends BaseScreen implements StateChangeListener
     HcString mallMenuItem = new HcString("Mall");
     HcString parkMenuItem = new HcString("Park");
     HcString coffeeShopItem = new HcString("Coffee Shop ");
+
+    mHomePosition = new Point(100, 250);
+    mSchoolPosition = new Point(200, 350);
+    mParkPosition = new Point(400, 400);
+
+    mapPointerSprite = new Sprite(resourcesManager.mapPointer);
+    mapPointerSprite.setSize(75, 75);
+    mapPointerSprite.setPosition(mSchoolPosition.X, mSchoolPosition.Y);
 
     mapMenuButtons = new ArrayList<TextButton>();
 
@@ -206,6 +222,7 @@ public class MapTutorialScreen extends BaseScreen implements StateChangeListener
     mGame.batch.draw(resourcesManager.menuBackgroundTexture, mBottomCell.getActorX() - 10, mBottomCell.getActorY() - 10, mBottomCell.getActorWidth() + 20, mBottomCell.getActorHeight() * 5 + 20);
     //  this.mDorianSprite.draw(mGame.batch);
     this.mConversationWidget.draw(mGame.batch, delta);
+    this.mapPointerSprite.draw(mGame.batch);
 
     mGame.batch.end();
 
@@ -213,7 +230,6 @@ public class MapTutorialScreen extends BaseScreen implements StateChangeListener
 
     Table.drawDebug(this.mStage);
     this.mStage.draw();
-
   }
 
 
@@ -257,8 +273,10 @@ public class MapTutorialScreen extends BaseScreen implements StateChangeListener
       return;
 
     for (int buttonIndex = 0; buttonIndex < this.mapMenuButtons.size(); buttonIndex++) {
-      if (selectedIndex == buttonIndex)
+      if (selectedIndex == buttonIndex) {
         this.mapMenuButtons.get(buttonIndex).setChecked(true);
+        updateMapHighlightLocation(this.mapMenuButtons.get(buttonIndex));
+      }
       else
         this.mapMenuButtons.get(buttonIndex).setChecked(false);
     }
@@ -280,6 +298,16 @@ public class MapTutorialScreen extends BaseScreen implements StateChangeListener
     }
 
     return index;
+  }
+
+  void updateMapHighlightLocation(TextButton button) {
+    if (button == mSchoolTextButton) {
+      this.mapPointerSprite.setPosition(this.mSchoolPosition.X, this.mSchoolPosition.Y);
+    } else if (button == mHomeTextButton) {
+      this.mapPointerSprite.setPosition(this.mHomePosition.X, this.mHomePosition.Y);
+    } else if (button == mParkMenuButton) {
+      this.mapPointerSprite.setPosition(this.mParkPosition.X, this.mParkPosition.Y);
+    }
   }
 
 

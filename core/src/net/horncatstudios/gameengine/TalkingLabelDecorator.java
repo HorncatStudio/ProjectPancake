@@ -33,11 +33,11 @@ public class TalkingLabelDecorator {
 
     if (textIndexCounter != this.mDisplayText.length()) {
       timeDeltaCounter += timeDelta;
-      Gdx.app.log("touch", "Updated timeDeltaCounter: " + timeDeltaCounter);
+      //  Gdx.app.log("touch", "Updated timeDeltaCounter: " + timeDeltaCounter);
       if (timeDeltaCounter > mTalkSpeed) {
         textIndexCounter++;
         this.mLabel.setText(this.mDisplayText.substring(0, textIndexCounter));
-        Gdx.app.log("touch", "Displaying the following text for state: " + this.mLabel.getText() + " For index: " + textIndexCounter);
+        //  Gdx.app.log("touch", "Displaying the following text for state: " + this.mLabel.getText() + " For index: " + textIndexCounter);
         timeDeltaCounter = 0.0f;
       }
     }

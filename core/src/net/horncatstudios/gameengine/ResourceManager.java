@@ -108,11 +108,12 @@ public class ResourceManager {
 
   //region Map Tutorial Resources
   public Texture worldMap;
-  public TextureRegionDrawable menuBackground;
   public Texture menuBackgroundTexture;
+  public Texture mapPointer;
 
   public void loadMapTutorialResources() {
     worldMap = new Texture(Gdx.files.internal("world-map-pokemon.png"));
+    mapPointer = new Texture(Gdx.files.internal("pointer.png"));
     fontManager.loadLocationMenuResources();
 
 
@@ -121,13 +122,12 @@ public class ResourceManager {
     backgroundTexture.fill();
 
     menuBackgroundTexture = new Texture(backgroundTexture);
-
-    TextureRegion backgroundRegion = new TextureRegion(menuBackgroundTexture);
-    menuBackground = new TextureRegionDrawable(backgroundRegion);
   }
 
   public void unloadMapTutorialResources() {
     worldMap.dispose();
+    mapPointer.dispose();
+    menuBackgroundTexture.dispose();
   }
 
   //endregion
