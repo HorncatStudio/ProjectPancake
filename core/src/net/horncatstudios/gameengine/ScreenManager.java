@@ -69,7 +69,7 @@ public class ScreenManager {
         loadWorldMapTutorialScreen();
         break;
       case PHONE_TUTORIAL:
-        loadPhoneTutorialWithExplanation();
+        loadResumePhoneTutorial();
       default:
         break;
     }
@@ -180,6 +180,15 @@ public class ScreenManager {
     }
 
     phoneTutorialScreen.setCustom("noexplain");
+    setScene(phoneTutorialScreen);
+  }
+
+  public void loadResumePhoneTutorial() {
+    if (phoneTutorialScreen == null) {
+      loadPhoneTutorialWithoutExplanation();
+      return;
+    }
+
     setScene(phoneTutorialScreen);
   }
 

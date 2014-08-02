@@ -103,8 +103,10 @@ public class MapTutorialScreen extends BaseScreen implements StateChangeListener
 
     this.mStage = new Stage(new ScreenViewport(camera), this.mGame.batch);
     Table mapMenu = new Table();
-    mapMenu.debug();
 
+    if (HcDefines.DebuggingEnabled) {
+      mapMenu.debug();
+    }
 
     mapMenu.add().height(50);
     mapMenu.row();
@@ -152,10 +154,10 @@ public class MapTutorialScreen extends BaseScreen implements StateChangeListener
     state1.Responses.add(new Response("", state2));
 
     State state3 = new State("Okay, then that saves us a lot of time");
-    state3.CustomEvent = this.EXPLAIN_PHONE_TUTORIAL;
+    state3.CustomEvent = this.NO_EXPLAIN_PHONE_TUTORIAL;
 
     State state4 = new State("Dude, get a manual. But it's cool, I'll explain.");
-    state4.CustomEvent = this.NO_EXPLAIN_PHONE_TUTORIAL;
+    state4.CustomEvent = this.EXPLAIN_PHONE_TUTORIAL;
 
     state2.Responses.add(new Response("Yes", state3));
     state2.Responses.add(new Response("No", state4));
@@ -220,7 +222,6 @@ public class MapTutorialScreen extends BaseScreen implements StateChangeListener
     mGame.batch.begin();
     mGame.batch.draw(resourcesManager.worldMap, 0, 0, this.camera.viewportWidth, this.camera.viewportHeight);
     mGame.batch.draw(resourcesManager.menuBackgroundTexture, mBottomCell.getActorX() - 10, mBottomCell.getActorY() - 10, mBottomCell.getActorWidth() + 20, mBottomCell.getActorHeight() * 5 + 20);
-    //  this.mDorianSprite.draw(mGame.batch);
     this.mConversationWidget.draw(mGame.batch, delta);
     this.mapPointerSprite.draw(mGame.batch);
 
@@ -228,7 +229,10 @@ public class MapTutorialScreen extends BaseScreen implements StateChangeListener
 
     this.mConversationWidget.draw();
 
-    Table.drawDebug(this.mStage);
+    if (HcDefines.DebuggingEnabled) {
+      Table.drawDebug(this.mStage);
+    }
+
     this.mStage.draw();
   }
 

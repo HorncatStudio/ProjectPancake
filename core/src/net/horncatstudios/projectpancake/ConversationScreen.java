@@ -44,9 +44,9 @@ public class ConversationScreen extends BaseScreen implements StateChangeListene
     State state3 = new State("Well, the institution asked me to give you a grand tour of the grounds.  I'm honored that they realized how much I didn't want to be in class.", Emotion.CASUAL);
     State state4 = new State("Have you had a chance to check out our humble city? It's pretty boring around here.", Emotion.EMBARRASSED);
     State state5 = new State("Sorry, what? I just had to hit the snooze button on my brain. Are you serious?");
-    State state6 = new State("Eh, we??fve got at least ONE place that sells fair trade coffee. I play the uke, steal Twinkies from the guy who lives with me. I??fm just trying to find myself, y??fknow?");
-    State state7 = new State("Man, alright. Let??fs just focus on the tour? This is already punishing enough without you making it worse.");
-    State state8 = new State("Did you move from the middle of nowhere? New [guy/girl], you??fre rather mysterious.");
+    State state6 = new State("Eh, we have got at least ONE place that sells fair trade coffee. I play the uke, steal Twinkies from the guy who lives with me. I'm just trying to find myself, y'know?");
+    State state7 = new State("Man, alright. Let's just focus on the tour? This is already punishing enough without you making it worse.");
+    State state8 = new State("Did you move from the middle of nowhere? New [guy/girl], you're rather mysterious.");
     State state9 = new State("Very cool. Anyways, back to the tour.", Emotion.CASUAL);
 
     Response response = new Response("Yes", state3);
@@ -60,7 +60,7 @@ public class ConversationScreen extends BaseScreen implements StateChangeListene
     state4.Responses.add(new Response("I think it is nice.", state5));
     state4.Responses.add(new Response("So what do you do all the time?", state6));
 
-    state5.Responses.add(new Response("Yeah, I??fm serious!: ", state7));
+    state5.Responses.add(new Response("Yeah, I'm serious!", state7));
     state5.Responses.add(new Response("Uh, it's alright.", state8));
 
     state6.Responses.add(new Response("Cool.", state9));

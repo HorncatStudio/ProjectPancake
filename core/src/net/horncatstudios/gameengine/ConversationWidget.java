@@ -78,10 +78,12 @@ public class ConversationWidget {
     this.mFontHeight = (int) this.mFont.getLineHeight();
 
     this.mStage = new Stage(new ScreenViewport(camera), batch);
-    //this.mStage.getViewport().update((int) (camera.viewportWidth), (int) (camera.viewportHeight), false);
 
     Table tableLayout = new Table();
-    tableLayout.debug();
+
+    if (HcDefines.DebuggingEnabled) {
+      tableLayout.debug();
+    }
 
     TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
     style.checkedFontColor = Color.GRAY;
@@ -177,7 +179,9 @@ public class ConversationWidget {
   }
 
   public void draw() {
-    Table.drawDebug(this.mStage);
+    if (HcDefines.DebuggingEnabled) {
+      Table.drawDebug(this.mStage);
+    }
     this.mStage.draw();
   }
 

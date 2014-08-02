@@ -7,6 +7,8 @@ import net.horncatstudios.projectpancake.HcLocale;
  */
 public class HcDefines {
 
+  public static boolean DebuggingEnabled = false;
+
   public static float mediumTalkSpeed() {
     if (HcLocale.getCurrentLocale() == HcLocale.Locale.JP) {
       return 0.2f;

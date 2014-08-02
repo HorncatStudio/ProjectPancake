@@ -46,12 +46,6 @@ public class PhoneTutorialScreen extends BaseScreen implements StateChangeListen
         this.camera, this.mGame.batch);
     this.mConversation = new Conversation();
 
-    if (HcLocale.getCurrentLocale() == HcLocale.Locale.EN) {
-      loadPhoneTutorialTalking(true);
-    } else {
-      loadJapanesePhoneTutorialTalking(true);
-    }
-
 //    this.mConversationWidget.setState(this.mConversation.ConversationStates.get(0));
     Gdx.input.setInputProcessor(this);
 
@@ -85,8 +79,6 @@ public class PhoneTutorialScreen extends BaseScreen implements StateChangeListen
     tableLayout.add(mStaminaImage).width(100).height(100).pad(10.0f);
 
     tableLayout.top();
-
-    this.mConversationWidget.setState(mConversation.ConversationStates.get(0));
   }
 
   @Override
@@ -99,6 +91,10 @@ public class PhoneTutorialScreen extends BaseScreen implements StateChangeListen
   }
 
   private void loadPhoneTutorialTalking(boolean explain) {
+    if (HcLocale.getCurrentLocale() == HcLocale.Locale.JP) {
+      loadJapanesePhoneTutorialTalking(explain);
+      return;
+    }
 
     State state4 = new State("I'll give you my number, since I'm nice.  You should read my blog if you're bored. It's pretty deep.");
     state4.CustomEvent = DORIAN_ADD_CONTACT_INFO;
@@ -124,9 +120,9 @@ public class PhoneTutorialScreen extends BaseScreen implements StateChangeListen
     State stage7 = new State("If you ever want to send me a text ... ");
     stage7.CustomEvent = SHOW_CALENDAR;
 
-
-    State state9 = new State("You can play games at most of the places you go, so if you get tired of socializing, you can alwaysw blow off some steam on the games.");
+    State state9 = new State("You can play games at most of the places you go, so if you get tired of socializing, you can always blow off some steam on the games.");
     State state10 = new State("They'll have [symbol] over them, so you'll see them immediately.");
+
     State state11 = new State("Tired yet? I guess it's a good time to talk about stamina");
     State state12 = new State("Every in-game day, you get a certain amount of stamina. You can see how much you have left based on the clock.");
     State state13 = new State("The later it is, the less you have.  Each time you hang out with someone, it'' take a certain amount of time.");
@@ -134,7 +130,12 @@ public class PhoneTutorialScreen extends BaseScreen implements StateChangeListen
     State state15 = new State("You can also be a rebel and stay up late, but you might sleep in and miss school, so try to be a little responsible Or don't.");
     State state16 = new State("Whatever. But seriously, if you stay up, you'll feel it the next day");
 
-    state4.Responses.add(new Response("", state5));
+    if (explain) {
+      state4.Responses.add(new Response("", state5));
+    } else {
+      state4.Responses.add(new Response("", state11));
+    }
+
     state5.Responses.add(new Response("", state6));
     state6.Responses.add(new Response("", stage7));
 
@@ -149,6 +150,7 @@ public class PhoneTutorialScreen extends BaseScreen implements StateChangeListen
     state16.Responses.add(new Response("", null));
 
     this.mConversation.ConversationStates.add(state4);
+    this.mConversationWidget.setState(mConversation.ConversationStates.get(0));
   }
 
   private void loadJapanesePhoneTutorialTalking(boolean explain) {
@@ -179,6 +181,7 @@ public class PhoneTutorialScreen extends BaseScreen implements StateChangeListen
 
     State state9 = new State("ゲームはほとんどどこでもできる。だから人付き合いに疲れたなって時には思う存分ゲームで晴らしてやればいい。");
     State state10 = new State("[シンボルorマーカー]がゲームの目印だ。");
+
     State state11 = new State("疲れてきたんじゃないか？いいタイミングだから[エナジー/体力]について話しておこう。");
     State state12 = new State("ゲーム内では毎日ある一定量の体力が与えられる。いくら体力が残ってるかはゲーム内の時計を見れば分かる。");
     State state13 = new State("時間が過ぎれば体力も減っていく。また誰かと会ったりすると一定量の体力が削られる。");
@@ -186,7 +189,13 @@ public class PhoneTutorialScreen extends BaseScreen implements StateChangeListen
     State state15 = new State("遅くまで起きている事もできるが、寝過ごしたり学校を休んだりしてしまうこともあるので、するなら自己責任でな。");
     State state16 = new State("まぁやりたければやってみればいいさ。");
 
-    state4.Responses.add(new Response("", state5));
+
+    if (explain) {
+      state4.Responses.add(new Response("", state5));
+    } else {
+      state4.Responses.add(new Response("", state11));
+    }
+
     state5.Responses.add(new Response("", state6));
     state6.Responses.add(new Response("", stage7));
 
@@ -201,6 +210,8 @@ public class PhoneTutorialScreen extends BaseScreen implements StateChangeListen
     state16.Responses.add(new Response("", null));
 
     this.mConversation.ConversationStates.add(state4);
+
+    this.mConversationWidget.setState(mConversation.ConversationStates.get(0));
   }
 
   @Override
@@ -239,6 +250,7 @@ public class PhoneTutorialScreen extends BaseScreen implements StateChangeListen
     if (customEvent.equals(SHOW_CALENDAR)) {
       mCalendarScreen.loadChildScreen();
     }
+
 
     this.mConversationWidget.setState(state);
   }

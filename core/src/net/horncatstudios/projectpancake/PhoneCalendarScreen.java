@@ -45,17 +45,6 @@ public class PhoneCalendarScreen extends ChildScreen implements StateChangeListe
 
       this.mConversationWidget.setState(state);
     }
-
-    /*State state = new State("People's birthdays and stuff pop up took, so you've got no excuse to miss a birthday.");
-    State state2 = new State("Hint, hint");
-
-    state.Responses.add(new Response("", state2));
-    state2.Responses.add(new Response("", null));
-
-    this.mConversation.ConversationStates.add(state);
-    this.mConversation.ConversationStates.add(state2);
-
-    this.mConversationWidget.setState(state);*/
   }
 
   @Override
