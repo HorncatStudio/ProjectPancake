@@ -101,7 +101,7 @@ public class MapTutorialScreen extends BaseScreen implements StateChangeListener
 
     int cellMenuWidth = (int) (this.camera.viewportWidth / 5);
 
-    this.mStage = new Stage(new ScreenViewport(camera), this.mGame.batch);
+    this.mStage = new Stage(mScreenViewport);
     Table mapMenu = new Table();
 
     if (HcDefines.DebuggingEnabled) {
@@ -280,8 +280,7 @@ public class MapTutorialScreen extends BaseScreen implements StateChangeListener
       if (selectedIndex == buttonIndex) {
         this.mapMenuButtons.get(buttonIndex).setChecked(true);
         updateMapHighlightLocation(this.mapMenuButtons.get(buttonIndex));
-      }
-      else
+      } else
         this.mapMenuButtons.get(buttonIndex).setChecked(false);
     }
     this.mCurrentMapIndex = selectedIndex;
@@ -348,11 +347,6 @@ public class MapTutorialScreen extends BaseScreen implements StateChangeListener
   @Override
   public boolean scrolled(int amount) {
     return false;
-  }
-
-  @Override
-  public void resize(int width, int height) {
-
   }
 
   @Override

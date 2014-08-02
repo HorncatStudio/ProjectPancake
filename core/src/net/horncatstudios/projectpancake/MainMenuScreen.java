@@ -52,13 +52,6 @@ public class MainMenuScreen extends BaseScreen implements ProjectPancakeMenuActi
   }
 
   @Override
-  public void resize(int i, int i2) {
-    camera.viewportHeight = i;
-    camera.viewportWidth = i2;
-    camera.update();
-  }
-
-  @Override
   public void show() {
 
   }

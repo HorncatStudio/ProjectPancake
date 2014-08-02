@@ -292,11 +292,6 @@ public class PhoneTutorialScreen extends BaseScreen implements StateChangeListen
 
 
   @Override
-  public void resize(int width, int height) {
-
-  }
-
-  @Override
   public void show() {
   }
 

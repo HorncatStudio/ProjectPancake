@@ -74,11 +74,6 @@ public class TileMapScreen extends BaseScreen {
   }
 
   @Override
-  public void resize(int width, int height) {
-
-  }
-
-  @Override
   public boolean keyDown(int keycode) {
     switch (keycode) {
       case Input.Keys.UP:

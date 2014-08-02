@@ -158,11 +158,6 @@ public class ConversationScreen extends BaseScreen implements StateChangeListene
   }
 
   @Override
-  public void resize(int i, int i2) {
-
-  }
-
-  @Override
   public void show() {
     // resourcesManager.conversationMusic.play();
   }

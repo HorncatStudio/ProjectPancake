@@ -23,6 +23,20 @@ public class EndGameScreen extends BaseScreen {
   }
 
   @Override
+  public void render(float delta) {
+    Gdx.gl.glClearColor(0, 0, 0, 1);
+    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+    camera.update();
+
+    mGame.batch.setProjectionMatrix(camera.combined);
+
+    mGame.batch.begin();
+    theEnd.draw(mGame.batch, resourcesManager.fontManager.conversationFont);
+    mGame.batch.end();
+  }
+
+  @Override
   public ScreenManager.ScreenType getSceneType() {
     return null;
   }
@@ -65,25 +79,6 @@ public class EndGameScreen extends BaseScreen {
   @Override
   public boolean scrolled(int amount) {
     return false;
-  }
-
-  @Override
-  public void render(float delta) {
-    Gdx.gl.glClearColor(0, 0, 0, 1);
-    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-    camera.update();
-
-    mGame.batch.setProjectionMatrix(camera.combined);
-
-    mGame.batch.begin();
-    theEnd.draw(mGame.batch, resourcesManager.fontManager.conversationFont);
-    mGame.batch.end();
-  }
-
-  @Override
-  public void resize(int width, int height) {
-
   }
 
   @Override

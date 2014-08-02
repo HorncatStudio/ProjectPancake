@@ -130,11 +130,6 @@ public class PhoneCalendarScreen extends ChildScreen implements StateChangeListe
 
 
   @Override
-  public void resize(int width, int height) {
-
-  }
-
-  @Override
   public void show() {
 
   }
